@@ -1,0 +1,25 @@
+{
+  "instrument": "EURUSD",
+  "direction": "short",
+  "original_thesis": "Euro should weaken if US yields reaccelerate after CPI and ECB commentary stays cautious.",
+  "planned_trade": {
+    "entry": 1.0912,
+    "stop": 1.0976,
+    "target": 1.0805,
+    "size_risk_fraction": 0.006
+  },
+  "actual_trade": {
+    "entry": 1.0924,
+    "exit": 1.0822,
+    "size_risk_fraction": 0.009,
+    "stop_adjustment": "widened after entry to 1.0991",
+    "partial_profit_taken": true
+  },
+  "rule_adherence": {
+    "followed_thesis": true,
+    "respected_size_limit": false,
+    "respected_stop_plan": false
+  },
+  "user_lesson_guess": "I should trust my macro read more.",
+  "market_context": "CPI was softer than expected initially, but the dollar strengthened after the cash open as equities sold off."
+}

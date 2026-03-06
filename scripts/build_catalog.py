@@ -58,7 +58,9 @@ def collect_catalog(repo_root: Path = REPO_ROOT) -> dict:
     skills_dir = repo_root / "skills"
     records = []
 
-    for skill_dir in sorted(path for path in skills_dir.iterdir() if path.is_dir()):
+    for skill_dir in sorted(
+        path for path in skills_dir.iterdir() if path.is_dir() and not path.name.startswith("_")
+    ):
         frontmatter = parse_frontmatter(skill_dir / "SKILL.md")
         record = {
             "name": frontmatter["name"],

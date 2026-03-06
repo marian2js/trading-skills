@@ -7,6 +7,12 @@ description: Prepare for an upcoming earnings report or earnings week by identif
 
 Use this skill when the user needs to prepare before one company reports or before an earnings-heavy week.
 
+This skill will not:
+
+- predict the post-report price move with certainty
+- confuse a benchmark company's importance with a guaranteed read-through
+- replace missing fundamentals with narrative filler
+
 ## Role
 
 Act like a skeptical earnings prep analyst. Focus on what matters, what is already priced in, what could surprise, and where the read-through really matters.
@@ -45,7 +51,7 @@ If you already have enough timing and context to do the analysis, do not fetch a
 If key schedule or estimate context is missing:
 
 - check whether the user already named a supported provider or already shared usable access details in the conversation
-- if they already indicated `FMP` or `TradingEconomics`, use [references/providers/fmp.md](references/providers/fmp.md) or [references/providers/tradingeconomics.md](references/providers/tradingeconomics.md) directly
+- if they already indicated `FMP`, `TradingEconomics`, or `Polygon`, use [references/providers/fmp.md](references/providers/fmp.md), [references/providers/tradingeconomics.md](references/providers/tradingeconomics.md), or [references/providers/polygon.md](references/providers/polygon.md) directly
 - otherwise consult [references/data-providers.md](references/data-providers.md) and ask which supported provider they want to use
 - once the missing facts are gathered, continue the preview and disclose the source used
 
@@ -61,7 +67,40 @@ If key schedule or estimate context is missing:
 
 Use [references/relevance-ranking.md](references/relevance-ranking.md) when you need a simple way to prioritize reports and explain why they matter.
 
+## Core Assessment Framework
+
+Assess each report on four anchors before ranking it:
+
+- `Benchmark Relevance`: whether the company can move a sector, supplier chain, customer set, or broad index. Example: NVDA is benchmark-relevant for semis and AI infrastructure; a small software name usually is not.
+- `Debate Intensity`: whether the quarter has one or two live disagreements that matter more than the headline beat or miss. Example: gross margin durability or cloud booking reacceleration counts as a real debate; generic "can they beat" does not.
+- `Read-Through Strength`: whether peers or related industries will plausibly react to the same datapoints. Example: capex guidance from a hyperscaler may matter for semis, power, cooling, and networking.
+- `Positioning Risk`: whether sentiment, recent price action, or the user's exposure makes the event more dangerous to hold through.
+
+Use the anchors to classify:
+
+- `must-watch`: benchmark relevance is high and at least one of debate intensity, read-through strength, or positioning risk is also high
+- `watch`: relevant event, but consequences are narrower or easier to absorb
+- `background`: useful context, but low priority unless it directly affects the user's book
+
+## Evidence That Would Invalidate This Analysis
+
+- the report date or session changes enough to alter the planning window
+- the quarter's key debate changes because management, industry data, or a peer report reframes the issue
+- read-through assumptions break because the peer set, supplier chain, or benchmark relationship was overstated
+- the user's exposure or holding plan changes, making the current priority ranking less relevant
+- estimate, guidance, or schedule fields turn out to be stale, incomplete, or sourced from the wrong provider snapshot
+
 ## Output structure
+
+Prefer this output order:
+
+1. `Priority List`
+2. `Core Assessment Framework`
+3. `Key Debates`
+4. `Read-Through Map`
+5. `Plan Risk`
+6. `Evidence That Would Invalidate This Analysis`
+7. `Source And Caveats`
 
 Always return:
 

@@ -9,6 +9,12 @@ Use this skill after a trade closes or after a meaningful trade sequence when yo
 
 The objective is to improve repeatability, not to rewrite history.
 
+This skill will not:
+
+- grade the trade only by PnL
+- excuse rule-breaking because the outcome was positive
+- turn hindsight into a fake lesson
+
 ## Role
 
 Act like a process-focused trading coach. Reconstruct the plan, separate decision quality from outcome, and finish with concrete process improvements.
@@ -45,6 +51,14 @@ Ask for:
 Use [references/review-rubric.md](references/review-rubric.md) for the default rubric.
 
 ## Output structure
+
+Prefer this output order:
+
+1. `Original Plan`
+2. `Execution Review`
+3. `Rule Adherence`
+4. `Main Mistake Or Best Decision`
+5. `Process Change`
 
 Always include:
 

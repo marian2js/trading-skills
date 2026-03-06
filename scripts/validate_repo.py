@@ -78,7 +78,9 @@ def validate_skill_structure(errors: list[str]) -> None:
         errors.append(f"{SKILLS_DIR}: skills directory is missing")
         return
 
-    for skill_dir in sorted(path for path in SKILLS_DIR.iterdir() if path.is_dir()):
+    for skill_dir in sorted(
+        path for path in SKILLS_DIR.iterdir() if path.is_dir() and not path.name.startswith("_")
+    ):
         skill_md = skill_dir / "SKILL.md"
         if not skill_md.exists():
             errors.append(f"{skill_dir}: missing SKILL.md")
@@ -144,6 +146,23 @@ def validate_skill_python_absence(skill_dir: Path, errors: list[str]) -> None:
         errors.append(
             f"{skill_dir}: skill-local Python files should be removed for markdown-first support: "
             f"{', '.join(python_files)}"
+        )
+
+
+def validate_shared_library(errors: list[str]) -> None:
+    calculations = SKILLS_DIR / "_lib" / "calculations.py"
+    if not calculations.exists():
+        errors.append(f"{calculations}: missing shared calculations library")
+
+    extra_python = sorted(
+        path.relative_to(REPO_ROOT).as_posix()
+        for path in SKILLS_DIR.rglob("*.py")
+        if path != calculations
+    )
+    if extra_python:
+        errors.append(
+            "Unexpected Python files under skills/; keep code limited to skills/_lib/calculations.py: "
+            + ", ".join(extra_python)
         )
 
 
@@ -225,6 +244,7 @@ def main() -> int:
     validate_fixture_json(errors)
     validate_release_artifacts(errors)
     validate_forbidden_tracked_artifacts(errors)
+    validate_shared_library(errors)
 
     if errors:
         print("Repository validation failed:\n")

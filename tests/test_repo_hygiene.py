@@ -44,7 +44,7 @@ def test_no_forbidden_tracked_artifacts(repo_root):
 def test_public_skill_names_do_not_leak_provider_brands(repo_root):
     leaked = []
     for skill_dir in sorted((repo_root / "skills").iterdir()):
-        if not skill_dir.is_dir():
+        if not skill_dir.is_dir() or skill_dir.name.startswith("_"):
             continue
         tokens = set(skill_dir.name.split("-"))
         if tokens & PROVIDER_LEAK_TERMS:
@@ -55,20 +55,20 @@ def test_public_skill_names_do_not_leak_provider_brands(repo_root):
 def test_every_skill_has_sample_output_artifact(repo_root):
     missing = []
     for skill_dir in sorted((repo_root / "skills").iterdir()):
-        if not skill_dir.is_dir():
+        if not skill_dir.is_dir() or skill_dir.name.startswith("_"):
             continue
         if not (skill_dir / "sample-output.md").exists():
             missing.append(skill_dir.name)
     assert not missing, f"Every skill should include sample-output.md for quick evaluation: {missing}"
 
 
-def test_skills_do_not_ship_python_implementation_files(repo_root):
+def test_skills_only_ship_shared_python_library(repo_root):
     python_files = sorted(
         path.relative_to(repo_root).as_posix()
         for path in (repo_root / "skills").rglob("*.py")
     )
-    assert not python_files, (
-        "Skills should stay markdown-first; remove skill-local Python files: "
+    assert python_files == ["skills/_lib/calculations.py"], (
+        "Skills should stay markdown-first aside from the shared calculations library: "
         f"{python_files}"
     )
 

@@ -25,6 +25,14 @@ Keep provider docs short and practical:
 
 Avoid turning provider docs into large operational manuals.
 
+## Common provider patterns
+
+- `FMP`: broad REST coverage for earnings, market data, and macro calendar lookups with query parameters such as `from`, `to`, `country`, and `apikey`
+- `TradingEconomics`: good for calendar and macro context with endpoints that often encode country, indicator, and date range directly in the path, plus `c=<TE_API_KEY>` and `f=json`
+- `Polygon`: strongest when the missing context is price history or recent fundamentals, typically via path-based market-data routes and `apiKey=<POLYGON_API_KEY>`
+
+When adding provider docs, show the actual endpoint shape, one realistic `curl` example, the minimum fields to extract, and the fallback behavior if the provider cannot fill the missing fact cleanly.
+
 ## What provider docs should not become
 
 - a Python integration layer

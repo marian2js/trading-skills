@@ -38,6 +38,7 @@ Current release candidate version: `0.1.0-rc.1` in [VERSION](VERSION).
 - [Examples](docs/examples/README.md)
 - [Optional provider support](docs/optional-provider-support.md)
 - [Compatibility and install](docs/compatibility-and-install.md)
+- [Composing skills](docs/composing-skills.md)
 - [Contributing](CONTRIBUTING.md)
 - [Versioning and releases](docs/versioning-and-releases.md)
 - [Changelog](CHANGELOG.md)
@@ -155,14 +156,36 @@ Each public skill lives in `skills/<capability>/` and centers around a `SKILL.md
 - User-provided context comes first.
 - Optional provider support is markdown-based and used only when needed.
 
+## Agent Integration Patterns
+
+For agent systems, the cleanest pattern is:
+
+1. gather user context first
+2. run the smallest number of skills needed
+3. carry forward a compact markdown trade context instead of raw transcript state
+4. disclose any provider-based data that was used
+5. keep execution and broker actions outside this repo
+
+Recommended composition:
+
+- use `macro-event-analysis` or `earnings-preview` to frame event risk
+- use `market-regime-analysis` to classify the broader environment
+- use `risk-reward-sanity-check` to pressure-test structure
+- use `position-sizing` only after the stop is stable
+- use `post-trade-review` after the trade closes
+
+See [docs/composing-skills.md](docs/composing-skills.md) for the shared Trade Context schema and realistic chaining examples.
+
 See the docs for details:
 
 - [Architecture](docs/architecture.md)
 - [Examples](docs/examples/README.md)
 - [Compatibility and install](docs/compatibility-and-install.md)
+- [Composing skills](docs/composing-skills.md)
 - [Optional provider support](docs/optional-provider-support.md)
 - [Repo conventions](docs/repo-conventions.md)
 - [Skill design principles](docs/skill-design-principles.md)
+- [Skill template](docs/skill-template.md)
 - [New skill checklist](docs/new-skill-checklist.md)
 - [Versioning and releases](docs/versioning-and-releases.md)
 - [Release checklist](docs/release-checklist.md)

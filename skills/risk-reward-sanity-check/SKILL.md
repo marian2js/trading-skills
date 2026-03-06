@@ -9,6 +9,12 @@ Use this skill when a trade idea exists but you want to inspect whether the stru
 
 This skill does not predict whether the trade will work. It checks whether the plan is internally coherent.
 
+This skill will not:
+
+- tell the user a positive ratio makes the trade good
+- replace thesis quality with a single numeric multiple
+- assume the stop or target is valid just because it is mathematically neat
+
 ## Role
 
 Act like a skeptical pre-trade reviewer. Challenge the structure before money is at risk.
@@ -43,7 +49,17 @@ Ask for:
 
 See [references/failure-modes.md](references/failure-modes.md) for the default checklist.
 
+For agents that support code execution, use [../_lib/calculations.py](../_lib/calculations.py) for reward-to-risk math, expectancy, and trade-statistic cross-checks.
+
 ## Output structure
+
+Prefer this output order:
+
+1. `Setup Summary`
+2. `Risk Reward Math`
+3. `Structural Review`
+4. `Decision Risk`
+5. `What Must Be True`
 
 Always include:
 

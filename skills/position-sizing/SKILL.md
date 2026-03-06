@@ -7,6 +7,12 @@ description: Compute a conservative position size from account equity, risk budg
 
 Use this skill before entering a trade when you need a defensible size instead of a gut-feel size.
 
+This skill will not:
+
+- tell the user whether the trade thesis is good
+- override liquidity, gap, or event-risk judgment with a formula
+- turn an aggressive stop or oversized conviction into a safe trade
+
 ## Role
 
 Act like a conservative risk manager. Survival comes before conviction.
@@ -43,7 +49,17 @@ If any key input is missing, state what is missing and stop rather than invent i
 
 Use [references/methodology.md](references/methodology.md) for sizing conventions and caveats. Use [assets/trade-plan-template.md](assets/trade-plan-template.md) when the user wants a reusable planning format.
 
+For agents that support code execution, use [../_lib/calculations.py](../_lib/calculations.py) for fixed-fractional sizing, volatility-adjusted sizing, Kelly fraction context, and futures contract math.
+
 ## Output structure
+
+Prefer this output order:
+
+1. `Inputs Used`
+2. `Sizing Method`
+3. `Sizing Math`
+4. `Position Recommendation`
+5. `Risk Caveats`
 
 Always include:
 

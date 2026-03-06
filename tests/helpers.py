@@ -59,7 +59,11 @@ def skills_dir(repo_root: Path) -> Path:
 
 
 def iter_skill_dirs(repo_root: Path) -> list[Path]:
-    return sorted(path for path in skills_dir(repo_root).iterdir() if path.is_dir())
+    return sorted(
+        path
+        for path in skills_dir(repo_root).iterdir()
+        if path.is_dir() and not path.name.startswith("_")
+    )
 
 
 def parse_frontmatter(skill_md: Path) -> dict[str, str]:
