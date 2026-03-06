@@ -83,6 +83,11 @@ def collect_catalog(repo_root: Path = REPO_ROOT) -> dict:
             "requires_configuration": parse_bool(frontmatter.get("requires_configuration")),
             "status": frontmatter["status"],
             "asset_coverage": parse_csv(frontmatter.get("asset_coverage")),
+            "example_artifact": (
+                f"skills/{skill_dir.name}/sample-output.md"
+                if (skill_dir / "sample-output.md").exists()
+                else None
+            ),
             "tags": parse_csv(frontmatter.get("tags")),
         }
         records.append(record)
@@ -110,16 +115,22 @@ def render_skill_index(catalog: dict) -> str:
             continue
         parts.append(f"### {category}")
         parts.append("")
-        parts.append("| Skill | Dependency | Status | Config | Summary |")
-        parts.append("| --- | --- | --- | --- | --- |")
+        parts.append("| Skill | Dependency | Status | Config | Example | Summary |")
+        parts.append("| --- | --- | --- | --- | --- | --- |")
         for record in records:
             config = "yes" if record["requires_configuration"] else "no"
+            example = (
+                f"[sample]({record['example_artifact']})"
+                if record["example_artifact"]
+                else "-"
+            )
             parts.append(
                 "| "
                 f"`{record['name']}` | "
                 f"`{record['dependency_class']}` | "
                 f"`{record['status']}` | "
                 f"`{config}` | "
+                f"{example} | "
                 f"{record['description']} |"
             )
         parts.append("")

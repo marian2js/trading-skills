@@ -18,7 +18,7 @@ The format is intentionally lightweight:
 
 - Hardened live-data calendar skills around explicit live/example labeling, fallback behavior, and provider failure handling.
 
-## 0.1.0
+## 0.1.0-rc.1
 
 ### Added
 

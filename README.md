@@ -1,5 +1,8 @@
 # trading-skills
 
+[![CI](https://github.com/marian2js/trading-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/marian2js/trading-skills/actions/workflows/ci.yml)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+
 `trading-skills` is a portable, capability-first collection of trading and investing skills for agent tools that support `SKILL.md`-style packages.
 
 The goal is not to generate magic signals. The goal is to improve decision quality, risk management, execution planning, and review discipline with transparent, auditable workflows.
@@ -27,6 +30,17 @@ The repository also ships a machine-readable [catalog.json](catalog.json) so fut
 
 `trading-skills` is preferred over `trading-agent-skills` because it is cleaner, easier to remember, and centered on the user job rather than the implementation medium.
 
+Current release candidate version: `0.1.0-rc.1` in [VERSION](VERSION).
+
+## Quick links
+
+- [Examples](docs/examples/README.md)
+- [Live data setup](docs/live-data-setup.md)
+- [Compatibility and install](docs/compatibility-and-install.md)
+- [Contributing](CONTRIBUTING.md)
+- [Versioning and releases](docs/versioning-and-releases.md)
+- [Changelog](CHANGELOG.md)
+
 ## Installation model
 
 The intended UX is simple and capability-first:
@@ -37,7 +51,7 @@ npx skills add marian2js/trading-skills@economic-calendar
 npx skills add marian2js/trading-skills@earnings-calendar
 ```
 
-## Getting started
+## Quickstart
 
 Use static skills immediately:
 
@@ -103,29 +117,29 @@ The current library is grouped into a small number of clear categories:
 <!-- SKILL_INDEX_START -->
 ### risk-management
 
-| Skill | Dependency | Status | Config | Summary |
-| --- | --- | --- | --- | --- |
-| `position-sizing` | `static` | `beta` | `no` | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. |
-| `risk-reward-sanity-check` | `static` | `beta` | `no` | Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed. |
+| Skill | Dependency | Status | Config | Example | Summary |
+| --- | --- | --- | --- | --- | --- |
+| `position-sizing` | `static` | `beta` | `no` | [sample](skills/position-sizing/sample-output.md) | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. |
+| `risk-reward-sanity-check` | `static` | `beta` | `no` | [sample](skills/risk-reward-sanity-check/sample-output.md) | Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed. |
 
 ### trade-review
 
-| Skill | Dependency | Status | Config | Summary |
-| --- | --- | --- | --- | --- |
-| `post-trade-review` | `static` | `beta` | `no` | Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater. |
+| Skill | Dependency | Status | Config | Example | Summary |
+| --- | --- | --- | --- | --- | --- |
+| `post-trade-review` | `static` | `beta` | `no` | [sample](skills/post-trade-review/sample-output.md) | Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater. |
 
 ### macro
 
-| Skill | Dependency | Status | Config | Summary |
-| --- | --- | --- | --- | --- |
-| `economic-calendar` | `data-required` | `experimental` | `yes` | Summarize upcoming macro event risk from a normalized economic calendar so the user can see timing, importance, and coverage caveats without dealing with provider internals. |
+| Skill | Dependency | Status | Config | Example | Summary |
+| --- | --- | --- | --- | --- | --- |
+| `economic-calendar` | `data-required` | `experimental` | `yes` | [sample](skills/economic-calendar/sample-output.md) | Summarize upcoming macro event risk from a normalized economic calendar so the user can see timing, importance, and coverage caveats without dealing with provider internals. |
 
 ### market-data
 
-| Skill | Dependency | Status | Config | Summary |
-| --- | --- | --- | --- | --- |
-| `earnings-calendar` | `data-required` | `experimental` | `yes` | Summarize upcoming earnings events with normalized fields and conservative relevance ranking so the user can prepare around catalysts without learning provider internals. |
-| `market-regime-detector` | `data-optional` | `beta` | `no` | Classify market context conservatively from trend, volatility, breadth, and event backdrop so the user can adapt tactics without relying on black-box regime claims. |
+| Skill | Dependency | Status | Config | Example | Summary |
+| --- | --- | --- | --- | --- | --- |
+| `earnings-calendar` | `data-required` | `experimental` | `yes` | [sample](skills/earnings-calendar/sample-output.md) | Summarize upcoming earnings events with normalized fields and conservative relevance ranking so the user can prepare around catalysts without learning provider internals. |
+| `market-regime-detector` | `data-optional` | `beta` | `no` | [sample](skills/market-regime-detector/sample-output.md) | Classify market context conservatively from trend, volatility, breadth, and event backdrop so the user can adapt tactics without relying on black-box regime claims. |
 
 <!-- SKILL_INDEX_END -->
 
@@ -165,6 +179,7 @@ Each public skill lives in `skills/<capability>/` and centers around a `SKILL.md
 See the docs for details:
 
 - [Architecture](docs/architecture.md)
+- [Examples](docs/examples/README.md)
 - [Compatibility and install](docs/compatibility-and-install.md)
 - [Live data setup](docs/live-data-setup.md)
 - [Repo conventions](docs/repo-conventions.md)
@@ -213,6 +228,7 @@ The current checks cover:
 - catalog metadata matches the skill folders
 - README skill index stays in sync with the catalog
 - local references in `SKILL.md` files exist
+- README, docs, and sample-output markdown links stay valid
 - JSON examples in the schema docs parse successfully
 - fixture JSON files parse successfully
 - forbidden artifacts do not leak into tracked files

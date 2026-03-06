@@ -15,6 +15,7 @@
         "futures",
         "fx"
       ],
+      "example_artifact": "skills/position-sizing/sample-output.md",
       "tags": [
         "risk-management",
         "execution-planning",
@@ -35,6 +36,7 @@
         "futures",
         "fx"
       ],
+      "example_artifact": "skills/risk-reward-sanity-check/sample-output.md",
       "tags": [
         "risk-management",
         "trade-structure",
@@ -55,6 +57,7 @@
         "futures",
         "fx"
       ],
+      "example_artifact": "skills/post-trade-review/sample-output.md",
       "tags": [
         "review",
         "journaling",
@@ -79,6 +82,7 @@
         "fx",
         "rates"
       ],
+      "example_artifact": "skills/economic-calendar/sample-output.md",
       "tags": [
         "macro",
         "calendar",
@@ -101,6 +105,7 @@
         "equities",
         "sector-etfs"
       ],
+      "example_artifact": "skills/earnings-calendar/sample-output.md",
       "tags": [
         "earnings",
         "catalysts",
@@ -121,6 +126,7 @@
         "futures",
         "fx"
       ],
+      "example_artifact": "skills/market-regime-detector/sample-output.md",
       "tags": [
         "market-context",
         "regime",

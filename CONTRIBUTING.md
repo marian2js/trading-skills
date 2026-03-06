@@ -93,6 +93,14 @@ make ci
 
 The repo has one metadata source of truth per skill: the `SKILL.md` frontmatter inside `skills/<skill>/`.
 
+## Shortest path to contribute a fix
+
+1. Update the relevant file under `skills/`, `docs/`, `scripts/`, or `tests/`.
+2. Update `sample-output.md` if the user-facing behavior changed.
+3. Run `make catalog` if skill metadata changed.
+4. Run `make test`.
+5. Update [CHANGELOG.md](CHANGELOG.md) if the change is release-noteworthy.
+
 Typical contributor flow:
 
 1. Add or update a skill under `skills/<skill>/`.
@@ -101,6 +109,17 @@ Typical contributor flow:
 4. Add or update tests in the root `tests/` directory unless co-located skill tests are clearly justified.
 5. Regenerate the machine-readable catalog and README skill index with `make catalog`.
 6. Run `make test` before opening a PR.
+
+## Maintainer workflow
+
+Typical maintainer pass before merge or release:
+
+1. Review the skill or doc change.
+2. Confirm example artifacts still reflect the current behavior.
+3. Run `make catalog`.
+4. Run `make ci`.
+5. Update [CHANGELOG.md](CHANGELOG.md) if needed.
+6. Open or merge the PR once CI is green.
 
 Run the full checks before opening a PR:
 

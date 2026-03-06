@@ -51,4 +51,8 @@ def test_catalog_field_shapes_are_consistent(repo_root):
         assert isinstance(record["asset_coverage"], list) and record["asset_coverage"], (
             f"{record['name']} should declare asset coverage"
         )
+        assert record["example_artifact"], f"{record['name']} should declare a sample example artifact"
+        assert record["example_artifact"].startswith("skills/"), (
+            f"{record['name']} example_artifact should point into skills/: {record['example_artifact']}"
+        )
         assert isinstance(record["tags"], list) and record["tags"], f"{record['name']} should declare tags"

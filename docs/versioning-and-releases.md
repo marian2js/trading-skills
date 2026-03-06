@@ -7,6 +7,8 @@ The repository should version changes conservatively because users may depend on
 - example outputs
 - install metadata
 
+The current release anchor lives in the top-level [VERSION](../VERSION) file.
+
 ## Suggested release interpretation
 
 ### Patch-level changes
@@ -49,6 +51,7 @@ Use for:
 Before tagging a release:
 
 - update `CHANGELOG.md`
+- bump `VERSION` if the release intent changed
 - make sure README examples still match the current repo
 - verify `catalog.json` and generated README sections are current
 - confirm example-mode outputs are clearly labeled as example data

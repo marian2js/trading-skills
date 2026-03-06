@@ -1,6 +1,7 @@
 # Release Checklist
 
 - [ ] `make catalog` has been run if metadata changed
+- [ ] `VERSION` reflects the intended release
 - [ ] `make test` passes locally
 - [ ] CI is green on the release branch or main
 - [ ] `README.md` is current

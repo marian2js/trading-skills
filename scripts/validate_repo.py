@@ -16,6 +16,8 @@ SKILLS_DIR = REPO_ROOT / "skills"
 SCHEMA_DOC = REPO_ROOT / "docs" / "canonical-schemas.md"
 README_PATH = REPO_ROOT / "README.md"
 CATALOG_PATH = REPO_ROOT / "catalog.json"
+VERSION_PATH = REPO_ROOT / "VERSION"
+CHANGELOG_PATH = REPO_ROOT / "CHANGELOG.md"
 
 GENERIC_DESCRIPTION_FRAGMENTS = {
     "skill description",
@@ -64,6 +66,7 @@ FORBIDDEN_TRACKED_PATTERNS = (
     ".venv/",
     ".env",
     ".env.",
+    ".DS_Store",
 )
 FORBIDDEN_TRACKED_SUFFIXES = (
     ".pyc",
@@ -131,7 +134,6 @@ def validate_skill_structure(errors: list[str]) -> None:
         if not sample_output.exists():
             errors.append(f"{skill_dir}: missing sample-output.md")
         validate_frontmatter(skill_md, errors)
-        validate_markdown_links(skill_md, errors)
         validate_data_backed_structure(skill_dir, errors)
         validate_public_skill_naming(skill_dir, errors)
 
@@ -150,6 +152,13 @@ def validate_markdown_links(path: Path, errors: list[str]) -> None:
             continue
         if not target_path.exists():
             errors.append(f"{path}: referenced file does not exist: {target}")
+
+
+def validate_repo_markdown_links(errors: list[str]) -> None:
+    for path in sorted(REPO_ROOT.rglob("*.md")):
+        if any(part.startswith(".") and part not in {".github"} for part in path.parts):
+            continue
+        validate_markdown_links(path, errors)
 
 
 def validate_data_backed_structure(skill_dir: Path, errors: list[str]) -> None:
@@ -215,6 +224,16 @@ def validate_fixture_json(errors: list[str]) -> None:
             errors.append(f"{fixture}: invalid JSON fixture: {exc}")
 
 
+def validate_release_artifacts(errors: list[str]) -> None:
+    if not VERSION_PATH.exists():
+        errors.append(f"{VERSION_PATH}: missing release version anchor")
+    elif not VERSION_PATH.read_text(encoding="utf-8").strip():
+        errors.append(f"{VERSION_PATH}: version file is empty")
+
+    if not CHANGELOG_PATH.exists():
+        errors.append(f"{CHANGELOG_PATH}: missing changelog")
+
+
 def validate_forbidden_tracked_artifacts(errors: list[str]) -> None:
     try:
         result = subprocess.run(
@@ -256,8 +275,10 @@ def validate_schema_examples(errors: list[str]) -> None:
 def main() -> int:
     errors: list[str] = []
     validate_skill_structure(errors)
+    validate_repo_markdown_links(errors)
     validate_catalog_and_readme(errors)
     validate_fixture_json(errors)
+    validate_release_artifacts(errors)
     validate_forbidden_tracked_artifacts(errors)
     validate_schema_examples(errors)
 

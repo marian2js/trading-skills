@@ -4,11 +4,14 @@ Prompt:
 
 > Use `economic-calendar` to summarize the next 48 hours of macro risk.
 
-Output shape:
+Expected output shape:
 
 - `data_mode`: `example` or `live`
 - `provider`: source used
+- `retrieved_at_utc`: fetch timestamp
 - `requested_window`: requested dates and optional country filter
 - `coverage_warnings`: missing consensus or no-event warnings
 
-Example/demo data should always be labeled as example data.
+Caveat:
+
+- example/demo data should always be labeled as example data and never be confused with current macro coverage

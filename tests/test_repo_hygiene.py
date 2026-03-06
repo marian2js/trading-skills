@@ -9,6 +9,7 @@ FORBIDDEN_TRACKED_PATTERNS = (
     ".venv/",
     ".env",
     ".env.",
+    ".DS_Store",
 )
 FORBIDDEN_TRACKED_SUFFIXES = (
     ".pyc",
@@ -59,3 +60,10 @@ def test_every_skill_has_sample_output_artifact(repo_root):
         if not (skill_dir / "sample-output.md").exists():
             missing.append(skill_dir.name)
     assert not missing, f"Every skill should include sample-output.md for quick evaluation: {missing}"
+
+
+def test_release_artifacts_exist(repo_root):
+    assert (repo_root / "CHANGELOG.md").exists(), "Repository should include CHANGELOG.md"
+    version_file = repo_root / "VERSION"
+    assert version_file.exists(), "Repository should include a VERSION file"
+    assert version_file.read_text(encoding="utf-8").strip(), "VERSION file should not be empty"
