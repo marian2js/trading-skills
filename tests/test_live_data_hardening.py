@@ -76,7 +76,7 @@ def test_safe_json_request_wraps_malformed_json(repo_root, monkeypatch):
 def test_economic_adapter_rejects_unexpected_payload_shape(repo_root):
     module = import_module_from_path(
         "economic_adapter_bad_shape",
-        repo_root / "skills/economic-calendar/providers/fmp/adapter.py",
+        repo_root / "skills/macro-event-analysis/providers/fmp/adapter.py",
     )
     adapter = module.FMPEconomicCalendarAdapter()
     with pytest.raises(RuntimeError, match="unexpected payload shape"):
@@ -86,7 +86,7 @@ def test_economic_adapter_rejects_unexpected_payload_shape(repo_root):
 def test_earnings_adapter_rejects_unexpected_payload_shape(repo_root):
     module = import_module_from_path(
         "earnings_adapter_bad_shape",
-        repo_root / "skills/earnings-calendar/providers/fmp/adapter.py",
+        repo_root / "skills/earnings-preview/providers/fmp/adapter.py",
     )
     adapter = module.FMPEarningsCalendarAdapter()
     with pytest.raises(RuntimeError, match="unexpected payload shape"):
@@ -96,14 +96,14 @@ def test_earnings_adapter_rejects_unexpected_payload_shape(repo_root):
 def test_economic_degraded_payload_surfaces_warning(repo_root):
     adapter_module = import_module_from_path(
         "economic_adapter_degraded",
-        repo_root / "skills/economic-calendar/providers/fmp/adapter.py",
+        repo_root / "skills/macro-event-analysis/providers/fmp/adapter.py",
     )
     script_module = import_module_from_path(
         "economic_fetch_script",
-        repo_root / "skills/economic-calendar/scripts/fetch_calendar.py",
+        repo_root / "skills/macro-event-analysis/scripts/fetch_calendar.py",
     )
     adapter = adapter_module.FMPEconomicCalendarAdapter()
-    degraded = load_json(repo_root / "skills/economic-calendar/fixtures/degraded-provider-payload.json")
+    degraded = load_json(repo_root / "skills/macro-event-analysis/fixtures/degraded-provider-payload.json")
 
     normalized = adapter.normalize(degraded)
     analysis, coverage_warnings = script_module.analyze_events(normalized)
@@ -116,14 +116,14 @@ def test_economic_degraded_payload_surfaces_warning(repo_root):
 def test_earnings_degraded_payload_surfaces_warning(repo_root):
     adapter_module = import_module_from_path(
         "earnings_adapter_degraded",
-        repo_root / "skills/earnings-calendar/providers/fmp/adapter.py",
+        repo_root / "skills/earnings-preview/providers/fmp/adapter.py",
     )
     script_module = import_module_from_path(
         "earnings_fetch_script",
-        repo_root / "skills/earnings-calendar/scripts/fetch_earnings.py",
+        repo_root / "skills/earnings-preview/scripts/fetch_earnings.py",
     )
     adapter = adapter_module.FMPEarningsCalendarAdapter()
-    degraded = load_json(repo_root / "skills/earnings-calendar/fixtures/degraded-provider-payload.json")
+    degraded = load_json(repo_root / "skills/earnings-preview/fixtures/degraded-provider-payload.json")
 
     normalized = adapter.normalize(degraded)
     analysis, coverage_warnings = script_module.analyze_events(normalized, [])
@@ -138,7 +138,7 @@ def test_economic_empty_result_behavior(repo_root):
         repo_root,
         [
             "python3",
-            "skills/economic-calendar/scripts/fetch_calendar.py",
+            "skills/macro-event-analysis/scripts/fetch_calendar.py",
             "--provider",
             "example",
             "--start-date",
@@ -159,7 +159,7 @@ def test_date_window_boundary_behavior(repo_root):
         repo_root,
         [
             "python3",
-            "skills/economic-calendar/scripts/fetch_calendar.py",
+            "skills/macro-event-analysis/scripts/fetch_calendar.py",
             "--provider",
             "example",
             "--start-date",
@@ -182,7 +182,7 @@ def test_explicit_live_provider_missing_key_reports_clean_error(repo_root):
         repo_root,
         [
             "python3",
-            "skills/economic-calendar/scripts/fetch_calendar.py",
+            "skills/macro-event-analysis/scripts/fetch_calendar.py",
             "--provider",
             "fmp",
             "--json",
@@ -201,7 +201,7 @@ def test_live_only_mode_prevents_example_fallback(repo_root):
         repo_root,
         [
             "python3",
-            "skills/earnings-calendar/scripts/fetch_earnings.py",
+            "skills/earnings-preview/scripts/fetch_earnings.py",
             "--provider",
             "auto",
             "--live-only",

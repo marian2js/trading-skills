@@ -22,7 +22,7 @@ CHANGELOG_PATH = REPO_ROOT / "CHANGELOG.md"
 GENERIC_DESCRIPTION_FRAGMENTS = {"skill description", "todo", "placeholder", "tbd", "generic"}
 FRONTMATTER_REQUIRED = {"name", "description"}
 FRONTMATTER_ALLOWED = {"name", "description"}
-DATA_BACKED_SKILLS = {"economic-calendar", "earnings-calendar"}
+DATA_BACKED_SKILLS = {"macro-event-analysis", "earnings-preview"}
 
 FORBIDDEN_TRACKED_PATTERNS = (
     "__pycache__/",

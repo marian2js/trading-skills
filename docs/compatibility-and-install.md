@@ -33,7 +33,7 @@ Typical install shape for ecosystems that support repo-scoped skill install:
 
 ```bash
 npx skills add marian2js/trading-skills@position-sizing
-npx skills add marian2js/trading-skills@economic-calendar
+npx skills add marian2js/trading-skills@macro-event-analysis
 ```
 
 Users should think in terms of capabilities, not providers.

@@ -12,22 +12,24 @@ Add more metadata only when it has a clear current job in the repo. Do not add f
 ## Naming conventions
 
 - Use concise, capability-first skill names.
-- Prefer names that describe the user job directly, such as `economic-calendar` or `position-sizing`.
+- Prefer names that describe the user job directly, such as `macro-event-analysis` or `position-sizing`.
 - Do not expose provider names in public skill names unless the provider-specific behavior is itself the product.
 
 ## Capability-first packaging
 
 The public package is the skill capability. Providers stay inside the skill directory as internal adapters.
 
+Public skills should describe an analytical job, not a data utility. If the main thing a skill does is fetch or normalize data, that logic probably belongs in scripts, fixtures, or references instead of the public `SKILL.md`.
+
 Good:
 
-- `skills/economic-calendar/`
-- `skills/earnings-calendar/`
+- `skills/macro-event-analysis/`
+- `skills/earnings-preview/`
 
 Bad by default:
 
-- `skills/fmp-economic-calendar/`
-- `skills/provider-x-earnings/`
+- `skills/fmp-macro-events/`
+- `skills/provider-x-earnings-preview/`
 
 ## Skill directory structure
 

@@ -2,7 +2,7 @@
 
 Prompt:
 
-> Use `market-regime-detector` from these observations: uptrend intact, breadth narrowing, volatility elevated, CPI tomorrow.
+> Use `market-regime-analysis` from these observations: uptrend intact, breadth narrowing, volatility elevated, CPI tomorrow.
 
 Expected output shape:
 

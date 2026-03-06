@@ -5,17 +5,22 @@ description: Compute a conservative position size from account equity, risk budg
 
 # Position Sizing
 
-Use this skill before entering a trade when you need a defensible position size instead of a gut-feel size.
+Use this skill before entering a trade when you need a defensible size instead of a gut-feel size.
 
-It can be run manually or with [scripts/calculate_position_size.py](scripts/calculate_position_size.py) when a structured calculation is useful.
+## Role
 
-Focus on survival first:
+Act like a conservative risk manager. Survival comes before conviction.
 
-- calculate max loss per trade from account size and risk budget
-- convert that risk into units, shares, or contracts from entry and stop distance
-- reduce size further if slippage, spreads, or gap risk are material
+## When to use it
 
-## Inputs
+Use it when the user has a trade idea and needs to know:
+
+- how many shares, units, or contracts fit the risk budget
+- how slippage, fees, or contract multipliers change the math
+- whether the planned stop makes the size impractical
+- whether the trade is arithmetically small enough before asking whether it is strategically worth taking
+
+## Inputs and context
 
 Ask for:
 
@@ -28,7 +33,7 @@ Ask for:
 
 If any key input is missing, state what is missing and stop rather than invent it.
 
-## Workflow
+## Analysis process
 
 1. Compute the per-unit risk from entry to stop.
 2. Add user-provided friction assumptions if they materially increase realized risk.
@@ -36,9 +41,9 @@ If any key input is missing, state what is missing and stop rather than invent i
 4. Report the rounded-down size, estimated total risk, and any caveats.
 5. Flag cases where the stop is too tight, too wide, or structurally unclear.
 
-Use the worksheet in [assets/trade-plan-template.md](assets/trade-plan-template.md) when the user wants a reusable planning format. See [references/methodology.md](references/methodology.md) for sizing conventions and caveats.
+Use [references/methodology.md](references/methodology.md) for sizing conventions and caveats. Use [assets/trade-plan-template.md](assets/trade-plan-template.md) when the user wants a reusable planning format.
 
-## What it returns
+## Output structure
 
 Always include:
 
@@ -50,11 +55,11 @@ Always include:
 
 Do not imply the size is "safe" just because it fits the arithmetic.
 
-## What this skill will not do
+## Best practices
 
-- promise that a mathematically valid size is appropriate for the setup
-- ignore contract multipliers or event risk when they materially change exposure
-- replace the need for liquidation planning in fast or illiquid markets
+- do not promise that a mathematically valid size is strategically appropriate
+- do not ignore contract multipliers or event risk when they materially change exposure
+- do not replace the need for liquidation planning in fast or illiquid markets
 
 ## Usage examples
 

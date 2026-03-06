@@ -21,6 +21,7 @@ Do not contribute:
 - hype-driven "signal" skills with unverifiable claims
 - broker execution workflows in v1
 - public provider-specific skills unless there is a strong user-facing reason
+- public skills whose main job is fetch/normalize plumbing instead of analysis
 - giant abstractions that add complexity before the capability is useful
 
 ## Skill checklist

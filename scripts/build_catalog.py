@@ -19,18 +19,18 @@ SKILL_ORDER = [
     "position-sizing",
     "risk-reward-sanity-check",
     "post-trade-review",
-    "economic-calendar",
-    "earnings-calendar",
-    "market-regime-detector",
+    "macro-event-analysis",
+    "earnings-preview",
+    "market-regime-analysis",
 ]
 
 SKILL_DOC_MAP = {
     "position-sizing": "docs/examples/position-sizing-walkthrough.md",
     "risk-reward-sanity-check": "docs/examples/risk-reward-sanity-check-walkthrough.md",
     "post-trade-review": "docs/examples/post-trade-review-walkthrough.md",
-    "economic-calendar": "docs/examples/economic-calendar-example-mode.md",
-    "earnings-calendar": "docs/examples/earnings-calendar-live-mode.md",
-    "market-regime-detector": "docs/examples/market-regime-detector-walkthrough.md",
+    "macro-event-analysis": "docs/examples/macro-event-analysis-example-mode.md",
+    "earnings-preview": "docs/examples/earnings-preview-live-mode.md",
+    "market-regime-analysis": "docs/examples/market-regime-analysis-walkthrough.md",
 }
 
 

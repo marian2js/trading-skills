@@ -6,13 +6,15 @@ This repository is designed around user-facing capabilities, not raw integration
 
 That means:
 
-- `economic-calendar` is a public skill
-- `earnings-calendar` is a public skill
+- `macro-event-analysis` is a public skill
+- `earnings-preview` is a public skill
 - provider adapters such as `fmp` are implementation details inside those skills
 
 This is the default because users think in terms of a job to be done, not in terms of vendor topology.
 
 The same principle applies to scope boundaries: broker execution is not part of v1. Decision support comes first, while brokerage workflows remain explicitly out of scope.
+
+Public skills should feel like analyst workflows. Raw fetch, normalize, and adapter concerns belong behind the skill boundary, not in the public skill text.
 
 ## Skill != API
 
@@ -42,9 +44,9 @@ Capability-first design produces cleaner public UX:
 
 Provider-first design tends to create unnecessary fragmentation:
 
-- `fmp-earnings-calendar`
-- `fred-economic-calendar`
-- `alpaca-market-regime`
+- `fmp-earnings-preview`
+- `fred-macro-event-analysis`
+- `alpaca-market-regime-analysis`
 
 Those names may describe implementation, but they are usually poor product defaults.
 

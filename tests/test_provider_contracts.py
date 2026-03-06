@@ -8,22 +8,22 @@ from tests.helpers import import_module_from_path
 ADAPTER_CASES = [
     (
         "economic_fmp",
-        Path("skills/economic-calendar/providers/fmp/adapter.py"),
+        Path("skills/macro-event-analysis/providers/fmp/adapter.py"),
         "FMPEconomicCalendarAdapter",
     ),
     (
         "economic_example",
-        Path("skills/economic-calendar/providers/example/adapter.py"),
+        Path("skills/macro-event-analysis/providers/example/adapter.py"),
         "ExampleEconomicCalendarAdapter",
     ),
     (
         "earnings_fmp",
-        Path("skills/earnings-calendar/providers/fmp/adapter.py"),
+        Path("skills/earnings-preview/providers/fmp/adapter.py"),
         "FMPEarningsCalendarAdapter",
     ),
     (
         "earnings_example",
-        Path("skills/earnings-calendar/providers/example/adapter.py"),
+        Path("skills/earnings-preview/providers/example/adapter.py"),
         "ExampleEarningsCalendarAdapter",
     ),
 ]

@@ -4,7 +4,7 @@
 
 Provider adapters let a public capability use one or more data sources without exposing provider complexity as a public packaging problem.
 
-Users install `economic-calendar`, not `fmp-economic-calendar`.
+Users install `macro-event-analysis` or `earnings-preview`, not `fmp-macro-event-analysis`.
 
 ## Adapter contract
 

@@ -8,9 +8,9 @@ def test_skill_catalog_has_expected_v1_skills(repo_root):
         "position-sizing",
         "risk-reward-sanity-check",
         "post-trade-review",
-        "economic-calendar",
-        "earnings-calendar",
-        "market-regime-detector",
+        "macro-event-analysis",
+        "earnings-preview",
+        "market-regime-analysis",
     }
     actual = {skill_dir.name for skill_dir in iter_skill_dirs(repo_root)}
     assert actual == expected, f"Expected skill catalog {sorted(expected)}, got {sorted(actual)}"

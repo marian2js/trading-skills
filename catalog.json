@@ -22,25 +22,25 @@
       "docs_path": "docs/examples/post-trade-review-walkthrough.md"
     },
     {
-      "name": "economic-calendar",
-      "path": "skills/economic-calendar",
-      "description": "Summarize upcoming macro event risk from a normalized economic calendar so the user can see timing, importance, and coverage caveats without dealing with provider internals.",
-      "example_path": "skills/economic-calendar/sample-output.md",
-      "docs_path": "docs/examples/economic-calendar-example-mode.md"
+      "name": "macro-event-analysis",
+      "path": "skills/macro-event-analysis",
+      "description": "Prepare for upcoming macro catalysts by identifying the events that matter, mapping the likely transmission channels, and surfacing timing risk for the user's markets or positions.",
+      "example_path": "skills/macro-event-analysis/sample-output.md",
+      "docs_path": "docs/examples/macro-event-analysis-example-mode.md"
     },
     {
-      "name": "earnings-calendar",
-      "path": "skills/earnings-calendar",
-      "description": "Summarize upcoming earnings events with normalized fields and conservative relevance ranking so the user can prepare around catalysts without learning provider internals.",
-      "example_path": "skills/earnings-calendar/sample-output.md",
-      "docs_path": "docs/examples/earnings-calendar-live-mode.md"
+      "name": "earnings-preview",
+      "path": "skills/earnings-preview",
+      "description": "Prepare for an upcoming earnings report or earnings week by identifying the reports that matter, framing the key debates, and surfacing the read-through risk that could affect the user's watchlist or positions.",
+      "example_path": "skills/earnings-preview/sample-output.md",
+      "docs_path": "docs/examples/earnings-preview-live-mode.md"
     },
     {
-      "name": "market-regime-detector",
-      "path": "skills/market-regime-detector",
-      "description": "Classify market context conservatively from trend, volatility, breadth, and event backdrop so the user can adapt tactics without relying on black-box regime claims.",
-      "example_path": "skills/market-regime-detector/sample-output.md",
-      "docs_path": "docs/examples/market-regime-detector-walkthrough.md"
+      "name": "market-regime-analysis",
+      "path": "skills/market-regime-analysis",
+      "description": "Analyze current market context through trend, volatility, breadth, and event backdrop so the user can choose tactics that fit the environment without relying on black-box regime claims.",
+      "example_path": "skills/market-regime-analysis/sample-output.md",
+      "docs_path": "docs/examples/market-regime-analysis-walkthrough.md"
     }
   ]
 }

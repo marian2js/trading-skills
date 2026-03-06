@@ -13,18 +13,19 @@ Broker integrations are explicitly out of scope for v1. This repo does not ship 
 
 Most users think in terms of jobs to be done:
 
-- `earnings-calendar`
-- `economic-calendar`
+- `earnings-preview`
+- `macro-event-analysis`
 - `position-sizing`
-- `market-regime-detector`
+- `market-regime-analysis`
 
-They do not want to think in terms of vendor internals such as `fmp-earnings-calendar` or `fred-economic-calendar`.
+They do not want to think in terms of vendor internals such as `fmp-earnings-preview` or `fred-macro-event-analysis`.
 
 This repository keeps the public UX capability-first:
 
 - A skill is a user-facing capability.
 - A provider is an internal implementation detail in most cases.
 - Data-backed skills disclose the source, freshness, and limitations of their output.
+- Public skills are analyst workflows, not raw data wrappers.
 
 The repository also ships a small machine-readable [catalog.json](catalog.json) so browsing, docs generation, and validation can rely on one simple index.
 
@@ -47,8 +48,8 @@ The intended UX is simple and capability-first:
 
 ```bash
 npx skills add marian2js/trading-skills@position-sizing
-npx skills add marian2js/trading-skills@economic-calendar
-npx skills add marian2js/trading-skills@earnings-calendar
+npx skills add marian2js/trading-skills@macro-event-analysis
+npx skills add marian2js/trading-skills@earnings-preview
 ```
 
 ## Quickstart
@@ -61,13 +62,13 @@ Use static skills immediately:
 
 Use data-backed skills in example mode with no credentials:
 
-- `economic-calendar`
-- `earnings-calendar`
+- `macro-event-analysis`
+- `earnings-preview`
 
 Use live data-backed skills after configuring `FMP_API_KEY`:
 
-- `economic-calendar`
-- `earnings-calendar`
+- `macro-event-analysis`
+- `earnings-preview`
 
 See [docs/live-data-setup.md](docs/live-data-setup.md) for live/example behavior, fallback rules, and verification steps.
 
@@ -77,9 +78,9 @@ Example prompts after installation:
 
 - "Use `position-sizing` for a $125,000 account risking 0.5% with entry 412.30 and stop 406.80."
 - "Use `risk-reward-sanity-check` on a swing long with entry 58.20, stop 55.90, and target 65.50."
-- "Use `economic-calendar` to summarize macro event risk for the next 48 hours."
-- "Use `earnings-calendar` to rank upcoming earnings that matter for NVDA, AMD, and the semiconductor group."
-- "Use `market-regime-detector` to classify current context from my observations without pretending to forecast."
+- "Use `macro-event-analysis` to summarize macro event risk for the next 48 hours."
+- "Use `earnings-preview` for NVDA, AMD, and the semiconductor group heading into the next earnings-heavy week."
+- "Use `market-regime-analysis` to classify current context from my observations without pretending to forecast."
 - "Use `post-trade-review` to review a trade where I respected the thesis but violated my stop."
 
 ## Static vs data-backed skills
@@ -113,9 +114,9 @@ The current library stays intentionally small and capability-first:
 | `position-sizing` | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. | [sample](skills/position-sizing/sample-output.md) / [guide](docs/examples/position-sizing-walkthrough.md) |
 | `risk-reward-sanity-check` | Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed. | [sample](skills/risk-reward-sanity-check/sample-output.md) / [guide](docs/examples/risk-reward-sanity-check-walkthrough.md) |
 | `post-trade-review` | Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater. | [sample](skills/post-trade-review/sample-output.md) / [guide](docs/examples/post-trade-review-walkthrough.md) |
-| `economic-calendar` | Summarize upcoming macro event risk from a normalized economic calendar so the user can see timing, importance, and coverage caveats without dealing with provider internals. | [sample](skills/economic-calendar/sample-output.md) / [guide](docs/examples/economic-calendar-example-mode.md) |
-| `earnings-calendar` | Summarize upcoming earnings events with normalized fields and conservative relevance ranking so the user can prepare around catalysts without learning provider internals. | [sample](skills/earnings-calendar/sample-output.md) / [guide](docs/examples/earnings-calendar-live-mode.md) |
-| `market-regime-detector` | Classify market context conservatively from trend, volatility, breadth, and event backdrop so the user can adapt tactics without relying on black-box regime claims. | [sample](skills/market-regime-detector/sample-output.md) / [guide](docs/examples/market-regime-detector-walkthrough.md) |
+| `macro-event-analysis` | Prepare for upcoming macro catalysts by identifying the events that matter, mapping the likely transmission channels, and surfacing timing risk for the user's markets or positions. | [sample](skills/macro-event-analysis/sample-output.md) / [guide](docs/examples/macro-event-analysis-example-mode.md) |
+| `earnings-preview` | Prepare for an upcoming earnings report or earnings week by identifying the reports that matter, framing the key debates, and surfacing the read-through risk that could affect the user's watchlist or positions. | [sample](skills/earnings-preview/sample-output.md) / [guide](docs/examples/earnings-preview-live-mode.md) |
+| `market-regime-analysis` | Analyze current market context through trend, volatility, breadth, and event backdrop so the user can choose tactics that fit the environment without relying on black-box regime claims. | [sample](skills/market-regime-analysis/sample-output.md) / [guide](docs/examples/market-regime-analysis-walkthrough.md) |
 
 <!-- SKILL_INDEX_END -->
 
@@ -216,7 +217,7 @@ The current checks cover:
 ## Next steps after v1
 
 - Add better cross-asset examples for equities, futures, and FX risk workflows
-- Expand provider coverage for `economic-calendar` and `earnings-calendar`
+- Expand provider coverage for `macro-event-analysis` and `earnings-preview`
 - Add more `data-optional` skills such as watchlist review and catalyst maps
 - Add packaging and release metadata for one-step installation across more skill marketplaces
 - Add test fixtures and golden outputs for skill examples

@@ -2,10 +2,13 @@
 
 Prompt:
 
-> Use `economic-calendar` to summarize the next 48 hours of macro risk.
+> Use `macro-event-analysis` to summarize the next 48 hours of macro risk for USD rates and index futures.
 
 Expected output shape:
 
+- prioritized event slate
+- why the top events matter
+- transmission channels to watch
 - `data_mode`: `example` or `live`
 - `provider`: source used
 - `retrieved_at_utc`: fetch timestamp

@@ -4,7 +4,7 @@ These walkthroughs are intentionally short. They show how a user would evaluate 
 
 - [Position sizing walkthrough](position-sizing-walkthrough.md)
 - [Risk reward sanity check walkthrough](risk-reward-sanity-check-walkthrough.md)
-- [Economic calendar in example mode](economic-calendar-example-mode.md)
-- [Earnings calendar in live mode](earnings-calendar-live-mode.md)
-- [Market regime detector walkthrough](market-regime-detector-walkthrough.md)
+- [Macro event analysis in example mode](macro-event-analysis-example-mode.md)
+- [Earnings preview in live mode](earnings-preview-live-mode.md)
+- [Market regime analysis walkthrough](market-regime-analysis-walkthrough.md)
 - [Post trade review walkthrough](post-trade-review-walkthrough.md)

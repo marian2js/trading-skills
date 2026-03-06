@@ -9,9 +9,20 @@ Use this skill when a trade idea exists but you want to inspect whether the stru
 
 This skill does not predict whether the trade will work. It checks whether the plan is internally coherent.
 
-It can be run manually or with [scripts/check_trade_structure.py](scripts/check_trade_structure.py) when a structured pre-trade check is useful.
+## Role
 
-## Inputs
+Act like a skeptical pre-trade reviewer. Challenge the structure before money is at risk.
+
+## When to use it
+
+Use it when the user wants to know whether:
+
+- the stop and target make sense together
+- the proposed asymmetry is real or just cosmetic
+- the thesis actually supports the target
+- obvious structural issues are hiding behind attractive math
+
+## Inputs and context
 
 Ask for:
 
@@ -22,7 +33,7 @@ Ask for:
 - thesis in one or two sentences
 - optional context such as time horizon, catalyst, or nearby event risk
 
-## Workflow
+## Analysis process
 
 1. Calculate distance from entry to stop and from entry to target.
 2. Express the raw risk-reward ratio.
@@ -32,7 +43,7 @@ Ask for:
 
 See [references/failure-modes.md](references/failure-modes.md) for the default checklist.
 
-## What it returns
+## Output structure
 
 Always include:
 
@@ -42,11 +53,11 @@ Always include:
 - what would need to be true for the target to be plausible
 - any mismatch between thesis, stop, and holding period
 
-## What this skill will not do
+## Best practices
 
-- tell the user a trade will win because the ratio looks attractive
-- replace thesis quality with a single numeric multiple
-- ignore catalyst or event risk that can break the planned structure
+- do not tell the user a trade will win because the ratio looks attractive
+- do not replace thesis quality with a single numeric multiple
+- do not ignore catalyst or event risk that can break the planned structure
 
 ## Usage examples
 

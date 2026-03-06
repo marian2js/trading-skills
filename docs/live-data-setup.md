@@ -2,8 +2,8 @@
 
 The current data-backed skills are:
 
-- `economic-calendar`
-- `earnings-calendar`
+- `macro-event-analysis`
+- `earnings-preview`
 
 Both skills can run in two modes:
 
@@ -43,14 +43,14 @@ If `data_mode` is `example`, you are not looking at current live data.
 
 ## What to expect without credentials
 
-- `economic-calendar` and `earnings-calendar` still remain demoable through example fixtures
+- `macro-event-analysis` and `earnings-preview` still remain demoable through example fixtures
 - `--provider fmp` fails with an actionable error if `FMP_API_KEY` is missing
 - `--live-only` fails instead of falling back
 
 Example:
 
 ```bash
-python3 skills/economic-calendar/scripts/fetch_calendar.py --provider auto --json
-python3 skills/earnings-calendar/scripts/fetch_earnings.py --provider auto --json
-python3 skills/economic-calendar/scripts/fetch_calendar.py --provider auto --live-only --json
+python3 skills/macro-event-analysis/scripts/fetch_calendar.py --provider auto --json
+python3 skills/earnings-preview/scripts/fetch_earnings.py --provider auto --json
+python3 skills/macro-event-analysis/scripts/fetch_calendar.py --provider auto --live-only --json
 ```

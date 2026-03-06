@@ -18,6 +18,7 @@ The format is intentionally lightweight:
 
 - Hardened live-data calendar skills around explicit live/example labeling, fallback behavior, and provider failure handling.
 - Simplified skill frontmatter and catalog metadata so the repo stays capability-first without unnecessary taxonomy overhead.
+- Refocused public skills around analyst workflows, including replacing utility-style public names with `earnings-preview`, `macro-event-analysis`, and `market-regime-analysis`.
 
 ## 0.1.0-rc.1
 
