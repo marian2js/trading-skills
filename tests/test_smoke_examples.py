@@ -35,6 +35,11 @@ def test_economic_calendar_example_script_smoke(repo_root):
     payload = json.loads(output)
     expected = load_json(repo_root / "skills/economic-calendar/fixtures/interpreted-summary.json")
     assert payload["provider"] == "example", "Economic calendar smoke test should use the example adapter"
+    assert payload["data_mode"] == expected["data_mode"], "Economic calendar output should label example mode explicitly"
+    assert payload["requested_window"] == expected["requested_window"], "Economic calendar output should echo the requested window"
+    assert payload["fallback_reason"] == expected["fallback_reason"], "Explicit example mode should not report a fallback reason"
+    assert isinstance(payload["retrieved_at_utc"], str) and payload["retrieved_at_utc"].endswith("Z")
+    assert payload["coverage_warnings"] == expected["coverage_warnings"], "Economic calendar coverage warnings should match the fixture"
     assert payload["event_count"] == 3, "Economic calendar example should return three events in the demo window"
     assert payload["analysis"] == expected["analysis"], "Economic calendar analysis should match the interpreted fixture"
 
@@ -59,6 +64,11 @@ def test_earnings_calendar_example_script_smoke(repo_root):
     payload = json.loads(output)
     expected = load_json(repo_root / "skills/earnings-calendar/fixtures/interpreted-summary.json")
     assert payload["provider"] == "example", "Earnings calendar smoke test should use the example adapter"
+    assert payload["data_mode"] == expected["data_mode"], "Earnings calendar output should label example mode explicitly"
+    assert payload["requested_window"] == expected["requested_window"], "Earnings calendar output should echo the requested window"
+    assert payload["fallback_reason"] == expected["fallback_reason"], "Explicit example mode should not report a fallback reason"
+    assert isinstance(payload["retrieved_at_utc"], str) and payload["retrieved_at_utc"].endswith("Z")
+    assert payload["coverage_warnings"] == expected["coverage_warnings"], "Earnings calendar coverage warnings should match the fixture"
     assert payload["events"][0]["symbol"] == "NVDA", "Requested symbol should be boosted to the top of the example output"
     assert payload["events"][0]["session"] == "after-close", "Example earnings output should expose canonical session fields"
     assert payload["analysis"] == expected["analysis"], "Earnings calendar analysis should match the interpreted fixture"

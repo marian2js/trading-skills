@@ -47,11 +47,14 @@ This keeps the public skill usable without forcing every contributor to solve pr
 
 The important constraint is that the fallback behavior remains explicit. Users should never have to guess whether they are looking at live data or example fixtures.
 
+Some scripts also support `--live-only`, which disables fallback and turns missing live configuration into a normal user-facing error.
+
 ## Fallback behavior
 
 A fallback should be intentional and visible:
 
 - identify the provider used
+- identify whether the data mode is `live` or `example`
 - identify whether it is live or example data
 - include timestamp and coverage notes when possible
 - never silently present example data as current market data

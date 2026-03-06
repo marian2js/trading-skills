@@ -2,15 +2,27 @@
 
 from __future__ import annotations
 
-import json
 import os
-from datetime import datetime
-from urllib.parse import urlencode
-from urllib.request import urlopen
+import sys
+from pathlib import Path
+
+
+SHARED_SCRIPTS_DIR = Path(__file__).resolve().parents[4] / "scripts"
+if str(SHARED_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SHARED_SCRIPTS_DIR))
+
+from live_data_common import (
+    ProviderRuntimeError,
+    coerce_utc_datetime,
+    ensure_list_payload,
+    safe_json_request,
+    within_date_window,
+)
 
 
 class FMPEconomicCalendarAdapter:
     provider_name = "fmp"
+    data_mode = "live"
     endpoint = "https://financialmodelingprep.com/stable/economic-calendar"
 
     def is_available(self) -> tuple[bool, str]:
@@ -21,22 +33,33 @@ class FMPEconomicCalendarAdapter:
     def fetch_raw(self, start_date=None, end_date=None, country=None):
         api_key = os.getenv("FMP_API_KEY")
         params = {"apikey": api_key}
-        # FMP calendar endpoints commonly accept from/to date windows.
         if start_date:
             params["from"] = start_date
         if end_date:
             params["to"] = end_date
         if country:
             params["country"] = country
-
-        with urlopen(f"{self.endpoint}?{urlencode(params)}") as response:
-            return json.loads(response.read().decode("utf-8"))
+        payload = safe_json_request(
+            self.endpoint,
+            params,
+            provider_name=self.provider_name,
+        )
+        return ensure_list_payload(
+            payload,
+            provider_name=self.provider_name,
+            expected="economic calendar events",
+        )
 
     def normalize(self, raw, start_date=None, end_date=None, country=None):
+        ensure_list_payload(raw, provider_name=self.provider_name, expected="economic calendar events")
         normalized = []
         for item in raw:
+            if not isinstance(item, dict):
+                raise ProviderRuntimeError(
+                    f"{self.provider_name} returned a malformed event item; expected an object per row."
+                )
             scheduled = item.get("date") or item.get("scheduledTime") or item.get("timestamp")
-            scheduled_time_utc = _coerce_datetime(scheduled)
+            scheduled_time_utc = coerce_utc_datetime(scheduled, fallback_to_now=True)
             record_country = item.get("country") or item.get("countryCode") or "unknown"
             if country and record_country.lower() != country.lower():
                 continue
@@ -60,7 +83,7 @@ class FMPEconomicCalendarAdapter:
                     "unit": item.get("unit"),
                     "status": normalize_status(item.get("actual")),
                     "source_url": self.endpoint,
-                    "last_updated_utc": _coerce_datetime(item.get("lastUpdated") or scheduled),
+                    "last_updated_utc": coerce_utc_datetime(item.get("lastUpdated") or scheduled, fallback_to_now=True),
                     "coverage_notes": (
                         "Normalized from FMP economic calendar data. Importance and category "
                         "can be provider-specific, and some releases may omit estimates or revisions."
@@ -70,7 +93,7 @@ class FMPEconomicCalendarAdapter:
         filtered = [
             event
             for event in normalized
-            if _within_date_window(event["scheduled_time_utc"], start_date, end_date)
+            if within_date_window(event["scheduled_time_utc"], start_date, end_date)
         ]
         return sorted(filtered, key=lambda event: event["scheduled_time_utc"])
 
@@ -100,26 +123,3 @@ def normalize_status(actual):
 
 def slugify(value):
     return "".join(ch.lower() if ch.isalnum() else "-" for ch in value).strip("-")
-
-
-def _coerce_datetime(value):
-    if not value:
-        return datetime.utcnow().isoformat(timespec="seconds") + "Z"
-
-    text = str(value).strip().replace(" ", "T")
-    if text.endswith("Z"):
-        return text
-    if len(text) == 10:
-        return f"{text}T00:00:00Z"
-    if "+" not in text and text.count(":") == 2:
-        return f"{text}Z"
-    return text
-
-
-def _within_date_window(timestamp, start_date, end_date):
-    date_part = timestamp[:10]
-    if start_date and date_part < start_date:
-        return False
-    if end_date and date_part > end_date:
-        return False
-    return True

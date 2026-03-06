@@ -11,6 +11,7 @@ FIXTURE = Path(__file__).resolve().parents[2] / "fixtures" / "normalized-events.
 
 class ExampleEconomicCalendarAdapter:
     provider_name = "example"
+    data_mode = "example"
 
     def is_available(self) -> tuple[bool, str]:
         return True, "Example fixture is always available."

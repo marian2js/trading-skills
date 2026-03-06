@@ -1,12 +1,21 @@
 {
+  "data_mode": "example",
   "provider": "example",
   "selection_reason": "Explicit provider 'example' selected.",
+  "fallback_reason": null,
+  "requested_window": {
+    "start_date": "2026-03-12",
+    "end_date": "2026-05-30",
+    "symbols": [
+      "NVDA"
+    ]
+  },
   "event_count": 3,
+  "coverage_warnings": [],
   "analysis": {
     "high_importance_count": 3,
     "direct_watchlist_hits": [
       "NVDA"
-    ],
-    "coverage_warnings": []
+    ]
   }
 }

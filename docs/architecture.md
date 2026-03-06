@@ -67,6 +67,14 @@ This gives the repo a stable internal seam:
 - ranking and analysis code can be reused across providers
 - provider quirks stay out of the user-facing reasoning layer
 
+The user-facing envelope should also stay explicit about runtime behavior:
+
+- provider used
+- whether the data was live or example
+- requested date window
+- retrieval timestamp
+- fallback reason when example mode was selected
+
 ## v1 approach
 
 The repository is intentionally pragmatic in v1:

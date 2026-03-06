@@ -36,6 +36,7 @@ def test_provider_adapters_follow_internal_contract(repo_root):
         adapter = adapter_cls()
 
         assert hasattr(adapter, "provider_name"), f"{class_name} should define provider_name"
+        assert hasattr(adapter, "data_mode"), f"{class_name} should define data_mode"
         assert callable(getattr(adapter, "is_available", None)), f"{class_name} should implement is_available()"
         assert callable(getattr(adapter, "fetch_raw", None)), f"{class_name} should implement fetch_raw()"
         assert callable(getattr(adapter, "normalize", None)), f"{class_name} should implement normalize()"

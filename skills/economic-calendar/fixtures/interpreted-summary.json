@@ -1,7 +1,15 @@
 {
+  "data_mode": "example",
   "provider": "example",
   "selection_reason": "Explicit provider 'example' selected.",
+  "fallback_reason": null,
+  "requested_window": {
+    "start_date": "2026-03-12",
+    "end_date": "2026-03-13",
+    "country": null
+  },
   "event_count": 3,
+  "coverage_warnings": [],
   "analysis": {
     "high_impact_count": 2,
     "high_impact_events": [
@@ -19,7 +27,6 @@
     "countries_covered": [
       "EU",
       "US"
-    ],
-    "coverage_warnings": []
+    ]
   }
 }

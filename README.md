@@ -32,10 +32,30 @@ The repository also ships a machine-readable [catalog.json](catalog.json) so fut
 The intended UX is simple and capability-first:
 
 ```bash
-npx skills add <repo>@position-sizing
-npx skills add <repo>@economic-calendar
-npx skills add <repo>@earnings-calendar
+npx skills add marian2js/trading-skills@position-sizing
+npx skills add marian2js/trading-skills@economic-calendar
+npx skills add marian2js/trading-skills@earnings-calendar
 ```
+
+## Getting started
+
+Use static skills immediately:
+
+- `position-sizing`
+- `risk-reward-sanity-check`
+- `post-trade-review`
+
+Use data-backed skills in example mode with no credentials:
+
+- `economic-calendar`
+- `earnings-calendar`
+
+Use live data-backed skills after configuring `FMP_API_KEY`:
+
+- `economic-calendar`
+- `earnings-calendar`
+
+See [docs/live-data-setup.md](docs/live-data-setup.md) for live/example behavior, fallback rules, and verification steps.
 
 Example prompts after installation:
 
@@ -143,6 +163,7 @@ Each public skill lives in `skills/<capability>/` and centers around a `SKILL.md
 See the docs for details:
 
 - [Architecture](docs/architecture.md)
+- [Live data setup](docs/live-data-setup.md)
 - [Repo conventions](docs/repo-conventions.md)
 - [Skill design principles](docs/skill-design-principles.md)
 - [New skill checklist](docs/new-skill-checklist.md)

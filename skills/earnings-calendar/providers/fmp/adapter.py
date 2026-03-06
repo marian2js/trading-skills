@@ -2,14 +2,27 @@
 
 from __future__ import annotations
 
-import json
 import os
-from urllib.parse import urlencode
-from urllib.request import urlopen
+import sys
+from pathlib import Path
+
+
+SHARED_SCRIPTS_DIR = Path(__file__).resolve().parents[4] / "scripts"
+if str(SHARED_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SHARED_SCRIPTS_DIR))
+
+from live_data_common import (
+    ProviderRuntimeError,
+    coerce_utc_datetime,
+    ensure_list_payload,
+    safe_json_request,
+    within_date_window as shared_within_date_window,
+)
 
 
 class FMPEarningsCalendarAdapter:
     provider_name = "fmp"
+    data_mode = "live"
     endpoint = "https://financialmodelingprep.com/stable/earnings-calendar"
 
     def is_available(self) -> tuple[bool, str]:
@@ -24,14 +37,26 @@ class FMPEarningsCalendarAdapter:
             params["from"] = start_date
         if end_date:
             params["to"] = end_date
-
-        with urlopen(f"{self.endpoint}?{urlencode(params)}") as response:
-            return json.loads(response.read().decode("utf-8"))
+        payload = safe_json_request(
+            self.endpoint,
+            params,
+            provider_name=self.provider_name,
+        )
+        return ensure_list_payload(
+            payload,
+            provider_name=self.provider_name,
+            expected="earnings calendar events",
+        )
 
     def normalize(self, raw, start_date=None, end_date=None, watchlist=None):
+        ensure_list_payload(raw, provider_name=self.provider_name, expected="earnings calendar events")
         watchlist = set(watchlist or [])
         normalized = []
         for item in raw:
+            if not isinstance(item, dict):
+                raise ProviderRuntimeError(
+                    f"{self.provider_name} returned a malformed event item; expected an object per row."
+                )
             symbol = (item.get("symbol") or "").upper()
             company_name = item.get("name") or symbol or "Unknown company"
             relevance_score, relevance_notes = score_relevance(
@@ -62,7 +87,7 @@ class FMPEarningsCalendarAdapter:
                     "relevance_notes": relevance_notes,
                     "status": "released" if item.get("epsActual") is not None else "scheduled",
                     "source_url": self.endpoint,
-                    "last_updated_utc": coerce_timestamp(item.get("lastUpdated")) or coerce_earnings_datetime(item.get("date"), item.get("time")),
+                    "last_updated_utc": coerce_utc_datetime(item.get("lastUpdated")) or coerce_earnings_datetime(item.get("date"), item.get("time")),
                     "coverage_notes": (
                         "Normalized from FMP earnings calendar data. Timing, sector fields, "
                         "and revenue estimates may be incomplete or shift near the report date."
@@ -72,7 +97,7 @@ class FMPEarningsCalendarAdapter:
         filtered = [
             event
             for event in normalized
-            if within_date_window(event["scheduled_time_utc"], start_date, end_date)
+            if shared_within_date_window(event["scheduled_time_utc"], start_date, end_date)
         ]
         return sorted(filtered, key=lambda event: (-event["relevance_score"], event["scheduled_time_utc"]))
 
@@ -96,26 +121,13 @@ def coerce_earnings_datetime(date_value, time_value):
     if not date_value:
         return "1970-01-01T00:00:00Z"
     if "T" in str(date_value):
-        return coerce_timestamp(date_value)
+        return coerce_utc_datetime(date_value, fallback_to_now=True)
     timing = normalize_session(time_value)
     if timing == "after-close":
         return f"{date_value}T20:15:00Z"
     if timing == "before-open":
         return f"{date_value}T11:30:00Z"
     return f"{date_value}T00:00:00Z"
-
-
-def coerce_timestamp(value):
-    if not value:
-        return None
-    text = str(value).strip().replace(" ", "T")
-    if text.endswith("Z"):
-        return text
-    if len(text) == 10:
-        return f"{text}T00:00:00Z"
-    if "+" not in text and text.count(":") >= 2:
-        return f"{text}Z"
-    return text
 
 
 def bucket_market_cap(value):
@@ -166,11 +178,3 @@ def classify_importance(market_cap, in_watchlist):
         return "medium"
     return "low"
 
-
-def within_date_window(timestamp, start_date, end_date):
-    date_part = timestamp[:10]
-    if start_date and date_part < start_date:
-        return False
-    if end_date and date_part > end_date:
-        return False
-    return True
