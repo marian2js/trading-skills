@@ -1,22 +1,38 @@
-# Earnings Preview In Live Mode
+# Earnings Preview Examples
+
+## Case 1: The user already provided enough data
 
 Prompt:
 
-> Use `earnings-preview` for NVDA and ADBE with live data only. I care about the key debates and the names with the biggest read-through risk.
+> Use `earnings-preview` for NVDA next week. I already know the date is Wednesday after the close. My focus is AI demand, gross margin, and read-through to semis.
 
-Optional verification command:
+Expected behavior:
 
-```bash
-export FMP_API_KEY=your_key_here
-python3 skills/earnings-preview/scripts/fetch_earnings.py --provider auto --live-only --symbols NVDA,ADBE --json
-```
+- do not reach for a provider
+- work from the user's date and debate framing
+- build the preview around the key questions and read-through paths
 
-What to look for:
+## Case 2: The user already indicated a provider
 
-- `data_mode` is `live`
-- `provider` is `fmp`
-- `fallback_reason` is `null`
-- the output prioritizes the reports that actually matter to the watchlist
-- source, freshness, and coverage caveats stay explicit
+Prompt:
 
-If live data is unavailable, `--live-only` should fail instead of switching to example data.
+> Use `earnings-preview` for ADBE and CRM next week. I do not have the exact timing, but you can use Nasdaq for the missing schedule data.
+
+Expected behavior:
+
+- use the `Nasdaq` path directly because the user already chose it
+- gather only the missing timing facts
+- continue the preview and disclose that `Nasdaq` supplied the schedule confirmation
+
+## Case 3: Critical data is missing and no provider was indicated
+
+Prompt:
+
+> Use `earnings-preview` for my software watchlist next week. I have not pulled the schedule yet.
+
+Expected behavior:
+
+- do not assume a provider
+- consult `references/data-providers.md`
+- ask which supported provider the user wants to use
+- continue the preview only after the missing schedule context is available

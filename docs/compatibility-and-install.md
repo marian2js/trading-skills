@@ -8,7 +8,7 @@ A portable skill in this repo means:
 
 - a public `SKILL.md` entrypoint
 - minimal frontmatter, usually just `name` and `description`
-- supporting references, scripts, fixtures, and assets kept inside the skill directory
+- supporting references, fixtures, and assets kept inside the skill directory
 - no requirement that users understand provider internals to use the capability
 
 ## Expected skill folder shape
@@ -20,8 +20,6 @@ skills/<skill-name>/
   SKILL.md
   fixtures/
   references/
-  scripts/
-  providers/
   assets/
 ```
 
@@ -49,7 +47,7 @@ Ecosystem-generic expectations:
 Repo-specific conventions:
 
 - capability-first packaging
-- internal `providers/` directories for data-backed skills
+- markdown-first optional provider support for data-aware skills
 - a small generated `catalog.json` for browsing and validation
 - generated README skill index
 
@@ -57,5 +55,5 @@ Repo-specific conventions:
 
 - avoid hard-coding provider names into public skill names
 - keep relative paths inside the skill directory
-- prefer standard-library Python helpers where possible
+- prefer markdown references over hidden implementation files
 - assume non-technical users may browse the skill before they inspect any code

@@ -16,8 +16,8 @@ def test_skill_directories_are_not_empty_shells(repo_root):
         assert "SKILL.md" in entries, f"{skill_dir} should expose its public entrypoint via SKILL.md"
 
 
-def test_every_skill_has_a_fixtures_directory(repo_root):
+def test_fixtures_directories_are_optional_but_well_formed(repo_root):
     for skill_dir in iter_skill_dirs(repo_root):
         fixtures_dir = skill_dir / "fixtures"
-        assert fixtures_dir.exists(), f"{skill_dir.name} should keep sample inputs and outputs in fixtures/"
-        assert fixtures_dir.is_dir(), f"{fixtures_dir} should be a directory"
+        if fixtures_dir.exists():
+            assert fixtures_dir.is_dir(), f"{fixtures_dir} should be a directory"

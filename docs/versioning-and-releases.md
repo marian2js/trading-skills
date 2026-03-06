@@ -3,7 +3,6 @@
 The repository should version changes conservatively because users may depend on:
 
 - skill behavior
-- canonical schemas
 - example outputs
 - install metadata
 
@@ -26,14 +25,13 @@ Use for:
 
 - additive skill improvements
 - new example fixtures
-- non-breaking adapter additions
+- non-breaking provider support additions
 - richer output fields that do not remove or rename existing fields
 
 ### Major changes
 
 Use for:
 
-- breaking schema changes
 - renamed skill metadata fields
 - removed output fields
 - changes that alter public skill behavior in a way contributors or tooling must adapt to
@@ -42,8 +40,7 @@ Use for:
 
 - docs-only changes
 - skill behavior changes
-- schema changes
-- adapter changes
+- provider support changes
 - breaking changes
 
 ## Release documentation expectations

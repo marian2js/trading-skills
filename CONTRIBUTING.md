@@ -36,12 +36,10 @@ Every new public skill should include:
 
 If the skill is data-backed, it should also include:
 
-- a canonical schema or a documented dependency on an existing canonical schema
-- a provider selection strategy
-- at least one concrete adapter
-- an example or mock adapter for demos and tests
-- realistic fixtures under `skills/<skill>/fixtures/`
-- clear behavior when credentials or live data are unavailable
+- a user-data-first workflow
+- a small `references/data-providers.md` file if optional provider support is needed
+- concise provider docs under `references/providers/`
+- clear behavior when the user already named a provider, and when they have not
 
 ## Writing guidelines
 
@@ -51,18 +49,18 @@ If the skill is data-backed, it should also include:
 - Avoid fake precision. Rounded ranges and caveats are often better than false exactness.
 - Separate analysis from recommendation. The skill can support a decision without pretending to make it.
 
-## Adding a provider to an existing skill
+## Adding provider support to an existing skill
 
 Do not create a new public skill for a provider unless the provider-specific capability is itself the product.
 
 Instead:
 
-1. Add a new adapter under the existing capability, for example `skills/economic-calendar/providers/<provider>/`.
-2. Normalize the provider output into the documented canonical schema.
-3. Update the skill instructions or references only if the user-facing workflow changes.
+1. Add the provider to `references/data-providers.md`.
+2. Add or update a concise provider doc under `references/providers/`.
+3. Update the skill text only if the user-facing analysis workflow changes.
 4. Keep source disclosure in the final output.
 
-Read [docs/provider-adapters.md](docs/provider-adapters.md) before adding adapter code.
+Read [docs/provider-support.md](docs/provider-support.md) before adding provider guidance.
 
 ## Validation
 
@@ -72,10 +70,10 @@ Most tests live in the root `tests/` directory because the highest-value checks 
 - frontmatter quality
 - link integrity
 - schema examples
-- adapter contracts
-- normalization behavior
+- provider reference coverage
+- markdown-first workflow behavior
 
-Keep fixtures near the skill they belong to. Add `skills/<skill>/tests/` only when a skill has substantial local Python logic and co-location clearly improves maintainability.
+Keep fixtures near the skill they belong to when they help clarify the workflow. Add `skills/<skill>/tests/` only when a skill grows substantial local behavior and co-location clearly improves maintainability.
 
 ## Local setup quick start
 
@@ -105,7 +103,7 @@ The repo keeps metadata intentionally light. In most cases the only frontmatter 
 Typical contributor flow:
 
 1. Add or update a skill under `skills/<skill>/`.
-2. Keep sample inputs, normalized payloads, and demo outputs in `fixtures/`.
+2. Keep sample inputs or examples in `fixtures/` when they materially help the skill.
 3. Add or update `sample-output.md` or another small example artifact so users can evaluate the skill quickly.
 4. Add or update tests in the root `tests/` directory unless co-located skill tests are clearly justified.
 5. Regenerate the small machine-readable catalog and README skill index with `make catalog`.
@@ -155,7 +153,7 @@ Do not add:
 Keep pull requests narrow:
 
 - one new skill
-- one adapter addition
+- one provider-support addition
 - one documentation improvement
 - one validator improvement
 

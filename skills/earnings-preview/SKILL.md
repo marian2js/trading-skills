@@ -36,6 +36,19 @@ Helpful but optional:
 - known positioning or sentiment concerns
 - whether the user plans to hold through the event
 
+Use the user's materials first: pasted schedules, watchlists, company notes, guidance excerpts, estimate tables, transcripts, screenshots, or provider details already mentioned in the conversation.
+
+## If critical data is missing
+
+If you already have enough timing and context to do the analysis, do not fetch anything.
+
+If key schedule or estimate context is missing:
+
+- check whether the user already named a supported provider or already shared usable access details in the conversation
+- if they already indicated `FMP` or `Nasdaq`, use [references/providers/fmp.md](references/providers/fmp.md) or [references/providers/nasdaq.md](references/providers/nasdaq.md) directly
+- otherwise consult [references/data-providers.md](references/data-providers.md) and ask which supported provider they want to use
+- once the missing facts are gathered, continue the preview and disclose the source used
+
 ## Analysis process
 
 1. Identify the reports that matter most for the user's names or theme.
@@ -44,7 +57,7 @@ Helpful but optional:
 4. Separate pre-report setup risk from business-quality judgment.
 5. Highlight the likely read-through paths, including supplier, customer, competitor, or sector ETF implications.
 6. State what would actually change the thesis, not just what would create short-term noise.
-7. If current schedule data is available, use it and disclose source, freshness, and any coverage gaps. If not, work from the user's inputs and say what is missing.
+7. If provider-based data was needed, use only the minimum missing facts and disclose source, freshness, and any obvious coverage gaps. Otherwise stay fully grounded in the user's material.
 
 Use [references/relevance-ranking.md](references/relevance-ranking.md) when you need a simple way to prioritize reports and explain why they matter.
 

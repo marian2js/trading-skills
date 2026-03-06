@@ -35,6 +35,19 @@ Helpful but optional:
 - specific holdings or watchlist names
 - events the user already knows are important
 
+Use the user's materials first: pasted event lists, screenshots, platform notes, transcripts, watchlists, or provider details already mentioned in the conversation.
+
+## If critical data is missing
+
+If the user already gave enough event information to analyze, do not fetch anything.
+
+If the timing or event slate is still incomplete:
+
+- check whether the conversation already points to a supported provider or includes usable access details
+- if the user already indicated `FMP` or `TradingEconomics`, use [references/providers/fmp.md](references/providers/fmp.md) or [references/providers/tradingeconomics.md](references/providers/tradingeconomics.md) directly
+- otherwise consult [references/data-providers.md](references/data-providers.md) and ask which supported provider they want to use
+- once the missing event details are gathered, continue the analysis and disclose the source used
+
 ## Analysis process
 
 1. Build the relevant event slate for the requested window.
@@ -42,8 +55,8 @@ Helpful but optional:
 3. Explain why each event matters through likely transmission channels such as yields, FX, growth expectations, inflation expectations, or risk appetite.
 4. Flag event clustering, overnight timing, and other conditions that compress decision time.
 5. Separate high-visibility events from lower-signal filler.
-6. State where the available calendar data is incomplete, stale, or missing consensus context.
-7. Translate the calendar into practical preparation questions: what should the user avoid assuming, monitor closely, or plan around?
+6. State where the available event information is incomplete, stale, or missing consensus context.
+7. Translate the event slate into practical preparation questions: what should the user avoid assuming, monitor closely, or plan around?
 
 Use [references/interpretation-guide.md](references/interpretation-guide.md) when you need a reminder to emphasize event risk over prediction.
 
@@ -56,7 +69,7 @@ Always return:
 - the main transmission channels to watch
 - timing notes, including clustered or overnight risk
 - a short preparation brief: what to monitor, what to avoid assuming, and where caution is warranted
-- explicit source, freshness, and caveats when current calendar data is used
+- explicit source, freshness, and caveats when provider-based data is used
 
 ## Best practices
 

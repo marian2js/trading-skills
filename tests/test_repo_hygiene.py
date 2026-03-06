@@ -62,6 +62,17 @@ def test_every_skill_has_sample_output_artifact(repo_root):
     assert not missing, f"Every skill should include sample-output.md for quick evaluation: {missing}"
 
 
+def test_skills_do_not_ship_python_implementation_files(repo_root):
+    python_files = sorted(
+        path.relative_to(repo_root).as_posix()
+        for path in (repo_root / "skills").rglob("*.py")
+    )
+    assert not python_files, (
+        "Skills should stay markdown-first; remove skill-local Python files: "
+        f"{python_files}"
+    )
+
+
 def test_release_artifacts_exist(repo_root):
     assert (repo_root / "CHANGELOG.md").exists(), "Repository should include CHANGELOG.md"
     version_file = repo_root / "VERSION"

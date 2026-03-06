@@ -17,9 +17,9 @@ Add more metadata only when it has a clear current job in the repo. Do not add f
 
 ## Capability-first packaging
 
-The public package is the skill capability. Providers stay inside the skill directory as internal adapters.
+The public package is the skill capability.
 
-Public skills should describe an analytical job, not a data utility. If the main thing a skill does is fetch or normalize data, that logic probably belongs in scripts, fixtures, or references instead of the public `SKILL.md`.
+Public skills should describe an analytical job, not a data utility. If the main thing a skill does is fetch or normalize data, that logic probably belongs in small provider references or fixtures instead of the public `SKILL.md`.
 
 Good:
 
@@ -37,12 +37,15 @@ Use the smallest structure that supports the capability cleanly.
 
 - `SKILL.md`: required public entrypoint
 - `references/`: methodology, caveats, domain notes, schema explanations
-- `scripts/`: executable helpers or adapter selection entrypoints
-- `providers/`: internal data adapters for data-backed skills
-- `fixtures/`: realistic sample inputs, raw provider payloads, normalized samples, interpreted outputs
+- `fixtures/`: realistic sample inputs or examples when they add current value
 - `assets/`: reusable templates or non-executable supporting material
 
 Not every skill needs every directory.
+
+For data-aware skills, prefer:
+
+- `references/data-providers.md`
+- `references/providers/<provider>.md`
 ## When provider-specific public skills are allowed
 
 Almost never. They are acceptable only when:

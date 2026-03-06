@@ -36,7 +36,7 @@ Current release candidate version: `0.1.0-rc.1` in [VERSION](VERSION).
 ## Quick links
 
 - [Examples](docs/examples/README.md)
-- [Live data setup](docs/live-data-setup.md)
+- [Optional provider support](docs/optional-provider-support.md)
 - [Compatibility and install](docs/compatibility-and-install.md)
 - [Contributing](CONTRIBUTING.md)
 - [Versioning and releases](docs/versioning-and-releases.md)
@@ -54,23 +54,21 @@ npx skills add marian2js/trading-skills@earnings-preview
 
 ## Quickstart
 
-Use static skills immediately:
+Use the static skills immediately:
 
 - `position-sizing`
 - `risk-reward-sanity-check`
 - `post-trade-review`
 
-Use data-backed skills in example mode with no credentials:
+Use the analysis-first, data-aware skills with the material you already have:
 
 - `macro-event-analysis`
 - `earnings-preview`
+- `market-regime-analysis`
 
-Use live data-backed skills after configuring `FMP_API_KEY`:
+Only if critical information is missing should these skills consult optional provider support.
 
-- `macro-event-analysis`
-- `earnings-preview`
-
-See [docs/live-data-setup.md](docs/live-data-setup.md) for live/example behavior, fallback rules, and verification steps.
+See [docs/optional-provider-support.md](docs/optional-provider-support.md) for the provider fallback pattern.
 
 Example walkthroughs for evaluating the current skills live in [docs/examples/](docs/examples/).
 
@@ -83,19 +81,24 @@ Example prompts after installation:
 - "Use `market-regime-analysis` to classify current context from my observations without pretending to forecast."
 - "Use `post-trade-review` to review a trade where I respected the thesis but violated my stop."
 
-## Static vs data-backed skills
+## User Data First
 
-Static skills are installable and immediately useful for non-technical users.
+This repo prefers the user's material first:
 
-Data-backed skills keep setup small:
+- pasted notes
+- watchlists
+- transcripts
+- screenshots
+- schedules already in context
+- estimate tables already in context
 
-- users install the capability, not a provider-specific package
-- the skill selects an internal adapter
-- if no live provider is configured, the skill explains that clearly and can fall back to an example adapter when available
+Only if critical information is missing should a skill consult optional provider support.
+
+If the user already named a supported provider or already shared usable access details, the skill should use that provider path directly. Otherwise it should ask which supported provider to use.
 
 ## Trust model
 
-High-trust output is a product requirement, not a nice-to-have. Data-backed skills should always disclose:
+High-trust output is a product requirement, not a nice-to-have. Skills that use provider-based data should always disclose:
 
 - source or provider used
 - freshness or timestamp when available
@@ -143,35 +146,33 @@ trading-skills/
   tests/
 ```
 
-Each public skill lives in `skills/<capability>/` and centers around a `SKILL.md` file. Long notes, methodology, fixtures, and scripts stay in adjacent folders so the skill body stays readable.
+Each public skill lives in `skills/<capability>/` and centers around a `SKILL.md` file. Long notes, methodology, fixtures, and provider references stay in adjacent folders so the skill body stays readable.
 
 ## Architecture in one page
 
 - Public packages are capability-first.
-- Provider adapters are internal.
-- Data-backed skills normalize provider responses into canonical schemas before analysis.
-- Skill logic should reason over the normalized schema, not the raw vendor payload.
-- v1 uses one primary provider per data-backed capability where appropriate, but the structure supports more later.
+- Public skills are analytical workflows.
+- User-provided context comes first.
+- Optional provider support is markdown-based and used only when needed.
 
 See the docs for details:
 
 - [Architecture](docs/architecture.md)
 - [Examples](docs/examples/README.md)
 - [Compatibility and install](docs/compatibility-and-install.md)
-- [Live data setup](docs/live-data-setup.md)
+- [Optional provider support](docs/optional-provider-support.md)
 - [Repo conventions](docs/repo-conventions.md)
 - [Skill design principles](docs/skill-design-principles.md)
 - [New skill checklist](docs/new-skill-checklist.md)
 - [Versioning and releases](docs/versioning-and-releases.md)
 - [Release checklist](docs/release-checklist.md)
-- [Provider adapters](docs/provider-adapters.md)
-- [Canonical schemas](docs/canonical-schemas.md)
+- [Provider support](docs/provider-support.md)
 
 ## Testing and validation
 
 This repo keeps most tests in the root [tests/](tests/) directory so contributors can find cross-cutting checks in one place. Skill-specific sample data lives next to the skill in `skills/<skill>/fixtures/`, which keeps demo data and normalization fixtures close to the capability they describe.
 
-Per-skill `tests/` directories are intentionally not the default. Add them only when a skill grows substantial local executable logic that is easier to maintain beside the code.
+Per-skill `tests/` directories are intentionally not the default. Add them only when a skill grows substantial local behavior that is easier to maintain beside the code.
 
 Run the full repository checks with one command:
 
@@ -206,13 +207,11 @@ The current checks cover:
 - README skill index stays in sync with the catalog
 - local references in `SKILL.md` files exist
 - README, docs, and sample-output markdown links stay valid
-- JSON examples in the schema docs parse successfully
 - fixture JSON files parse successfully
 - forbidden artifacts do not leak into tracked files
 - public skill names do not leak provider branding
-- provider adapters conform to the internal contract
-- normalization fixtures match the canonical schemas
-- representative scripts work in smoke-test mode
+- provider references linked from skills exist
+- skill-local markdown stays aligned with the user-data-first workflow
 
 ## Next steps after v1
 

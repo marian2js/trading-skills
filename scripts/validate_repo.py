@@ -13,7 +13,6 @@ from build_catalog import collect_catalog, parse_frontmatter, update_readme, ren
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SKILLS_DIR = REPO_ROOT / "skills"
-SCHEMA_DOC = REPO_ROOT / "docs" / "canonical-schemas.md"
 README_PATH = REPO_ROOT / "README.md"
 CATALOG_PATH = REPO_ROOT / "catalog.json"
 VERSION_PATH = REPO_ROOT / "VERSION"
@@ -22,7 +21,7 @@ CHANGELOG_PATH = REPO_ROOT / "CHANGELOG.md"
 GENERIC_DESCRIPTION_FRAGMENTS = {"skill description", "todo", "placeholder", "tbd", "generic"}
 FRONTMATTER_REQUIRED = {"name", "description"}
 FRONTMATTER_ALLOWED = {"name", "description"}
-DATA_BACKED_SKILLS = {"macro-event-analysis", "earnings-preview"}
+DATA_AWARE_SKILLS = {"macro-event-analysis", "earnings-preview", "market-regime-analysis"}
 
 FORBIDDEN_TRACKED_PATTERNS = (
     "__pycache__/",
@@ -88,7 +87,8 @@ def validate_skill_structure(errors: list[str]) -> None:
         if not sample_output.exists():
             errors.append(f"{skill_dir}: missing sample-output.md")
         validate_frontmatter(skill_md, errors)
-        validate_data_backed_structure(skill_dir, errors)
+        validate_provider_references(skill_dir, errors)
+        validate_skill_python_absence(skill_dir, errors)
         validate_public_skill_naming(skill_dir, errors)
 
 
@@ -115,17 +115,36 @@ def validate_repo_markdown_links(errors: list[str]) -> None:
         validate_markdown_links(path, errors)
 
 
-def validate_data_backed_structure(skill_dir: Path, errors: list[str]) -> None:
-    if skill_dir.name not in DATA_BACKED_SKILLS:
+def validate_provider_references(skill_dir: Path, errors: list[str]) -> None:
+    if skill_dir.name not in DATA_AWARE_SKILLS:
         return
 
-    providers_dir = skill_dir / "providers"
-    if not providers_dir.exists():
-        errors.append(f"{skill_dir}: data-backed skill is missing providers/")
+    data_providers = skill_dir / "references" / "data-providers.md"
+    providers_dir = skill_dir / "references" / "providers"
+    skill_text = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
+
+    if not data_providers.exists():
+        errors.append(f"{skill_dir}: data-aware skill is missing references/data-providers.md")
         return
-    providers = [path for path in providers_dir.iterdir() if path.is_dir() and not path.name.startswith("__")]
-    if not providers:
-        errors.append(f"{skill_dir}: data-backed skill should declare at least one internal provider")
+    if "references/data-providers.md" not in skill_text:
+        errors.append(f"{skill_dir}: SKILL.md should mention references/data-providers.md directly")
+    if "ask which supported provider" not in skill_text.lower():
+        errors.append(f"{skill_dir}: SKILL.md should explain how to ask the user to choose a provider")
+    if not providers_dir.exists():
+        errors.append(f"{skill_dir}: data-aware skill is missing references/providers/")
+        return
+    provider_docs = [path for path in providers_dir.glob("*.md")]
+    if not provider_docs:
+        errors.append(f"{skill_dir}: data-aware skill should declare at least one provider reference")
+
+
+def validate_skill_python_absence(skill_dir: Path, errors: list[str]) -> None:
+    python_files = sorted(path.relative_to(REPO_ROOT).as_posix() for path in skill_dir.rglob("*.py"))
+    if python_files:
+        errors.append(
+            f"{skill_dir}: skill-local Python files should be removed for markdown-first support: "
+            f"{', '.join(python_files)}"
+        )
 
 
 def validate_public_skill_naming(skill_dir: Path, errors: list[str]) -> None:
@@ -198,24 +217,6 @@ def validate_forbidden_tracked_artifacts(errors: list[str]) -> None:
             errors.append(f"Tracked forbidden artifact: {relative_path}")
 
 
-def validate_schema_examples(errors: list[str]) -> None:
-    if not SCHEMA_DOC.exists():
-        errors.append(f"{SCHEMA_DOC}: missing schema documentation")
-        return
-
-    text = SCHEMA_DOC.read_text(encoding="utf-8")
-    blocks = re.findall(r"```json\n(.*?)\n```", text, re.DOTALL)
-    if not blocks:
-        errors.append(f"{SCHEMA_DOC}: no JSON examples found")
-        return
-
-    for index, block in enumerate(blocks, start=1):
-        try:
-            json.loads(block)
-        except json.JSONDecodeError as exc:
-            errors.append(f"{SCHEMA_DOC}: JSON example #{index} is invalid: {exc}")
-
-
 def main() -> int:
     errors: list[str] = []
     validate_skill_structure(errors)
@@ -224,7 +225,6 @@ def main() -> int:
     validate_fixture_json(errors)
     validate_release_artifacts(errors)
     validate_forbidden_tracked_artifacts(errors)
-    validate_schema_examples(errors)
 
     if errors:
         print("Repository validation failed:\n")

@@ -26,17 +26,15 @@ Use this checklist before opening a pull request for a new skill or a major skil
 
 ## Fixtures and tests
 
-- `fixtures/` contains realistic sample data or examples.
+- `fixtures/` contains realistic sample data or examples when they add current value.
 - Static skills include example input/output pairs when practical.
-- Data-backed skills include raw and normalized fixture examples.
 - Root `tests/` were added or updated to cover the new behavior.
 
 ## Data-backed skills only
 
-- The skill defines or reuses a canonical schema.
-- At least one concrete provider adapter exists.
-- An example or mock adapter or fixture path exists for demoability.
-- Provider selection and fallback behavior are documented.
+- `references/data-providers.md` exists if optional provider support is needed.
+- concise provider docs exist under `references/providers/`.
+- the user-data-first and provider fallback behavior are documented.
 
 ## Keep it simple
 
