@@ -16,6 +16,7 @@
         "fx"
       ],
       "example_artifact": "skills/position-sizing/sample-output.md",
+      "docs_path": "docs/examples/position-sizing-walkthrough.md",
       "tags": [
         "risk-management",
         "execution-planning",
@@ -37,6 +38,7 @@
         "fx"
       ],
       "example_artifact": "skills/risk-reward-sanity-check/sample-output.md",
+      "docs_path": "docs/examples/risk-reward-sanity-check-walkthrough.md",
       "tags": [
         "risk-management",
         "trade-structure",
@@ -58,6 +60,7 @@
         "fx"
       ],
       "example_artifact": "skills/post-trade-review/sample-output.md",
+      "docs_path": "docs/examples/post-trade-review-walkthrough.md",
       "tags": [
         "review",
         "journaling",
@@ -83,6 +86,7 @@
         "rates"
       ],
       "example_artifact": "skills/economic-calendar/sample-output.md",
+      "docs_path": "docs/examples/economic-calendar-example-mode.md",
       "tags": [
         "macro",
         "calendar",
@@ -106,6 +110,7 @@
         "sector-etfs"
       ],
       "example_artifact": "skills/earnings-calendar/sample-output.md",
+      "docs_path": "docs/examples/earnings-calendar-live-mode.md",
       "tags": [
         "earnings",
         "catalysts",
@@ -127,6 +132,7 @@
         "fx"
       ],
       "example_artifact": "skills/market-regime-detector/sample-output.md",
+      "docs_path": "docs/examples/market-regime-detector-walkthrough.md",
       "tags": [
         "market-context",
         "regime",

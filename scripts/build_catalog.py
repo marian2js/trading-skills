@@ -24,6 +24,15 @@ CATEGORY_ORDER = [
     "workflow",
 ]
 
+SKILL_DOC_MAP = {
+    "position-sizing": "docs/examples/position-sizing-walkthrough.md",
+    "risk-reward-sanity-check": "docs/examples/risk-reward-sanity-check-walkthrough.md",
+    "post-trade-review": "docs/examples/post-trade-review-walkthrough.md",
+    "economic-calendar": "docs/examples/economic-calendar-example-mode.md",
+    "earnings-calendar": "docs/examples/earnings-calendar-live-mode.md",
+    "market-regime-detector": "docs/examples/market-regime-detector-walkthrough.md",
+}
+
 
 def parse_frontmatter(path: Path) -> dict[str, str]:
     text = path.read_text(encoding="utf-8")
@@ -88,6 +97,7 @@ def collect_catalog(repo_root: Path = REPO_ROOT) -> dict:
                 if (skill_dir / "sample-output.md").exists()
                 else None
             ),
+            "docs_path": SKILL_DOC_MAP.get(skill_dir.name),
             "tags": parse_csv(frontmatter.get("tags")),
         }
         records.append(record)
@@ -120,9 +130,9 @@ def render_skill_index(catalog: dict) -> str:
         for record in records:
             config = "yes" if record["requires_configuration"] else "no"
             example = (
-                f"[sample]({record['example_artifact']})"
+                f"[sample]({record['example_artifact']}) / [guide]({record['docs_path']})"
                 if record["example_artifact"]
-                else "-"
+                else (f"[guide]({record['docs_path']})" if record["docs_path"] else "-")
             )
             parts.append(
                 "| "

@@ -119,27 +119,27 @@ The current library is grouped into a small number of clear categories:
 
 | Skill | Dependency | Status | Config | Example | Summary |
 | --- | --- | --- | --- | --- | --- |
-| `position-sizing` | `static` | `beta` | `no` | [sample](skills/position-sizing/sample-output.md) | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. |
-| `risk-reward-sanity-check` | `static` | `beta` | `no` | [sample](skills/risk-reward-sanity-check/sample-output.md) | Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed. |
+| `position-sizing` | `static` | `beta` | `no` | [sample](skills/position-sizing/sample-output.md) / [guide](docs/examples/position-sizing-walkthrough.md) | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. |
+| `risk-reward-sanity-check` | `static` | `beta` | `no` | [sample](skills/risk-reward-sanity-check/sample-output.md) / [guide](docs/examples/risk-reward-sanity-check-walkthrough.md) | Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed. |
 
 ### trade-review
 
 | Skill | Dependency | Status | Config | Example | Summary |
 | --- | --- | --- | --- | --- | --- |
-| `post-trade-review` | `static` | `beta` | `no` | [sample](skills/post-trade-review/sample-output.md) | Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater. |
+| `post-trade-review` | `static` | `beta` | `no` | [sample](skills/post-trade-review/sample-output.md) / [guide](docs/examples/post-trade-review-walkthrough.md) | Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater. |
 
 ### macro
 
 | Skill | Dependency | Status | Config | Example | Summary |
 | --- | --- | --- | --- | --- | --- |
-| `economic-calendar` | `data-required` | `experimental` | `yes` | [sample](skills/economic-calendar/sample-output.md) | Summarize upcoming macro event risk from a normalized economic calendar so the user can see timing, importance, and coverage caveats without dealing with provider internals. |
+| `economic-calendar` | `data-required` | `experimental` | `yes` | [sample](skills/economic-calendar/sample-output.md) / [guide](docs/examples/economic-calendar-example-mode.md) | Summarize upcoming macro event risk from a normalized economic calendar so the user can see timing, importance, and coverage caveats without dealing with provider internals. |
 
 ### market-data
 
 | Skill | Dependency | Status | Config | Example | Summary |
 | --- | --- | --- | --- | --- | --- |
-| `earnings-calendar` | `data-required` | `experimental` | `yes` | [sample](skills/earnings-calendar/sample-output.md) | Summarize upcoming earnings events with normalized fields and conservative relevance ranking so the user can prepare around catalysts without learning provider internals. |
-| `market-regime-detector` | `data-optional` | `beta` | `no` | [sample](skills/market-regime-detector/sample-output.md) | Classify market context conservatively from trend, volatility, breadth, and event backdrop so the user can adapt tactics without relying on black-box regime claims. |
+| `earnings-calendar` | `data-required` | `experimental` | `yes` | [sample](skills/earnings-calendar/sample-output.md) / [guide](docs/examples/earnings-calendar-live-mode.md) | Summarize upcoming earnings events with normalized fields and conservative relevance ranking so the user can prepare around catalysts without learning provider internals. |
+| `market-regime-detector` | `data-optional` | `beta` | `no` | [sample](skills/market-regime-detector/sample-output.md) / [guide](docs/examples/market-regime-detector-walkthrough.md) | Classify market context conservatively from trend, volatility, breadth, and event backdrop so the user can adapt tactics without relying on black-box regime claims. |
 
 <!-- SKILL_INDEX_END -->
 

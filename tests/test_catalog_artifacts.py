@@ -55,4 +55,14 @@ def test_catalog_field_shapes_are_consistent(repo_root):
         assert record["example_artifact"].startswith("skills/"), (
             f"{record['name']} example_artifact should point into skills/: {record['example_artifact']}"
         )
+        assert (repo_root / record["example_artifact"]).exists(), (
+            f"{record['name']} example_artifact should exist on disk: {record['example_artifact']}"
+        )
+        assert record["docs_path"], f"{record['name']} should declare a walkthrough docs path"
+        assert record["docs_path"].startswith("docs/"), (
+            f"{record['name']} docs_path should point into docs/: {record['docs_path']}"
+        )
+        assert (repo_root / record["docs_path"]).exists(), (
+            f"{record['name']} docs_path should exist on disk: {record['docs_path']}"
+        )
         assert isinstance(record["tags"], list) and record["tags"], f"{record['name']} should declare tags"
