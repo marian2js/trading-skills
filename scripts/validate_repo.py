@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -56,6 +57,22 @@ VALID_STATUS = {
     "beta",
     "stable",
 }
+
+FORBIDDEN_TRACKED_PATTERNS = (
+    "__pycache__/",
+    ".pytest_cache/",
+    ".venv/",
+    ".env",
+    ".env.",
+)
+FORBIDDEN_TRACKED_SUFFIXES = (
+    ".pyc",
+    ".pyo",
+    ".swp",
+    ".swo",
+    ".tmp",
+    ".bak",
+)
 
 
 def validate_frontmatter(path: Path, errors: list[str]) -> None:
@@ -110,9 +127,13 @@ def validate_skill_structure(errors: list[str]) -> None:
         if not skill_md.exists():
             errors.append(f"{skill_dir}: missing SKILL.md")
             continue
+        sample_output = skill_dir / "sample-output.md"
+        if not sample_output.exists():
+            errors.append(f"{skill_dir}: missing sample-output.md")
         validate_frontmatter(skill_md, errors)
         validate_markdown_links(skill_md, errors)
         validate_data_backed_structure(skill_dir, errors)
+        validate_public_skill_naming(skill_dir, errors)
 
 
 def validate_markdown_links(path: Path, errors: list[str]) -> None:
@@ -154,6 +175,16 @@ def validate_data_backed_structure(skill_dir: Path, errors: list[str]) -> None:
         )
 
 
+def validate_public_skill_naming(skill_dir: Path, errors: list[str]) -> None:
+    leaked_provider_terms = {"fmp", "fred", "alpaca", "polygon", "ibkr", "interactive-brokers"}
+    name_tokens = set(skill_dir.name.split("-"))
+    leaked = sorted(name_tokens & leaked_provider_terms)
+    if leaked:
+        errors.append(
+            f"{skill_dir}: public skill name leaks provider branding ({', '.join(leaked)})"
+        )
+
+
 def validate_catalog_and_readme(errors: list[str]) -> None:
     catalog = collect_catalog(REPO_ROOT)
     expected_catalog = json.dumps(catalog, indent=2) + "\n"
@@ -184,6 +215,26 @@ def validate_fixture_json(errors: list[str]) -> None:
             errors.append(f"{fixture}: invalid JSON fixture: {exc}")
 
 
+def validate_forbidden_tracked_artifacts(errors: list[str]) -> None:
+    try:
+        result = subprocess.run(
+            ["git", "ls-files"],
+            cwd=REPO_ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError) as exc:
+        errors.append(f"Unable to inspect tracked files via git: {exc}")
+        return
+
+    for relative_path in result.stdout.splitlines():
+        if any(pattern in relative_path for pattern in FORBIDDEN_TRACKED_PATTERNS):
+            errors.append(f"Tracked forbidden artifact: {relative_path}")
+        if relative_path.endswith(FORBIDDEN_TRACKED_SUFFIXES):
+            errors.append(f"Tracked forbidden artifact: {relative_path}")
+
+
 def validate_schema_examples(errors: list[str]) -> None:
     if not SCHEMA_DOC.exists():
         errors.append(f"{SCHEMA_DOC}: missing schema documentation")
@@ -207,6 +258,7 @@ def main() -> int:
     validate_skill_structure(errors)
     validate_catalog_and_readme(errors)
     validate_fixture_json(errors)
+    validate_forbidden_tracked_artifacts(errors)
     validate_schema_examples(errors)
 
     if errors:

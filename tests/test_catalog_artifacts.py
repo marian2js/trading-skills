@@ -38,3 +38,17 @@ def test_data_backed_catalog_entries_declare_provider_metadata(repo_root):
                 assert record["requires_configuration"] is True, (
                     f"{record['name']} should declare that live operation requires configuration"
                 )
+
+
+def test_catalog_field_shapes_are_consistent(repo_root):
+    catalog = load_json(repo_root / "catalog.json")
+    for record in catalog["skills"]:
+        assert isinstance(record["name"], str) and record["name"], "Catalog skill name should be a non-empty string"
+        assert record["path"].startswith("skills/"), f"Catalog path should point into skills/: {record['path']}"
+        assert isinstance(record["description"], str) and len(record["description"]) >= 40
+        assert isinstance(record["providers_supported"], list), "providers_supported should be a list"
+        assert isinstance(record["requires_configuration"], bool), "requires_configuration should be boolean"
+        assert isinstance(record["asset_coverage"], list) and record["asset_coverage"], (
+            f"{record['name']} should declare asset coverage"
+        )
+        assert isinstance(record["tags"], list) and record["tags"], f"{record['name']} should declare tags"

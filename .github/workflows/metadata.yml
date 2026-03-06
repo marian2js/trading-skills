@@ -1,0 +1,39 @@
+name: Metadata
+
+on:
+  pull_request:
+    paths:
+      - "README.md"
+      - "catalog.json"
+      - "docs/**"
+      - "scripts/build_catalog.py"
+      - "scripts/validate_repo.py"
+      - "skills/**/SKILL.md"
+  push:
+    branches:
+      - main
+    paths:
+      - "README.md"
+      - "catalog.json"
+      - "docs/**"
+      - "scripts/build_catalog.py"
+      - "scripts/validate_repo.py"
+      - "skills/**/SKILL.md"
+
+jobs:
+  metadata-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check catalog and README sync
+        run: python scripts/build_catalog.py --check
+
+      - name: Run structural validator
+        run: python scripts/validate_repo.py

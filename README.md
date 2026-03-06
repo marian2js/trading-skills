@@ -57,6 +57,8 @@ Use live data-backed skills after configuring `FMP_API_KEY`:
 
 See [docs/live-data-setup.md](docs/live-data-setup.md) for live/example behavior, fallback rules, and verification steps.
 
+Example walkthroughs for evaluating the current skills live in [docs/examples/](docs/examples/).
+
 Example prompts after installation:
 
 - "Use `position-sizing` for a $125,000 account risking 0.5% with entry 412.30 and stop 406.80."
@@ -163,10 +165,13 @@ Each public skill lives in `skills/<capability>/` and centers around a `SKILL.md
 See the docs for details:
 
 - [Architecture](docs/architecture.md)
+- [Compatibility and install](docs/compatibility-and-install.md)
 - [Live data setup](docs/live-data-setup.md)
 - [Repo conventions](docs/repo-conventions.md)
 - [Skill design principles](docs/skill-design-principles.md)
 - [New skill checklist](docs/new-skill-checklist.md)
+- [Versioning and releases](docs/versioning-and-releases.md)
+- [Release checklist](docs/release-checklist.md)
 - [Provider adapters](docs/provider-adapters.md)
 - [Canonical schemas](docs/canonical-schemas.md)
 
@@ -194,6 +199,12 @@ Regenerate the machine-readable catalog and README skill index after metadata ch
 make catalog
 ```
 
+Mirror the GitHub Actions checks locally:
+
+```bash
+make ci
+```
+
 The current checks cover:
 
 - every skill directory contains `SKILL.md`
@@ -204,6 +215,8 @@ The current checks cover:
 - local references in `SKILL.md` files exist
 - JSON examples in the schema docs parse successfully
 - fixture JSON files parse successfully
+- forbidden artifacts do not leak into tracked files
+- public skill names do not leak provider branding
 - provider adapters conform to the internal contract
 - normalization fixtures match the canonical schemas
 - representative scripts work in smoke-test mode

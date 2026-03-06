@@ -3,7 +3,7 @@ VENV_DIR ?= .venv
 VENV_PYTHON := $(VENV_DIR)/bin/python
 VENV_READY := $(VENV_DIR)/.deps-installed
 
-.PHONY: catalog validate test
+.PHONY: catalog validate test ci
 
 catalog:
 	$(PYTHON) scripts/build_catalog.py
@@ -17,4 +17,8 @@ $(VENV_READY): requirements-dev.txt
 	touch $(VENV_READY)
 
 test: validate $(VENV_READY)
+	$(VENV_PYTHON) -m pytest
+
+ci: validate $(VENV_READY)
+	$(PYTHON) scripts/build_catalog.py --check
 	$(VENV_PYTHON) -m pytest

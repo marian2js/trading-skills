@@ -1,5 +1,14 @@
 __pycache__/
 *.pyc
+*.pyo
 .DS_Store
 .pytest_cache/
 .venv/
+*.swp
+*.swo
+*.tmp
+*.bak
+.env
+.env.*
+.idea/
+.vscode/

@@ -4,6 +4,8 @@ This repository is for portable trading and investing skills that improve judgme
 
 Before adding or reshaping a skill, read [docs/repo-conventions.md](docs/repo-conventions.md) and [docs/new-skill-checklist.md](docs/new-skill-checklist.md).
 
+For release hygiene and portability expectations, also read [docs/compatibility-and-install.md](docs/compatibility-and-install.md), [docs/versioning-and-releases.md](docs/versioning-and-releases.md), and [docs/release-checklist.md](docs/release-checklist.md).
+
 ## Contribution standards
 
 Contributions should be:
@@ -74,6 +76,19 @@ Most tests live in the root `tests/` directory because the highest-value checks 
 
 Keep fixtures near the skill they belong to. Add `skills/<skill>/tests/` only when a skill has substantial local Python logic and co-location clearly improves maintainability.
 
+## Local setup quick start
+
+```bash
+make catalog
+make test
+```
+
+If you want the local equivalent of CI checks, run:
+
+```bash
+make ci
+```
+
 ## Developer workflow
 
 The repo has one metadata source of truth per skill: the `SKILL.md` frontmatter inside `skills/<skill>/`.
@@ -82,15 +97,17 @@ Typical contributor flow:
 
 1. Add or update a skill under `skills/<skill>/`.
 2. Keep sample inputs, normalized payloads, and demo outputs in `fixtures/`.
-3. Add or update tests in the root `tests/` directory unless co-located skill tests are clearly justified.
-4. Regenerate the machine-readable catalog and README skill index with `make catalog`.
-5. Run `make test` before opening a PR.
+3. Add or update `sample-output.md` or another small example artifact so users can evaluate the skill quickly.
+4. Add or update tests in the root `tests/` directory unless co-located skill tests are clearly justified.
+5. Regenerate the machine-readable catalog and README skill index with `make catalog`.
+6. Run `make test` before opening a PR.
 
 Run the full checks before opening a PR:
 
 ```bash
 make catalog
 make test
+make ci
 ```
 
 If you only want the fast structural checks, use:
@@ -100,6 +117,16 @@ make validate
 ```
 
 `make test` creates a local `.venv` automatically if needed. The validator uses only the Python standard library, and the test suite uses pytest with a deliberately small amount of shared helper code.
+
+## What not to add yet
+
+Do not add:
+
+- broker adapters
+- order execution
+- account management
+- portfolio syncing
+- provider-specific public skill clones of existing capabilities
 
 ## Suggested PR scope
 
