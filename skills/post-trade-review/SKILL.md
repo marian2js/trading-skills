@@ -39,10 +39,18 @@ Use [references/review-rubric.md](references/review-rubric.md) for the default r
 Always include:
 
 - original thesis summary
+- setup quality assessment
+- execution quality assessment
 - what was done as planned
 - what was not done as planned
 - biggest mistake or best process decision
 - one concrete lesson to carry forward
+
+## What this skill will not do
+
+- grade the trade only by PnL
+- excuse broken process because the outcome happened to be positive
+- rewrite the original thesis with hindsight
 
 ## Usage examples
 

@@ -16,7 +16,7 @@ The public capability is `earnings-calendar`. Provider adapters are internal.
 
 - fetches upcoming earnings events through an internal adapter
 - normalizes them into the canonical earnings event schema
-- ranks relevance with conservative, explainable heuristics
+- ranks relevance with conservative, explainable heuristics after normalization
 - discloses source, freshness, and coverage limitations
 
 The v1 implementation includes:
@@ -41,6 +41,12 @@ Always include:
 - timestamp or last update information when available
 - relevance rationale, not just a numeric score
 - caveats around incomplete estimates, timing changes, or missing sector data
+
+## What this skill will not do
+
+- imply an earnings reaction is predictable
+- treat example fixtures as live market coverage
+- hide incomplete timing or estimate fields behind a neat ranking
 
 ## Usage examples
 

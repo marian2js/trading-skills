@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch and normalize economic calendar events."""
+"""Fetch, normalize, and analyze economic calendar events."""
 
 from __future__ import annotations
 
@@ -40,20 +40,44 @@ def choose_adapter(provider: str):
         ok, reason = adapter.is_available()
         if not ok:
             raise RuntimeError(reason)
-        return adapter
+        return adapter, f"Explicit provider '{provider}' selected."
 
     live = adapters["fmp"]
-    ok, _ = live.is_available()
+    ok, reason = live.is_available()
     if ok:
-        return live
-    return adapters["example"]
+        return live, "Auto-selected configured live provider 'fmp'."
+    return adapters["example"], f"Live provider unavailable ({reason}); using example fixture data."
+
+
+def analyze_events(events: list[dict]) -> dict:
+    high_impact = [event for event in events if event["importance"] == "high"]
+    missing_consensus = [event["event_name"] for event in events if event.get("consensus") in (None, "", "null")]
+    countries = sorted({event["country"] for event in events})
+
+    return {
+        "high_impact_count": len(high_impact),
+        "high_impact_events": [
+            {
+                "event_name": event["event_name"],
+                "country": event["country"],
+                "scheduled_time_utc": event["scheduled_time_utc"],
+            }
+            for event in high_impact[:5]
+        ],
+        "countries_covered": countries,
+        "coverage_warnings": (
+            [f"Consensus missing for: {', '.join(missing_consensus[:3])}"]
+            if missing_consensus
+            else []
+        ),
+    }
 
 
 def main() -> int:
     args = parse_args()
 
     try:
-        adapter = choose_adapter(args.provider)
+        adapter, selection_reason = choose_adapter(args.provider)
         raw = adapter.fetch_raw(
             start_date=args.start_date,
             end_date=args.end_date,
@@ -71,8 +95,10 @@ def main() -> int:
 
     payload = {
         "provider": adapter.provider_name,
+        "selection_reason": selection_reason,
         "retrieved_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "event_count": len(events),
+        "analysis": analyze_events(events),
         "events": events,
     }
 
@@ -81,8 +107,10 @@ def main() -> int:
         return 0
 
     print(f"Provider: {payload['provider']}")
+    print(f"Selection: {payload['selection_reason']}")
     print(f"Retrieved: {payload['retrieved_at_utc']}")
     print(f"Events: {payload['event_count']}")
+    print(f"High-impact events: {payload['analysis']['high_impact_count']}")
     for event in events:
         print(
             f"- {event['scheduled_time_utc']} | {event['importance']} | "
@@ -90,6 +118,8 @@ def main() -> int:
             f"(status={event['status']}, provider={event['provider']})"
         )
         print(f"  coverage: {event['coverage_notes']}")
+    for warning in payload["analysis"]["coverage_warnings"]:
+        print(f"Warning: {warning}")
 
     return 0
 

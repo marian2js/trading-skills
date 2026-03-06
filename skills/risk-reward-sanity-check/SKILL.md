@@ -12,6 +12,8 @@ Use this skill when a trade idea exists but you want to inspect whether the stru
 
 This skill does not predict whether the trade will work. It checks whether the plan is internally coherent.
 
+It can be run manually or with [scripts/check_trade_structure.py](scripts/check_trade_structure.py) when a structured pre-trade check is useful.
+
 ## Inputs
 
 Ask for:
@@ -38,9 +40,16 @@ See [references/failure-modes.md](references/failure-modes.md) for the default c
 Always include:
 
 - raw risk-reward math
+- asymmetry assessment
 - the main structural concern
 - what would need to be true for the target to be plausible
 - any mismatch between thesis, stop, and holding period
+
+## What this skill will not do
+
+- tell the user a trade will win because the ratio looks attractive
+- replace thesis quality with a single numeric multiple
+- ignore catalyst or event risk that can break the planned structure
 
 ## Usage examples
 

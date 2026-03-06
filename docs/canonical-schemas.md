@@ -14,8 +14,12 @@ Required or strongly recommended fields:
 - `event_name`
 - `country`
 - `currency`
+- `category`
 - `scheduled_time_utc`
 - `importance`
+- `previous`
+- `consensus`
+- `actual`
 - `status`
 - `source_url`
 - `last_updated_utc`
@@ -23,11 +27,7 @@ Required or strongly recommended fields:
 
 Optional fields:
 
-- `actual`
-- `consensus`
-- `previous`
 - `unit`
-- `category`
 
 Example:
 
@@ -62,8 +62,16 @@ Required or strongly recommended fields:
 - `provider`
 - `company_name`
 - `symbol`
+- `exchange`
 - `scheduled_time_utc`
-- `report_timing`
+- `session`
+- `estimate_eps`
+- `actual_eps`
+- `estimate_revenue`
+- `actual_revenue`
+- `importance`
+- `sector`
+- `market_cap_bucket`
 - `status`
 - `source_url`
 - `last_updated_utc`
@@ -71,11 +79,6 @@ Required or strongly recommended fields:
 
 Optional fields:
 
-- `exchange`
-- `sector`
-- `estimated_eps`
-- `estimated_revenue`
-- `market_cap_bucket`
 - `relevance_score`
 - `relevance_notes`
 
@@ -89,11 +92,14 @@ Example:
   "company_name": "NVIDIA Corporation",
   "symbol": "NVDA",
   "exchange": "NASDAQ",
-  "sector": "Semiconductors",
   "scheduled_time_utc": "2026-05-27T20:15:00Z",
-  "report_timing": "after-close",
-  "estimated_eps": "7.12",
-  "estimated_revenue": "43.8B",
+  "session": "after-close",
+  "estimate_eps": "7.12",
+  "actual_eps": null,
+  "estimate_revenue": "43.8B",
+  "actual_revenue": null,
+  "importance": "high",
+  "sector": "Semiconductors",
   "market_cap_bucket": "mega-cap",
   "relevance_score": 95,
   "relevance_notes": "Benchmark component with sector read-through and index weight impact.",
@@ -111,3 +117,4 @@ Example:
 - Prefer `null` over invented values when the provider omits a field.
 - Put provider-specific caveats in `coverage_notes`.
 - Keep raw payload quirks out of the analysis layer.
+- For earnings, keep event identity and provider data separate from ranking logic. Relevance scoring can be layered on after canonical normalization.

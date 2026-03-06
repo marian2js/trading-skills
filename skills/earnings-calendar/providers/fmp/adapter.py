@@ -34,13 +34,13 @@ class FMPEarningsCalendarAdapter:
         for item in raw:
             symbol = (item.get("symbol") or "").upper()
             company_name = item.get("name") or symbol or "Unknown company"
-            estimated_revenue = item.get("revenueEstimated")
             relevance_score, relevance_notes = score_relevance(
                 symbol=symbol,
                 sector=item.get("sector"),
                 market_cap=item.get("marketCap"),
                 watchlist=watchlist,
             )
+            importance = classify_importance(item.get("marketCap"), symbol in watchlist)
             normalized.append(
                 {
                     "schema_version": 1,
@@ -51,9 +51,12 @@ class FMPEarningsCalendarAdapter:
                     "exchange": item.get("exchangeShortName"),
                     "sector": item.get("sector"),
                     "scheduled_time_utc": coerce_earnings_datetime(item.get("date"), item.get("time")),
-                    "report_timing": normalize_report_timing(item.get("time")),
-                    "estimated_eps": stringify(item.get("epsEstimated")),
-                    "estimated_revenue": stringify(estimated_revenue),
+                    "session": normalize_session(item.get("time")),
+                    "estimate_eps": stringify(item.get("epsEstimated")),
+                    "actual_eps": stringify(item.get("epsActual")),
+                    "estimate_revenue": stringify(item.get("revenueEstimated")),
+                    "actual_revenue": stringify(item.get("revenueActual")),
+                    "importance": importance,
                     "market_cap_bucket": bucket_market_cap(item.get("marketCap")),
                     "relevance_score": relevance_score,
                     "relevance_notes": relevance_notes,
@@ -80,7 +83,7 @@ def stringify(value):
     return str(value)
 
 
-def normalize_report_timing(value):
+def normalize_session(value):
     lowered = str(value or "").strip().lower()
     if lowered in {"amc", "after-close", "after market close"}:
         return "after-close"
@@ -94,7 +97,7 @@ def coerce_earnings_datetime(date_value, time_value):
         return "1970-01-01T00:00:00Z"
     if "T" in str(date_value):
         return coerce_timestamp(date_value)
-    timing = normalize_report_timing(time_value)
+    timing = normalize_session(time_value)
     if timing == "after-close":
         return f"{date_value}T20:15:00Z"
     if timing == "before-open":
@@ -153,6 +156,15 @@ def score_relevance(symbol, sector, market_cap, watchlist):
         notes.append("Relevant event, but broad market read-through appears limited.")
 
     return min(score, 100), " ".join(notes)
+
+
+def classify_importance(market_cap, in_watchlist):
+    bucket = bucket_market_cap(market_cap)
+    if in_watchlist or bucket == "mega-cap":
+        return "high"
+    if bucket == "large-cap":
+        return "medium"
+    return "low"
 
 
 def within_date_window(timestamp, start_date, end_date):

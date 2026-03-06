@@ -17,7 +17,7 @@ The public capability is `economic-calendar`. Provider details are internal.
 - selects an internal provider adapter
 - fetches upcoming economic events
 - normalizes them into the canonical economic event schema
-- summarizes event risk with source, freshness, and caveats
+- analyzes event risk from the normalized schema with source, freshness, and caveats
 
 The v1 implementation includes:
 
@@ -41,6 +41,12 @@ Always include:
 - timestamp or last update information when available
 - high-impact items first
 - caveats about missing values, country coverage, or schedule uncertainty
+
+## What this skill will not do
+
+- predict the market direction after a release
+- pretend example data is live data
+- hide missing estimates, stale timestamps, or incomplete coverage
 
 ## Usage examples
 

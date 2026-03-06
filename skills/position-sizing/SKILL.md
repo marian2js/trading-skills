@@ -10,6 +10,8 @@ tags: risk-management, execution-planning, trading
 
 Use this skill before entering a trade when you need a defensible position size instead of a gut-feel size.
 
+It can be run manually or with [scripts/calculate_position_size.py](scripts/calculate_position_size.py) when a structured calculation is useful.
+
 Focus on survival first:
 
 - calculate max loss per trade from account size and risk budget
@@ -50,6 +52,12 @@ Always include:
 - caveats about slippage, gaps, leverage, or contract multipliers
 
 Do not imply the size is "safe" just because it fits the arithmetic.
+
+## What this skill will not do
+
+- promise that a mathematically valid size is appropriate for the setup
+- ignore contract multipliers or event risk when they materially change exposure
+- replace the need for liquidation planning in fast or illiquid markets
 
 ## Usage examples
 

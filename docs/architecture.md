@@ -12,6 +12,8 @@ That means:
 
 This is the default because users think in terms of a job to be done, not in terms of vendor topology.
 
+The same principle applies to scope boundaries: broker execution is not part of v1. Decision support comes first, while brokerage workflows remain explicitly out of scope.
+
 ## Skill != API
 
 A skill is a repeatable decision-support capability. It may use:
@@ -55,7 +57,7 @@ Data-backed skills use a simple internal adapter pattern:
 1. Check whether a provider is available
 2. Fetch raw provider data
 3. Normalize it into a canonical schema
-4. Run the skill logic on the normalized schema
+4. Run the analysis logic on the normalized schema
 5. Disclose provider, freshness, and limitations in output
 
 This gives the repo a stable internal seam:
@@ -63,6 +65,7 @@ This gives the repo a stable internal seam:
 - new providers can be added without changing the public skill name
 - normalized data becomes easier to test
 - ranking and analysis code can be reused across providers
+- provider quirks stay out of the user-facing reasoning layer
 
 ## v1 approach
 

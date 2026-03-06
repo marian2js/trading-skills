@@ -12,6 +12,8 @@ A great trading skill improves process quality. It helps the user:
 
 The point is decision support, not mystical prediction.
 
+It should also make clear what it will not do. Strong boundaries are part of trust.
+
 ## Product standards
 
 Each skill should be:
@@ -63,6 +65,7 @@ Strong outputs usually include:
 - the main risks and caveats
 - the parts that remain unknown
 - a clear separation between observation and judgment
+- a clear statement of what the skill is not claiming
 
 For data-backed skills, always include:
 

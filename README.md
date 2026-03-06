@@ -4,6 +4,8 @@
 
 The goal is not to generate magic signals. The goal is to improve decision quality, risk management, execution planning, and review discipline with transparent, auditable workflows.
 
+Broker integrations are explicitly out of scope for v1. This repo does not ship order execution, portfolio syncing, account management, or brokerage adapters.
+
 ## Why this repo exists
 
 Most users think in terms of jobs to be done:
@@ -72,12 +74,21 @@ The repo avoids hype, fake precision, and guaranteed-outcome language.
 
 ## Initial skills
 
-- `position-sizing`: conservative sizing from account size, risk budget, entry, stop, and friction assumptions
-- `risk-reward-sanity-check`: checks whether the trade structure is coherent before a trade is placed
-- `post-trade-review`: structured review of thesis, execution, rule adherence, and lessons
-- `economic-calendar`: upcoming macro event risk with internal provider adapters and normalized event schema
-- `earnings-calendar`: upcoming earnings events with normalized output and practical relevance ranking
-- `market-regime-detector`: conservative regime classification for context, not predictive certainty
+- `position-sizing` (`static`): conservative sizing from account size, risk budget, entry, stop, and friction assumptions
+- `risk-reward-sanity-check` (`static`): checks whether the trade structure is coherent before a trade is placed
+- `post-trade-review` (`static`): structured review of thesis, setup quality, execution quality, adherence, and lessons
+- `economic-calendar` (`data-required`): upcoming macro event risk with internal provider adapters, canonical normalization, and summary analysis
+- `earnings-calendar` (`data-required`): upcoming earnings events with canonical normalization and conservative relevance ranking
+- `market-regime-detector` (`data-optional`): conservative regime classification for context, not predictive certainty
+
+## What v1 does not include
+
+- broker-required skills
+- order execution
+- portfolio syncing
+- trade placement
+- account management
+- provider-specific public skill packages
 
 ## Repository layout
 
@@ -112,7 +123,7 @@ See the docs for details:
 
 ## Testing and validation
 
-This repo keeps most tests in the root [tests/](/Users/marian2js/workspace/trading-skills/tests) directory so contributors can find cross-cutting checks in one place. Skill-specific sample data lives next to the skill in `skills/<skill>/fixtures/`, which keeps demo data and normalization fixtures close to the capability they describe.
+This repo keeps most tests in the root [tests/](tests/) directory so contributors can find cross-cutting checks in one place. Skill-specific sample data lives next to the skill in `skills/<skill>/fixtures/`, which keeps demo data and normalization fixtures close to the capability they describe.
 
 Per-skill `tests/` directories are intentionally not the default. Add them only when a skill grows substantial local executable logic that is easier to maintain beside the code.
 

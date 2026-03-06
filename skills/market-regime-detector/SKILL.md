@@ -48,6 +48,12 @@ Always include:
 
 Avoid fake certainty or theatrical confidence percentages.
 
+## What this skill will not do
+
+- forecast returns from a single regime label
+- turn limited evidence into precise confidence scores
+- replace instrument-specific trade planning
+
 ## Usage examples
 
 - "Use `market-regime-detector` from these observations: uptrend intact, breadth narrowing, volatility elevated, CPI tomorrow."

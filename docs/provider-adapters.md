@@ -14,6 +14,8 @@ Each adapter should expose three concerns:
 2. Raw fetch
 3. Canonical normalization
 
+Analysis belongs above the adapter boundary. Providers fetch and normalize. Skill logic ranks, summarizes, or interprets the normalized records afterward.
+
 A minimal Python interface can look like this:
 
 ```python
@@ -42,6 +44,8 @@ v1 uses a pragmatic selection order:
 4. Otherwise return a clear setup message
 
 This keeps the public skill usable without forcing every contributor to solve provider orchestration upfront.
+
+The important constraint is that the fallback behavior remains explicit. Users should never have to guess whether they are looking at live data or example fixtures.
 
 ## Fallback behavior
 

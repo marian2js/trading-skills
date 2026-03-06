@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch and normalize earnings calendar events."""
+"""Fetch, normalize, and analyze earnings calendar events."""
 
 from __future__ import annotations
 
@@ -44,13 +44,33 @@ def choose_adapter(provider: str):
         ok, reason = adapter.is_available()
         if not ok:
             raise RuntimeError(reason)
-        return adapter
+        return adapter, f"Explicit provider '{provider}' selected."
 
     live = adapters["fmp"]
-    ok, _ = live.is_available()
+    ok, reason = live.is_available()
     if ok:
-        return live
-    return adapters["example"]
+        return live, "Auto-selected configured live provider 'fmp'."
+    return adapters["example"], f"Live provider unavailable ({reason}); using example fixture data."
+
+
+def analyze_events(events: list[dict], watchlist: list[str]) -> dict:
+    high_importance = [event for event in events if event["importance"] == "high"]
+    direct_hits = [event["symbol"] for event in events if event["symbol"] in set(watchlist)]
+    missing_estimates = [
+        event["symbol"]
+        for event in events
+        if event.get("estimate_eps") in (None, "", "null")
+        or event.get("estimate_revenue") in (None, "", "null")
+    ]
+    return {
+        "high_importance_count": len(high_importance),
+        "direct_watchlist_hits": direct_hits,
+        "coverage_warnings": (
+            [f"Missing estimate fields for: {', '.join(missing_estimates[:3])}"]
+            if missing_estimates
+            else []
+        ),
+    }
 
 
 def main() -> int:
@@ -58,7 +78,7 @@ def main() -> int:
     watchlist = [symbol.strip().upper() for symbol in args.symbols.split(",") if symbol.strip()]
 
     try:
-        adapter = choose_adapter(args.provider)
+        adapter, selection_reason = choose_adapter(args.provider)
         raw = adapter.fetch_raw(start_date=args.start_date, end_date=args.end_date)
         events = adapter.normalize(raw, start_date=args.start_date, end_date=args.end_date, watchlist=watchlist)
     except RuntimeError as exc:
@@ -67,8 +87,10 @@ def main() -> int:
 
     payload = {
         "provider": adapter.provider_name,
+        "selection_reason": selection_reason,
         "retrieved_at_utc": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "event_count": len(events),
+        "analysis": analyze_events(events, watchlist),
         "events": events,
     }
 
@@ -77,15 +99,18 @@ def main() -> int:
         return 0
 
     print(f"Provider: {payload['provider']}")
+    print(f"Selection: {payload['selection_reason']}")
     print(f"Retrieved: {payload['retrieved_at_utc']}")
     print(f"Events: {payload['event_count']}")
     for event in events:
         print(
             f"- {event['scheduled_time_utc']} | {event['symbol']} | score={event['relevance_score']} | "
-            f"{event['company_name']} ({event['report_timing']})"
+            f"{event['company_name']} ({event['session']})"
         )
         print(f"  rationale: {event['relevance_notes']}")
         print(f"  coverage: {event['coverage_notes']}")
+    for warning in payload["analysis"]["coverage_warnings"]:
+        print(f"Warning: {warning}")
 
     return 0
 
