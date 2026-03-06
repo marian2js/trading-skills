@@ -23,6 +23,8 @@ This repository keeps the public UX capability-first:
 - A provider is an internal implementation detail in most cases.
 - Data-backed skills disclose the source, freshness, and limitations of their output.
 
+The repository also ships a machine-readable [catalog.json](catalog.json) so future install tooling, docs generation, and validation can rely on one metadata source.
+
 `trading-skills` is preferred over `trading-agent-skills` because it is cleaner, easier to remember, and centered on the user job rather than the implementation medium.
 
 ## Installation model
@@ -74,12 +76,36 @@ The repo avoids hype, fake precision, and guaranteed-outcome language.
 
 ## Initial skills
 
-- `position-sizing` (`static`): conservative sizing from account size, risk budget, entry, stop, and friction assumptions
-- `risk-reward-sanity-check` (`static`): checks whether the trade structure is coherent before a trade is placed
-- `post-trade-review` (`static`): structured review of thesis, setup quality, execution quality, adherence, and lessons
-- `economic-calendar` (`data-required`): upcoming macro event risk with internal provider adapters, canonical normalization, and summary analysis
-- `earnings-calendar` (`data-required`): upcoming earnings events with canonical normalization and conservative relevance ranking
-- `market-regime-detector` (`data-optional`): conservative regime classification for context, not predictive certainty
+The current library is grouped into a small number of clear categories:
+
+<!-- SKILL_INDEX_START -->
+### risk-management
+
+| Skill | Dependency | Status | Config | Summary |
+| --- | --- | --- | --- | --- |
+| `position-sizing` | `static` | `beta` | `no` | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. |
+| `risk-reward-sanity-check` | `static` | `beta` | `no` | Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed. |
+
+### trade-review
+
+| Skill | Dependency | Status | Config | Summary |
+| --- | --- | --- | --- | --- |
+| `post-trade-review` | `static` | `beta` | `no` | Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater. |
+
+### macro
+
+| Skill | Dependency | Status | Config | Summary |
+| --- | --- | --- | --- | --- |
+| `economic-calendar` | `data-required` | `experimental` | `yes` | Summarize upcoming macro event risk from a normalized economic calendar so the user can see timing, importance, and coverage caveats without dealing with provider internals. |
+
+### market-data
+
+| Skill | Dependency | Status | Config | Summary |
+| --- | --- | --- | --- | --- |
+| `earnings-calendar` | `data-required` | `experimental` | `yes` | Summarize upcoming earnings events with normalized fields and conservative relevance ranking so the user can prepare around catalysts without learning provider internals. |
+| `market-regime-detector` | `data-optional` | `beta` | `no` | Classify market context conservatively from trend, volatility, breadth, and event backdrop so the user can adapt tactics without relying on black-box regime claims. |
+
+<!-- SKILL_INDEX_END -->
 
 ## What v1 does not include
 
@@ -117,7 +143,9 @@ Each public skill lives in `skills/<capability>/` and centers around a `SKILL.md
 See the docs for details:
 
 - [Architecture](docs/architecture.md)
+- [Repo conventions](docs/repo-conventions.md)
 - [Skill design principles](docs/skill-design-principles.md)
+- [New skill checklist](docs/new-skill-checklist.md)
 - [Provider adapters](docs/provider-adapters.md)
 - [Canonical schemas](docs/canonical-schemas.md)
 
@@ -139,13 +167,22 @@ This runs the lightweight validator, bootstraps a local `.venv` if needed, and e
 make validate
 ```
 
+Regenerate the machine-readable catalog and README skill index after metadata changes:
+
+```bash
+make catalog
+```
+
 The current checks cover:
 
 - every skill directory contains `SKILL.md`
 - frontmatter fields exist and match the directory name
 - descriptions are specific enough to be useful
+- catalog metadata matches the skill folders
+- README skill index stays in sync with the catalog
 - local references in `SKILL.md` files exist
 - JSON examples in the schema docs parse successfully
+- fixture JSON files parse successfully
 - provider adapters conform to the internal contract
 - normalization fixtures match the canonical schemas
 - representative scripts work in smoke-test mode

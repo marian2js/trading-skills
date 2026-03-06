@@ -1,0 +1,12 @@
+{
+  "risk": 2.3,
+  "reward": 7.3,
+  "risk_reward_ratio": 3.17,
+  "asymmetry": "strong",
+  "primary_concern": "Raw ratio is acceptable, but the target still needs a credible path and invalidation logic.",
+  "what_must_be_true": "The thesis must remain intact long enough for the target to be reachable without changing the stop logic.",
+  "thesis": "Breakout continuation if software leadership holds.",
+  "time_horizon": "swing",
+  "event_risk": "low",
+  "structural_flags": []
+}

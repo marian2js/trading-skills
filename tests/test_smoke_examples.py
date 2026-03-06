@@ -33,9 +33,10 @@ def test_economic_calendar_example_script_smoke(repo_root):
         ],
     )
     payload = json.loads(output)
+    expected = load_json(repo_root / "skills/economic-calendar/fixtures/interpreted-summary.json")
     assert payload["provider"] == "example", "Economic calendar smoke test should use the example adapter"
     assert payload["event_count"] == 3, "Economic calendar example should return three events in the demo window"
-    assert payload["analysis"]["high_impact_count"] == 2, "Expected two high-impact demo macro events"
+    assert payload["analysis"] == expected["analysis"], "Economic calendar analysis should match the interpreted fixture"
 
 
 def test_earnings_calendar_example_script_smoke(repo_root):
@@ -56,9 +57,11 @@ def test_earnings_calendar_example_script_smoke(repo_root):
         ],
     )
     payload = json.loads(output)
+    expected = load_json(repo_root / "skills/earnings-calendar/fixtures/interpreted-summary.json")
     assert payload["provider"] == "example", "Earnings calendar smoke test should use the example adapter"
     assert payload["events"][0]["symbol"] == "NVDA", "Requested symbol should be boosted to the top of the example output"
     assert payload["events"][0]["session"] == "after-close", "Example earnings output should expose canonical session fields"
+    assert payload["analysis"] == expected["analysis"], "Earnings calendar analysis should match the interpreted fixture"
 
 
 def test_market_regime_script_smoke(repo_root):
@@ -79,55 +82,63 @@ def test_market_regime_script_smoke(repo_root):
         ],
     )
     payload = json.loads(output)
-    fixture = load_json(repo_root / "skills/market-regime-detector/fixtures/basic-observation-set.json")
-    assert (
-        payload["regime"] == fixture["expected_regime"]
-    ), f"Expected regime {fixture['expected_regime']}, got {payload['regime']}"
+    expected = load_json(repo_root / "skills/market-regime-detector/fixtures/expected-output.json")
+    assert payload == expected, "Market regime smoke test should match the expected fixture output"
 
 
 def test_position_sizing_script_smoke(repo_root):
+    fixture_input = load_json(repo_root / "skills/position-sizing/fixtures/example-input.json")
+    expected = load_json(repo_root / "skills/position-sizing/fixtures/expected-output.json")
     output = run_command(
         repo_root,
         [
             "python3",
             "skills/position-sizing/scripts/calculate_position_size.py",
             "--account-size",
-            "150000",
+            str(fixture_input["account_size"]),
             "--risk-percent",
-            "0.4",
+            str(fixture_input["risk_percent"]),
             "--entry",
-            "84.2",
+            str(fixture_input["entry"]),
             "--stop",
-            "81.9",
+            str(fixture_input["stop"]),
             "--slippage",
-            "0.1",
+            str(fixture_input["slippage"]),
+            "--fee-per-unit",
+            str(fixture_input["fee_per_unit"]),
+            "--contract-multiplier",
+            str(fixture_input["contract_multiplier"]),
             "--json",
         ],
     )
     payload = json.loads(output)
-    assert payload["position_size"] == 250, "Position sizing smoke test should match the fixture arithmetic"
-    assert payload["total_risk"] == 600.0, "Position sizing smoke test should report total dollar risk"
+    assert payload == expected, "Position sizing smoke test should match the expected fixture output"
 
 
 def test_risk_reward_script_smoke(repo_root):
+    fixture_input = load_json(repo_root / "skills/risk-reward-sanity-check/fixtures/example-input.json")
+    expected = load_json(repo_root / "skills/risk-reward-sanity-check/fixtures/expected-output.json")
     output = run_command(
         repo_root,
         [
             "python3",
             "skills/risk-reward-sanity-check/scripts/check_trade_structure.py",
             "--direction",
-            "long",
+            fixture_input["direction"],
             "--entry",
-            "58.2",
+            str(fixture_input["entry"]),
             "--stop",
-            "55.9",
+            str(fixture_input["stop"]),
             "--target",
-            "65.5",
+            str(fixture_input["target"]),
             "--thesis",
-            "Breakout continuation if software leadership holds.",
+            fixture_input["thesis"],
+            "--time-horizon",
+            fixture_input["time_horizon"],
+            "--event-risk",
+            fixture_input["event_risk"],
             "--json",
         ],
     )
     payload = json.loads(output)
-    assert payload["risk_reward_ratio"] > 3.0, "Risk-reward smoke test should show strong asymmetry for the demo case"
-    assert payload["asymmetry"] == "strong", "Risk-reward smoke test should classify the demo case as strong asymmetry"
+    assert payload == expected, "Risk-reward smoke test should match the expected fixture output"

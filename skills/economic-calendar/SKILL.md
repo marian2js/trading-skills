@@ -1,8 +1,12 @@
 ---
 name: economic-calendar
 version: 0.1.0
-description: Summarize upcoming macro event risk from a normalized economic calendar so the user can see timing, importance, and coverage caveats without dealing with provider-specific workflows.
+description: Summarize upcoming macro event risk from a normalized economic calendar so the user can see timing, importance, and coverage caveats without dealing with provider internals.
 dependency_class: data-required
+category: macro
+status: experimental
+requires_configuration: true
+asset_coverage: equities, futures, fx, rates
 tags: macro, calendar, event-risk
 ---
 
@@ -32,7 +36,7 @@ See [references/interpretation-guide.md](references/interpretation-guide.md) for
 - If live credentials are missing, the skill should say so clearly and may fall back to the `example` adapter.
 - The output must always disclose whether the data is live or example data.
 
-## Output requirements
+## What it returns
 
 Always include:
 

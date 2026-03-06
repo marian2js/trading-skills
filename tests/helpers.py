@@ -19,6 +19,10 @@ FRONTMATTER_REQUIRED = {
     "version",
     "description",
     "dependency_class",
+    "category",
+    "status",
+    "requires_configuration",
+    "asset_coverage",
 }
 
 VALID_DEPENDENCY_CLASSES = {
@@ -26,6 +30,21 @@ VALID_DEPENDENCY_CLASSES = {
     "data-optional",
     "data-required",
     "broker-required",
+}
+
+VALID_CATEGORIES = {
+    "risk-management",
+    "trade-review",
+    "macro",
+    "market-data",
+    "research",
+    "workflow",
+}
+
+VALID_STATUS = {
+    "experimental",
+    "beta",
+    "stable",
 }
 
 ECONOMIC_EVENT_REQUIRED_FIELDS = {
@@ -101,6 +120,12 @@ def markdown_links(path: Path) -> list[str]:
 
 def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def parse_csv(value: str | None) -> list[str]:
+    if not value:
+        return []
+    return [item.strip() for item in value.split(",") if item.strip()]
 
 
 def json_code_blocks(path: Path) -> list[object]:

@@ -4,6 +4,6 @@
   "stop": 55.9,
   "target": 65.5,
   "thesis": "Breakout continuation if software leadership holds.",
-  "expected_r_multiple": 3.17,
-  "structural_risk": "Target plausibility depends on breakout follow-through rather than a single ratio."
+  "time_horizon": "swing",
+  "event_risk": "low"
 }

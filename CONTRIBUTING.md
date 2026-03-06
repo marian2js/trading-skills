@@ -2,6 +2,8 @@
 
 This repository is for portable trading and investing skills that improve judgment, risk clarity, planning, and review discipline.
 
+Before adding or reshaping a skill, read [docs/repo-conventions.md](docs/repo-conventions.md) and [docs/new-skill-checklist.md](docs/new-skill-checklist.md).
+
 ## Contribution standards
 
 Contributions should be:
@@ -72,9 +74,22 @@ Most tests live in the root `tests/` directory because the highest-value checks 
 
 Keep fixtures near the skill they belong to. Add `skills/<skill>/tests/` only when a skill has substantial local Python logic and co-location clearly improves maintainability.
 
+## Developer workflow
+
+The repo has one metadata source of truth per skill: the `SKILL.md` frontmatter inside `skills/<skill>/`.
+
+Typical contributor flow:
+
+1. Add or update a skill under `skills/<skill>/`.
+2. Keep sample inputs, normalized payloads, and demo outputs in `fixtures/`.
+3. Add or update tests in the root `tests/` directory unless co-located skill tests are clearly justified.
+4. Regenerate the machine-readable catalog and README skill index with `make catalog`.
+5. Run `make test` before opening a PR.
+
 Run the full checks before opening a PR:
 
 ```bash
+make catalog
 make test
 ```
 

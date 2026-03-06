@@ -1,0 +1,12 @@
+{
+  "provider": "example",
+  "selection_reason": "Explicit provider 'example' selected.",
+  "event_count": 3,
+  "analysis": {
+    "high_importance_count": 3,
+    "direct_watchlist_hits": [
+      "NVDA"
+    ],
+    "coverage_warnings": []
+  }
+}

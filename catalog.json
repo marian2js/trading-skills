@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "name": "position-sizing",
+      "path": "skills/position-sizing",
+      "description": "Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade.",
+      "dependency_class": "static",
+      "category": "risk-management",
+      "providers_supported": [],
+      "requires_configuration": false,
+      "status": "beta",
+      "asset_coverage": [
+        "equities",
+        "futures",
+        "fx"
+      ],
+      "tags": [
+        "risk-management",
+        "execution-planning",
+        "trading"
+      ]
+    },
+    {
+      "name": "risk-reward-sanity-check",
+      "path": "skills/risk-reward-sanity-check",
+      "description": "Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed.",
+      "dependency_class": "static",
+      "category": "risk-management",
+      "providers_supported": [],
+      "requires_configuration": false,
+      "status": "beta",
+      "asset_coverage": [
+        "equities",
+        "futures",
+        "fx"
+      ],
+      "tags": [
+        "risk-management",
+        "trade-structure",
+        "pre-trade"
+      ]
+    },
+    {
+      "name": "post-trade-review",
+      "path": "skills/post-trade-review",
+      "description": "Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater.",
+      "dependency_class": "static",
+      "category": "trade-review",
+      "providers_supported": [],
+      "requires_configuration": false,
+      "status": "beta",
+      "asset_coverage": [
+        "equities",
+        "futures",
+        "fx"
+      ],
+      "tags": [
+        "review",
+        "journaling",
+        "discipline"
+      ]
+    },
+    {
+      "name": "economic-calendar",
+      "path": "skills/economic-calendar",
+      "description": "Summarize upcoming macro event risk from a normalized economic calendar so the user can see timing, importance, and coverage caveats without dealing with provider internals.",
+      "dependency_class": "data-required",
+      "category": "macro",
+      "providers_supported": [
+        "example",
+        "fmp"
+      ],
+      "requires_configuration": true,
+      "status": "experimental",
+      "asset_coverage": [
+        "equities",
+        "futures",
+        "fx",
+        "rates"
+      ],
+      "tags": [
+        "macro",
+        "calendar",
+        "event-risk"
+      ]
+    },
+    {
+      "name": "earnings-calendar",
+      "path": "skills/earnings-calendar",
+      "description": "Summarize upcoming earnings events with normalized fields and conservative relevance ranking so the user can prepare around catalysts without learning provider internals.",
+      "dependency_class": "data-required",
+      "category": "market-data",
+      "providers_supported": [
+        "example",
+        "fmp"
+      ],
+      "requires_configuration": true,
+      "status": "experimental",
+      "asset_coverage": [
+        "equities",
+        "sector-etfs"
+      ],
+      "tags": [
+        "earnings",
+        "catalysts",
+        "calendar"
+      ]
+    },
+    {
+      "name": "market-regime-detector",
+      "path": "skills/market-regime-detector",
+      "description": "Classify market context conservatively from trend, volatility, breadth, and event backdrop so the user can adapt tactics without relying on black-box regime claims.",
+      "dependency_class": "data-optional",
+      "category": "market-data",
+      "providers_supported": [],
+      "requires_configuration": false,
+      "status": "beta",
+      "asset_coverage": [
+        "equities",
+        "futures",
+        "fx"
+      ],
+      "tags": [
+        "market-context",
+        "regime",
+        "risk-management"
+      ]
+    }
+  ]
+}

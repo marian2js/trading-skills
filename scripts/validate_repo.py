@@ -8,10 +8,13 @@ import re
 import sys
 from pathlib import Path
 
+from build_catalog import collect_catalog, parse_frontmatter, update_readme, render_skill_index
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SKILLS_DIR = REPO_ROOT / "skills"
 SCHEMA_DOC = REPO_ROOT / "docs" / "canonical-schemas.md"
+README_PATH = REPO_ROOT / "README.md"
+CATALOG_PATH = REPO_ROOT / "catalog.json"
 
 GENERIC_DESCRIPTION_FRAGMENTS = {
     "skill description",
@@ -26,6 +29,10 @@ FRONTMATTER_REQUIRED = {
     "version",
     "description",
     "dependency_class",
+    "category",
+    "status",
+    "requires_configuration",
+    "asset_coverage",
 }
 
 VALID_DEPENDENCY_CLASSES = {
@@ -35,27 +42,20 @@ VALID_DEPENDENCY_CLASSES = {
     "broker-required",
 }
 
+VALID_CATEGORIES = {
+    "risk-management",
+    "trade-review",
+    "macro",
+    "market-data",
+    "research",
+    "workflow",
+}
 
-def parse_frontmatter(path: Path) -> dict[str, str]:
-    text = path.read_text(encoding="utf-8")
-    if not text.startswith("---\n"):
-        raise ValueError(f"{path}: missing opening frontmatter delimiter")
-
-    parts = text.split("---\n", 2)
-    if len(parts) < 3:
-        raise ValueError(f"{path}: malformed frontmatter block")
-
-    block = parts[1]
-    data: dict[str, str] = {}
-    for raw_line in block.splitlines():
-        line = raw_line.strip()
-        if not line:
-            continue
-        if ":" not in line:
-            raise ValueError(f"{path}: invalid frontmatter line: {raw_line}")
-        key, value = line.split(":", 1)
-        data[key.strip()] = value.strip()
-    return data
+VALID_STATUS = {
+    "experimental",
+    "beta",
+    "stable",
+}
 
 
 def validate_frontmatter(path: Path, errors: list[str]) -> None:
@@ -87,6 +87,18 @@ def validate_frontmatter(path: Path, errors: list[str]) -> None:
     if dependency_class not in VALID_DEPENDENCY_CLASSES:
         errors.append(f"{path}: invalid dependency_class '{dependency_class}'")
 
+    category = frontmatter["category"]
+    if category not in VALID_CATEGORIES:
+        errors.append(f"{path}: invalid category '{category}'")
+
+    status = frontmatter["status"]
+    if status not in VALID_STATUS:
+        errors.append(f"{path}: invalid status '{status}'")
+
+    requires_configuration = frontmatter["requires_configuration"].lower()
+    if requires_configuration not in {"true", "false"}:
+        errors.append(f"{path}: requires_configuration must be true or false")
+
 
 def validate_skill_structure(errors: list[str]) -> None:
     if not SKILLS_DIR.exists():
@@ -100,6 +112,7 @@ def validate_skill_structure(errors: list[str]) -> None:
             continue
         validate_frontmatter(skill_md, errors)
         validate_markdown_links(skill_md, errors)
+        validate_data_backed_structure(skill_dir, errors)
 
 
 def validate_markdown_links(path: Path, errors: list[str]) -> None:
@@ -116,6 +129,59 @@ def validate_markdown_links(path: Path, errors: list[str]) -> None:
             continue
         if not target_path.exists():
             errors.append(f"{path}: referenced file does not exist: {target}")
+
+
+def validate_data_backed_structure(skill_dir: Path, errors: list[str]) -> None:
+    frontmatter = parse_frontmatter(skill_dir / "SKILL.md")
+    dependency_class = frontmatter["dependency_class"]
+    if dependency_class not in {"data-required", "data-optional"}:
+        return
+
+    providers_dir = skill_dir / "providers"
+    if skill_dir.name in {"economic-calendar", "earnings-calendar"}:
+        if not providers_dir.exists():
+            errors.append(f"{skill_dir}: data-backed skill is missing providers/")
+            return
+        providers = [
+            path for path in providers_dir.iterdir() if path.is_dir() and not path.name.startswith("__")
+        ]
+        if not providers:
+            errors.append(f"{skill_dir}: data-backed skill should declare at least one internal provider")
+
+    if dependency_class == "data-required" and frontmatter["requires_configuration"] != "true":
+        errors.append(
+            f"{skill_dir}: data-required skills should declare requires_configuration: true"
+        )
+
+
+def validate_catalog_and_readme(errors: list[str]) -> None:
+    catalog = collect_catalog(REPO_ROOT)
+    expected_catalog = json.dumps(catalog, indent=2) + "\n"
+    if not CATALOG_PATH.exists():
+        errors.append(f"{CATALOG_PATH}: missing generated catalog")
+    elif CATALOG_PATH.read_text(encoding="utf-8") != expected_catalog:
+        errors.append("catalog.json is out of date; run `make catalog`")
+
+    if not README_PATH.exists():
+        errors.append(f"{README_PATH}: missing README")
+        return
+
+    actual_readme = README_PATH.read_text(encoding="utf-8")
+    try:
+        expected_readme = update_readme(actual_readme, render_skill_index(catalog))
+    except ValueError as exc:
+        errors.append(str(exc))
+        return
+    if expected_readme != actual_readme:
+        errors.append("README skill index is out of date; run `make catalog`")
+
+
+def validate_fixture_json(errors: list[str]) -> None:
+    for fixture in sorted(REPO_ROOT.glob("skills/*/fixtures/*.json")):
+        try:
+            json.loads(fixture.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            errors.append(f"{fixture}: invalid JSON fixture: {exc}")
 
 
 def validate_schema_examples(errors: list[str]) -> None:
@@ -139,6 +205,8 @@ def validate_schema_examples(errors: list[str]) -> None:
 def main() -> int:
     errors: list[str] = []
     validate_skill_structure(errors)
+    validate_catalog_and_readme(errors)
+    validate_fixture_json(errors)
     validate_schema_examples(errors)
 
     if errors:

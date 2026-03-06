@@ -3,7 +3,10 @@ VENV_DIR ?= .venv
 VENV_PYTHON := $(VENV_DIR)/bin/python
 VENV_READY := $(VENV_DIR)/.deps-installed
 
-.PHONY: validate test
+.PHONY: catalog validate test
+
+catalog:
+	$(PYTHON) scripts/build_catalog.py
 
 validate:
 	$(PYTHON) scripts/validate_repo.py

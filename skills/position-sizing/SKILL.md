@@ -1,8 +1,12 @@
 ---
 name: position-sizing
 version: 0.1.0
-description: Size a trade conservatively from account equity, risk budget, entry, stop, and optional friction assumptions so the user can see exposure and failure points before entering.
+description: Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade.
 dependency_class: static
+category: risk-management
+status: beta
+requires_configuration: false
+asset_coverage: equities, futures, fx
 tags: risk-management, execution-planning, trading
 ---
 
@@ -41,7 +45,7 @@ If any key input is missing, state what is missing and stop rather than invent i
 
 Use the worksheet in [assets/trade-plan-template.md](assets/trade-plan-template.md) when the user wants a reusable planning format. See [references/methodology.md](references/methodology.md) for sizing conventions and caveats.
 
-## Output requirements
+## What it returns
 
 Always include:
 

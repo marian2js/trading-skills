@@ -3,6 +3,10 @@ name: market-regime-detector
 version: 0.1.0
 description: Classify market context conservatively from trend, volatility, breadth, and event backdrop so the user can adapt tactics without relying on black-box regime claims.
 dependency_class: data-optional
+category: market-data
+status: beta
+requires_configuration: false
+asset_coverage: equities, futures, fx
 tags: market-context, regime, risk-management
 ---
 
@@ -37,7 +41,7 @@ See [references/regime-framework.md](references/regime-framework.md) for the sco
 4. Explain which trading styles are supported and which are fragile in that regime.
 5. State what evidence would change the classification.
 
-## Output requirements
+## What it returns
 
 Always include:
 

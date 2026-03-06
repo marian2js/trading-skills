@@ -3,8 +3,11 @@ from __future__ import annotations
 from tests.helpers import (
     FRONTMATTER_REQUIRED,
     GENERIC_DESCRIPTION_FRAGMENTS,
+    VALID_CATEGORIES,
     VALID_DEPENDENCY_CLASSES,
+    VALID_STATUS,
     iter_skill_dirs,
+    parse_csv,
     parse_frontmatter,
 )
 
@@ -36,3 +39,15 @@ def test_descriptions_are_specific_and_dependency_class_is_valid(repo_root):
         assert (
             frontmatter["dependency_class"] in VALID_DEPENDENCY_CLASSES
         ), f"{skill_dir.name} has invalid dependency_class '{frontmatter['dependency_class']}'"
+        assert frontmatter["category"] in VALID_CATEGORIES, (
+            f"{skill_dir.name} has invalid category '{frontmatter['category']}'"
+        )
+        assert frontmatter["status"] in VALID_STATUS, (
+            f"{skill_dir.name} has invalid status '{frontmatter['status']}'"
+        )
+        assert frontmatter["requires_configuration"] in {"true", "false"}, (
+            f"{skill_dir.name} must declare requires_configuration as true or false"
+        )
+        assert parse_csv(frontmatter["asset_coverage"]), (
+            f"{skill_dir.name} should declare at least one asset_coverage value"
+        )

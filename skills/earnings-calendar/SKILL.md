@@ -1,8 +1,12 @@
 ---
 name: earnings-calendar
 version: 0.1.0
-description: Summarize upcoming earnings events with normalized fields and practical relevance ranking so the user can prepare around catalysts without learning provider-specific APIs.
+description: Summarize upcoming earnings events with normalized fields and conservative relevance ranking so the user can prepare around catalysts without learning provider internals.
 dependency_class: data-required
+category: market-data
+status: experimental
+requires_configuration: true
+asset_coverage: equities, sector-etfs
 tags: earnings, catalysts, calendar
 ---
 
@@ -32,7 +36,7 @@ Use [scripts/fetch_earnings.py](scripts/fetch_earnings.py) for the adapter-backe
 - If not, the skill should explain that live coverage is unavailable and may use the example adapter.
 - The output must identify whether it is using live or example data.
 
-## Output requirements
+## What it returns
 
 Always include:
 
