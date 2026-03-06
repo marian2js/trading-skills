@@ -10,7 +10,7 @@ Use this checklist before opening a pull request for a new skill or a major skil
 
 ## Skill quality
 
-- `SKILL.md` frontmatter is complete and matches the directory name.
+- `SKILL.md` frontmatter stays minimal and matches the directory name.
 - The description explains what the skill does and when to use it.
 - The skill clearly states helpful inputs.
 - The skill clearly states what it returns.
@@ -37,3 +37,9 @@ Use this checklist before opening a pull request for a new skill or a major skil
 - At least one concrete provider adapter exists.
 - An example or mock adapter or fixture path exists for demoability.
 - Provider selection and fallback behavior are documented.
+
+## Keep it simple
+
+- Do not add metadata fields unless the repo uses them right now.
+- Do not create new public skills for provider variants of the same capability.
+- Prefer a small skill plus a clear `sample-output.md` over extra taxonomy or framework work.

@@ -1,5 +1,14 @@
 # Repo Conventions
 
+## Keep skills lightweight
+
+Most skills in this repo should keep frontmatter minimal:
+
+- `name`
+- `description`
+
+Add more metadata only when it has a clear current job in the repo. Do not add fields for speculative taxonomy work.
+
 ## Naming conventions
 
 - Use concise, capability-first skill names.
@@ -32,18 +41,6 @@ Use the smallest structure that supports the capability cleanly.
 - `assets/`: reusable templates or non-executable supporting material
 
 Not every skill needs every directory.
-
-## Dependency classes
-
-Use one of these values in skill frontmatter and the catalog:
-
-- `static`
-- `data-optional`
-- `data-required`
-- `broker-required`
-
-`broker-required` is reserved for future work and should not be used for v1 skills.
-
 ## When provider-specific public skills are allowed
 
 Almost never. They are acceptable only when:
@@ -71,3 +68,9 @@ The repo should never reward:
 - guaranteed outcomes
 - black-box confidence theater
 - fake precision that is not defensible
+
+## Metadata and generated files
+
+- `catalog.json` stays intentionally small and exists to support browsing, validation, and README generation.
+- The generated README skill index should stay simple and user-facing.
+- If a field does not improve current install UX, browsing, or validation, do not add it.

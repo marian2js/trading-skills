@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the repository skill catalog and generated README index."""
+"""Build a small repository skill catalog and generated README index."""
 
 from __future__ import annotations
 
@@ -15,13 +15,13 @@ README_PATH = REPO_ROOT / "README.md"
 README_START = "<!-- SKILL_INDEX_START -->"
 README_END = "<!-- SKILL_INDEX_END -->"
 
-CATEGORY_ORDER = [
-    "risk-management",
-    "trade-review",
-    "macro",
-    "market-data",
-    "research",
-    "workflow",
+SKILL_ORDER = [
+    "position-sizing",
+    "risk-reward-sanity-check",
+    "post-trade-review",
+    "economic-calendar",
+    "earnings-calendar",
+    "market-regime-detector",
 ]
 
 SKILL_DOC_MAP = {
@@ -54,96 +54,53 @@ def parse_frontmatter(path: Path) -> dict[str, str]:
     return data
 
 
-def parse_csv(value: str | None) -> list[str]:
-    if not value:
-        return []
-    return [item.strip() for item in value.split(",") if item.strip()]
-
-
-def parse_bool(value: str | None) -> bool:
-    return str(value or "").strip().lower() == "true"
-
-
-def find_supported_providers(skill_dir: Path) -> list[str]:
-    providers_dir = skill_dir / "providers"
-    if not providers_dir.exists():
-        return []
-    return sorted(
-        path.name
-        for path in providers_dir.iterdir()
-        if path.is_dir() and not path.name.startswith("__")
-    )
-
-
 def collect_catalog(repo_root: Path = REPO_ROOT) -> dict:
     skills_dir = repo_root / "skills"
     records = []
 
     for skill_dir in sorted(path for path in skills_dir.iterdir() if path.is_dir()):
         frontmatter = parse_frontmatter(skill_dir / "SKILL.md")
-        providers_supported = find_supported_providers(skill_dir)
         record = {
             "name": frontmatter["name"],
             "path": f"skills/{skill_dir.name}",
             "description": frontmatter["description"],
-            "dependency_class": frontmatter["dependency_class"],
-            "category": frontmatter["category"],
-            "providers_supported": providers_supported,
-            "requires_configuration": parse_bool(frontmatter.get("requires_configuration")),
-            "status": frontmatter["status"],
-            "asset_coverage": parse_csv(frontmatter.get("asset_coverage")),
-            "example_artifact": (
+            "example_path": (
                 f"skills/{skill_dir.name}/sample-output.md"
                 if (skill_dir / "sample-output.md").exists()
                 else None
             ),
             "docs_path": SKILL_DOC_MAP.get(skill_dir.name),
-            "tags": parse_csv(frontmatter.get("tags")),
         }
         records.append(record)
 
     records.sort(
         key=lambda record: (
-            CATEGORY_ORDER.index(record["category"])
-            if record["category"] in CATEGORY_ORDER
-            else len(CATEGORY_ORDER),
+            SKILL_ORDER.index(record["name"])
+            if record["name"] in SKILL_ORDER
+            else len(SKILL_ORDER),
             record["name"],
         )
     )
-    return {"version": 1, "skills": records}
+    return {"skills": records}
 
 
 def render_skill_index(catalog: dict) -> str:
-    grouped: dict[str, list[dict]] = {}
-    for record in catalog["skills"]:
-        grouped.setdefault(record["category"], []).append(record)
-
     parts = [README_START]
-    for category in CATEGORY_ORDER:
-        records = grouped.get(category)
-        if not records:
-            continue
-        parts.append(f"### {category}")
-        parts.append("")
-        parts.append("| Skill | Dependency | Status | Config | Example | Summary |")
-        parts.append("| --- | --- | --- | --- | --- | --- |")
-        for record in records:
-            config = "yes" if record["requires_configuration"] else "no"
-            example = (
-                f"[sample]({record['example_artifact']}) / [guide]({record['docs_path']})"
-                if record["example_artifact"]
-                else (f"[guide]({record['docs_path']})" if record["docs_path"] else "-")
-            )
-            parts.append(
-                "| "
-                f"`{record['name']}` | "
-                f"`{record['dependency_class']}` | "
-                f"`{record['status']}` | "
-                f"`{config}` | "
-                f"{example} | "
-                f"{record['description']} |"
-            )
-        parts.append("")
+    parts.append("| Skill | Summary | Examples |")
+    parts.append("| --- | --- | --- |")
+    for record in catalog["skills"]:
+        example = (
+            f"[sample]({record['example_path']}) / [guide]({record['docs_path']})"
+            if record["example_path"]
+            else (f"[guide]({record['docs_path']})" if record["docs_path"] else "-")
+        )
+        parts.append(
+            "| "
+            f"`{record['name']}` | "
+            f"{record['description']} | "
+            f"{example} |"
+        )
+    parts.append("")
     parts.append(README_END)
     return "\n".join(parts)
 

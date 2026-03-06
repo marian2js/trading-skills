@@ -28,7 +28,7 @@ Do not contribute:
 Every new public skill should include:
 
 - `skills/<skill-name>/SKILL.md`
-- clear frontmatter with a name that matches the directory
+- minimal frontmatter with a name that matches the directory
 - a specific description that explains what the skill does and when to use it
 - realistic usage examples
 - supporting references in `references/` when the method needs extra detail
@@ -91,13 +91,13 @@ make ci
 
 ## Developer workflow
 
-The repo has one metadata source of truth per skill: the `SKILL.md` frontmatter inside `skills/<skill>/`.
+The repo keeps metadata intentionally light. In most cases the only frontmatter you should need is `name` and `description`.
 
 ## Shortest path to contribute a fix
 
 1. Update the relevant file under `skills/`, `docs/`, `scripts/`, or `tests/`.
 2. Update `sample-output.md` if the user-facing behavior changed.
-3. Run `make catalog` if skill metadata changed.
+3. Run `make catalog` if skill names, descriptions, or example docs changed.
 4. Run `make test`.
 5. Update [CHANGELOG.md](CHANGELOG.md) if the change is release-noteworthy.
 
@@ -107,7 +107,7 @@ Typical contributor flow:
 2. Keep sample inputs, normalized payloads, and demo outputs in `fixtures/`.
 3. Add or update `sample-output.md` or another small example artifact so users can evaluate the skill quickly.
 4. Add or update tests in the root `tests/` directory unless co-located skill tests are clearly justified.
-5. Regenerate the machine-readable catalog and README skill index with `make catalog`.
+5. Regenerate the small machine-readable catalog and README skill index with `make catalog`.
 6. Run `make test` before opening a PR.
 
 ## Maintainer workflow
@@ -136,6 +136,8 @@ make validate
 ```
 
 `make test` creates a local `.venv` automatically if needed. The validator uses only the Python standard library, and the test suite uses pytest with a deliberately small amount of shared helper code.
+
+Avoid adding metadata or abstractions unless they clearly improve the current install experience, browsing experience, or validation quality.
 
 ## What not to add yet
 

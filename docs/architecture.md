@@ -82,16 +82,6 @@ The repository is intentionally pragmatic in v1:
 - one primary provider per capability is acceptable
 - a mock or example provider is required where practical
 - the internal contract should be explicit even if only one live adapter exists today
+- `SKILL.md` frontmatter should stay lightweight unless extra fields are clearly paying for themselves now
 
 This keeps the codebase future-proof without turning v1 into a framework project.
-
-## Static, data-optional, and data-required skills
-
-The repository documents dependency classes clearly because users need to know setup cost before installing:
-
-- `static`: works immediately
-- `data-optional`: useful without live data, better with additional inputs
-- `data-required`: needs external data to be fully useful
-- `broker-required`: reserved for future execution workflows
-
-The dependency class is part of the trust model. It helps users understand what the skill can and cannot do in a fresh install.

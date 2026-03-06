@@ -7,6 +7,7 @@
 A portable skill in this repo means:
 
 - a public `SKILL.md` entrypoint
+- minimal frontmatter, usually just `name` and `description`
 - supporting references, scripts, fixtures, and assets kept inside the skill directory
 - no requirement that users understand provider internals to use the capability
 
@@ -42,14 +43,14 @@ Users should think in terms of capabilities, not providers.
 Ecosystem-generic expectations:
 
 - `SKILL.md` as the public skill entrypoint
-- clear frontmatter metadata
+- lightweight frontmatter metadata
 - portable relative references inside the skill folder
 
 Repo-specific conventions:
 
-- category and dependency metadata used to generate `catalog.json`
 - capability-first packaging
 - internal `providers/` directories for data-backed skills
+- a small generated `catalog.json` for browsing and validation
 - generated README skill index
 
 ## Compatibility guidance for contributors

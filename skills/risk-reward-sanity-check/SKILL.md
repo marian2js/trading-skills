@@ -1,13 +1,6 @@
 ---
 name: risk-reward-sanity-check
-version: 0.1.0
 description: Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed.
-dependency_class: static
-category: risk-management
-status: beta
-requires_configuration: false
-asset_coverage: equities, futures, fx
-tags: risk-management, trade-structure, pre-trade
 ---
 
 # Risk Reward Sanity Check

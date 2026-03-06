@@ -1,13 +1,6 @@
 ---
 name: post-trade-review
-version: 0.1.0
 description: Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater.
-dependency_class: static
-category: trade-review
-status: beta
-requires_configuration: false
-asset_coverage: equities, futures, fx
-tags: review, journaling, discipline
 ---
 
 # Post Trade Review

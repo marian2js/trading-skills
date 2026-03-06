@@ -26,7 +26,7 @@ This repository keeps the public UX capability-first:
 - A provider is an internal implementation detail in most cases.
 - Data-backed skills disclose the source, freshness, and limitations of their output.
 
-The repository also ships a machine-readable [catalog.json](catalog.json) so future install tooling, docs generation, and validation can rely on one metadata source.
+The repository also ships a small machine-readable [catalog.json](catalog.json) so browsing, docs generation, and validation can rely on one simple index.
 
 `trading-skills` is preferred over `trading-agent-skills` because it is cleaner, easier to remember, and centered on the user job rather than the implementation medium.
 
@@ -84,13 +84,6 @@ Example prompts after installation:
 
 ## Static vs data-backed skills
 
-This repository uses four dependency classes:
-
-- `static`: no external data or credentials required
-- `data-optional`: works without live data, but can improve with inputs or adapters
-- `data-required`: needs an external data provider to operate fully
-- `broker-required`: needs broker integration; not part of v1
-
 Static skills are installable and immediately useful for non-technical users.
 
 Data-backed skills keep setup small:
@@ -112,34 +105,17 @@ The repo avoids hype, fake precision, and guaranteed-outcome language.
 
 ## Initial skills
 
-The current library is grouped into a small number of clear categories:
+The current library stays intentionally small and capability-first:
 
 <!-- SKILL_INDEX_START -->
-### risk-management
-
-| Skill | Dependency | Status | Config | Example | Summary |
-| --- | --- | --- | --- | --- | --- |
-| `position-sizing` | `static` | `beta` | `no` | [sample](skills/position-sizing/sample-output.md) / [guide](docs/examples/position-sizing-walkthrough.md) | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. |
-| `risk-reward-sanity-check` | `static` | `beta` | `no` | [sample](skills/risk-reward-sanity-check/sample-output.md) / [guide](docs/examples/risk-reward-sanity-check-walkthrough.md) | Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed. |
-
-### trade-review
-
-| Skill | Dependency | Status | Config | Example | Summary |
-| --- | --- | --- | --- | --- | --- |
-| `post-trade-review` | `static` | `beta` | `no` | [sample](skills/post-trade-review/sample-output.md) / [guide](docs/examples/post-trade-review-walkthrough.md) | Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater. |
-
-### macro
-
-| Skill | Dependency | Status | Config | Example | Summary |
-| --- | --- | --- | --- | --- | --- |
-| `economic-calendar` | `data-required` | `experimental` | `yes` | [sample](skills/economic-calendar/sample-output.md) / [guide](docs/examples/economic-calendar-example-mode.md) | Summarize upcoming macro event risk from a normalized economic calendar so the user can see timing, importance, and coverage caveats without dealing with provider internals. |
-
-### market-data
-
-| Skill | Dependency | Status | Config | Example | Summary |
-| --- | --- | --- | --- | --- | --- |
-| `earnings-calendar` | `data-required` | `experimental` | `yes` | [sample](skills/earnings-calendar/sample-output.md) / [guide](docs/examples/earnings-calendar-live-mode.md) | Summarize upcoming earnings events with normalized fields and conservative relevance ranking so the user can prepare around catalysts without learning provider internals. |
-| `market-regime-detector` | `data-optional` | `beta` | `no` | [sample](skills/market-regime-detector/sample-output.md) / [guide](docs/examples/market-regime-detector-walkthrough.md) | Classify market context conservatively from trend, volatility, breadth, and event backdrop so the user can adapt tactics without relying on black-box regime claims. |
+| Skill | Summary | Examples |
+| --- | --- | --- |
+| `position-sizing` | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. | [sample](skills/position-sizing/sample-output.md) / [guide](docs/examples/position-sizing-walkthrough.md) |
+| `risk-reward-sanity-check` | Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed. | [sample](skills/risk-reward-sanity-check/sample-output.md) / [guide](docs/examples/risk-reward-sanity-check-walkthrough.md) |
+| `post-trade-review` | Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater. | [sample](skills/post-trade-review/sample-output.md) / [guide](docs/examples/post-trade-review-walkthrough.md) |
+| `economic-calendar` | Summarize upcoming macro event risk from a normalized economic calendar so the user can see timing, importance, and coverage caveats without dealing with provider internals. | [sample](skills/economic-calendar/sample-output.md) / [guide](docs/examples/economic-calendar-example-mode.md) |
+| `earnings-calendar` | Summarize upcoming earnings events with normalized fields and conservative relevance ranking so the user can prepare around catalysts without learning provider internals. | [sample](skills/earnings-calendar/sample-output.md) / [guide](docs/examples/earnings-calendar-live-mode.md) |
+| `market-regime-detector` | Classify market context conservatively from trend, volatility, breadth, and event backdrop so the user can adapt tactics without relying on black-box regime claims. | [sample](skills/market-regime-detector/sample-output.md) / [guide](docs/examples/market-regime-detector-walkthrough.md) |
 
 <!-- SKILL_INDEX_END -->
 

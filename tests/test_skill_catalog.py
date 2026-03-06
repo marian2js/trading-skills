@@ -22,4 +22,3 @@ def test_skill_catalog_metadata_is_consistent(repo_root):
         frontmatter = parse_frontmatter(skill_dir / "SKILL.md")
         assert frontmatter["name"] not in seen_names, f"Duplicate skill name found: {frontmatter['name']}"
         seen_names.add(frontmatter["name"])
-        assert frontmatter["version"], f"{skill_dir.name} should declare a version"

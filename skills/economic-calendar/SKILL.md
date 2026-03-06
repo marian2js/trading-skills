@@ -1,13 +1,6 @@
 ---
 name: economic-calendar
-version: 0.1.0
 description: Summarize upcoming macro event risk from a normalized economic calendar so the user can see timing, importance, and coverage caveats without dealing with provider internals.
-dependency_class: data-required
-category: macro
-status: experimental
-requires_configuration: true
-asset_coverage: equities, futures, fx, rates
-tags: macro, calendar, event-risk
 ---
 
 # Economic Calendar

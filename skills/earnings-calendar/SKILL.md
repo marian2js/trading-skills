@@ -1,13 +1,6 @@
 ---
 name: earnings-calendar
-version: 0.1.0
 description: Summarize upcoming earnings events with normalized fields and conservative relevance ranking so the user can prepare around catalysts without learning provider internals.
-dependency_class: data-required
-category: market-data
-status: experimental
-requires_configuration: true
-asset_coverage: equities, sector-etfs
-tags: earnings, catalysts, calendar
 ---
 
 # Earnings Calendar

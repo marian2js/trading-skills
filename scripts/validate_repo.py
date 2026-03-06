@@ -19,46 +19,10 @@ CATALOG_PATH = REPO_ROOT / "catalog.json"
 VERSION_PATH = REPO_ROOT / "VERSION"
 CHANGELOG_PATH = REPO_ROOT / "CHANGELOG.md"
 
-GENERIC_DESCRIPTION_FRAGMENTS = {
-    "skill description",
-    "todo",
-    "placeholder",
-    "tbd",
-    "generic",
-}
-
-FRONTMATTER_REQUIRED = {
-    "name",
-    "version",
-    "description",
-    "dependency_class",
-    "category",
-    "status",
-    "requires_configuration",
-    "asset_coverage",
-}
-
-VALID_DEPENDENCY_CLASSES = {
-    "static",
-    "data-optional",
-    "data-required",
-    "broker-required",
-}
-
-VALID_CATEGORIES = {
-    "risk-management",
-    "trade-review",
-    "macro",
-    "market-data",
-    "research",
-    "workflow",
-}
-
-VALID_STATUS = {
-    "experimental",
-    "beta",
-    "stable",
-}
+GENERIC_DESCRIPTION_FRAGMENTS = {"skill description", "todo", "placeholder", "tbd", "generic"}
+FRONTMATTER_REQUIRED = {"name", "description"}
+FRONTMATTER_ALLOWED = {"name", "description"}
+DATA_BACKED_SKILLS = {"economic-calendar", "earnings-calendar"}
 
 FORBIDDEN_TRACKED_PATTERNS = (
     "__pycache__/",
@@ -90,6 +54,12 @@ def validate_frontmatter(path: Path, errors: list[str]) -> None:
         errors.append(f"{path}: missing frontmatter fields: {', '.join(missing)}")
         return
 
+    unexpected = sorted(set(frontmatter) - FRONTMATTER_ALLOWED)
+    if unexpected:
+        errors.append(
+            f"{path}: unexpected frontmatter fields for this repo style: {', '.join(unexpected)}"
+        )
+
     skill_dir_name = path.parent.name
     if frontmatter["name"] != skill_dir_name:
         errors.append(
@@ -102,22 +72,6 @@ def validate_frontmatter(path: Path, errors: list[str]) -> None:
     lowered = description.lower()
     if any(fragment in lowered for fragment in GENERIC_DESCRIPTION_FRAGMENTS):
         errors.append(f"{path}: description looks generic or placeholder-like")
-
-    dependency_class = frontmatter["dependency_class"]
-    if dependency_class not in VALID_DEPENDENCY_CLASSES:
-        errors.append(f"{path}: invalid dependency_class '{dependency_class}'")
-
-    category = frontmatter["category"]
-    if category not in VALID_CATEGORIES:
-        errors.append(f"{path}: invalid category '{category}'")
-
-    status = frontmatter["status"]
-    if status not in VALID_STATUS:
-        errors.append(f"{path}: invalid status '{status}'")
-
-    requires_configuration = frontmatter["requires_configuration"].lower()
-    if requires_configuration not in {"true", "false"}:
-        errors.append(f"{path}: requires_configuration must be true or false")
 
 
 def validate_skill_structure(errors: list[str]) -> None:
@@ -162,26 +116,16 @@ def validate_repo_markdown_links(errors: list[str]) -> None:
 
 
 def validate_data_backed_structure(skill_dir: Path, errors: list[str]) -> None:
-    frontmatter = parse_frontmatter(skill_dir / "SKILL.md")
-    dependency_class = frontmatter["dependency_class"]
-    if dependency_class not in {"data-required", "data-optional"}:
+    if skill_dir.name not in DATA_BACKED_SKILLS:
         return
 
     providers_dir = skill_dir / "providers"
-    if skill_dir.name in {"economic-calendar", "earnings-calendar"}:
-        if not providers_dir.exists():
-            errors.append(f"{skill_dir}: data-backed skill is missing providers/")
-            return
-        providers = [
-            path for path in providers_dir.iterdir() if path.is_dir() and not path.name.startswith("__")
-        ]
-        if not providers:
-            errors.append(f"{skill_dir}: data-backed skill should declare at least one internal provider")
-
-    if dependency_class == "data-required" and frontmatter["requires_configuration"] != "true":
-        errors.append(
-            f"{skill_dir}: data-required skills should declare requires_configuration: true"
-        )
+    if not providers_dir.exists():
+        errors.append(f"{skill_dir}: data-backed skill is missing providers/")
+        return
+    providers = [path for path in providers_dir.iterdir() if path.is_dir() and not path.name.startswith("__")]
+    if not providers:
+        errors.append(f"{skill_dir}: data-backed skill should declare at least one internal provider")
 
 
 def validate_public_skill_naming(skill_dir: Path, errors: list[str]) -> None:

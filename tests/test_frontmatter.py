@@ -1,13 +1,10 @@
 from __future__ import annotations
 
 from tests.helpers import (
+    FRONTMATTER_ALLOWED,
     FRONTMATTER_REQUIRED,
     GENERIC_DESCRIPTION_FRAGMENTS,
-    VALID_CATEGORIES,
-    VALID_DEPENDENCY_CLASSES,
-    VALID_STATUS,
     iter_skill_dirs,
-    parse_csv,
     parse_frontmatter,
 )
 
@@ -17,6 +14,10 @@ def test_frontmatter_exists_and_has_required_fields(repo_root):
         frontmatter = parse_frontmatter(skill_dir / "SKILL.md")
         missing = FRONTMATTER_REQUIRED - set(frontmatter)
         assert not missing, f"{skill_dir.name} is missing frontmatter fields: {sorted(missing)}"
+        unexpected = set(frontmatter) - FRONTMATTER_ALLOWED
+        assert not unexpected, (
+            f"{skill_dir.name} should keep frontmatter minimal; unexpected fields: {sorted(unexpected)}"
+        )
 
 
 def test_frontmatter_name_matches_directory(repo_root):
@@ -27,7 +28,7 @@ def test_frontmatter_name_matches_directory(repo_root):
         ), f"{skill_dir / 'SKILL.md'} should use name '{skill_dir.name}', got '{frontmatter['name']}'"
 
 
-def test_descriptions_are_specific_and_dependency_class_is_valid(repo_root):
+def test_descriptions_are_specific(repo_root):
     for skill_dir in iter_skill_dirs(repo_root):
         frontmatter = parse_frontmatter(skill_dir / "SKILL.md")
         description = frontmatter["description"].strip()
@@ -36,18 +37,3 @@ def test_descriptions_are_specific_and_dependency_class_is_valid(repo_root):
         assert not any(
             fragment in lowered for fragment in GENERIC_DESCRIPTION_FRAGMENTS
         ), f"{skill_dir.name} description looks generic: {description!r}"
-        assert (
-            frontmatter["dependency_class"] in VALID_DEPENDENCY_CLASSES
-        ), f"{skill_dir.name} has invalid dependency_class '{frontmatter['dependency_class']}'"
-        assert frontmatter["category"] in VALID_CATEGORIES, (
-            f"{skill_dir.name} has invalid category '{frontmatter['category']}'"
-        )
-        assert frontmatter["status"] in VALID_STATUS, (
-            f"{skill_dir.name} has invalid status '{frontmatter['status']}'"
-        )
-        assert frontmatter["requires_configuration"] in {"true", "false"}, (
-            f"{skill_dir.name} must declare requires_configuration as true or false"
-        )
-        assert parse_csv(frontmatter["asset_coverage"]), (
-            f"{skill_dir.name} should declare at least one asset_coverage value"
-        )

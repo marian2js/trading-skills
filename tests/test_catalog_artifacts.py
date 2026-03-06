@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import json
-
 from tests.helpers import import_module_from_path, iter_skill_dirs, load_json
 
 
@@ -28,35 +26,21 @@ def test_catalog_covers_all_skill_directories(repo_root):
     assert catalog_names == skill_names, "catalog.json should contain every skill directory exactly once"
 
 
-def test_data_backed_catalog_entries_declare_provider_metadata(repo_root):
-    catalog = load_json(repo_root / "catalog.json")
-    for record in catalog["skills"]:
-        if record["dependency_class"] in {"data-required", "data-optional"}:
-            if record["name"] in {"economic-calendar", "earnings-calendar"}:
-                assert record["providers_supported"], f"{record['name']} should declare supported internal providers"
-            if record["dependency_class"] == "data-required":
-                assert record["requires_configuration"] is True, (
-                    f"{record['name']} should declare that live operation requires configuration"
-                )
-
-
 def test_catalog_field_shapes_are_consistent(repo_root):
     catalog = load_json(repo_root / "catalog.json")
     for record in catalog["skills"]:
         assert isinstance(record["name"], str) and record["name"], "Catalog skill name should be a non-empty string"
         assert record["path"].startswith("skills/"), f"Catalog path should point into skills/: {record['path']}"
         assert isinstance(record["description"], str) and len(record["description"]) >= 40
-        assert isinstance(record["providers_supported"], list), "providers_supported should be a list"
-        assert isinstance(record["requires_configuration"], bool), "requires_configuration should be boolean"
-        assert isinstance(record["asset_coverage"], list) and record["asset_coverage"], (
-            f"{record['name']} should declare asset coverage"
+        assert set(record) == {"name", "path", "description", "example_path", "docs_path"}, (
+            f"{record['name']} catalog entry should stay minimal and predictable"
         )
-        assert record["example_artifact"], f"{record['name']} should declare a sample example artifact"
-        assert record["example_artifact"].startswith("skills/"), (
-            f"{record['name']} example_artifact should point into skills/: {record['example_artifact']}"
+        assert record["example_path"], f"{record['name']} should declare a sample example artifact"
+        assert record["example_path"].startswith("skills/"), (
+            f"{record['name']} example_path should point into skills/: {record['example_path']}"
         )
-        assert (repo_root / record["example_artifact"]).exists(), (
-            f"{record['name']} example_artifact should exist on disk: {record['example_artifact']}"
+        assert (repo_root / record["example_path"]).exists(), (
+            f"{record['name']} example_path should exist on disk: {record['example_path']}"
         )
         assert record["docs_path"], f"{record['name']} should declare a walkthrough docs path"
         assert record["docs_path"].startswith("docs/"), (
@@ -65,4 +49,3 @@ def test_catalog_field_shapes_are_consistent(repo_root):
         assert (repo_root / record["docs_path"]).exists(), (
             f"{record['name']} docs_path should exist on disk: {record['docs_path']}"
         )
-        assert isinstance(record["tags"], list) and record["tags"], f"{record['name']} should declare tags"

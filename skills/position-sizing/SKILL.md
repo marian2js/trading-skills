@@ -1,13 +1,6 @@
 ---
 name: position-sizing
-version: 0.1.0
 description: Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade.
-dependency_class: static
-category: risk-management
-status: beta
-requires_configuration: false
-asset_coverage: equities, futures, fx
-tags: risk-management, execution-planning, trading
 ---
 
 # Position Sizing
