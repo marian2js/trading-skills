@@ -45,7 +45,7 @@ If you already have enough timing and context to do the analysis, do not fetch a
 If key schedule or estimate context is missing:
 
 - check whether the user already named a supported provider or already shared usable access details in the conversation
-- if they already indicated `FMP` or `Nasdaq`, use [references/providers/fmp.md](references/providers/fmp.md) or [references/providers/nasdaq.md](references/providers/nasdaq.md) directly
+- if they already indicated `FMP` or `TradingEconomics`, use [references/providers/fmp.md](references/providers/fmp.md) or [references/providers/tradingeconomics.md](references/providers/tradingeconomics.md) directly
 - otherwise consult [references/data-providers.md](references/data-providers.md) and ask which supported provider they want to use
 - once the missing facts are gathered, continue the preview and disclose the source used
 

@@ -16,13 +16,13 @@ Expected behavior:
 
 Prompt:
 
-> Use `earnings-preview` for ADBE and CRM next week. I do not have the exact timing, but you can use Nasdaq for the missing schedule data.
+> Use `earnings-preview` for ADBE and CRM next week. I do not have the exact timing, but you can use TradingEconomics for the missing schedule data.
 
 Expected behavior:
 
-- use the `Nasdaq` path directly because the user already chose it
+- use the `TradingEconomics` path directly because the user already chose it
 - gather only the missing timing facts
-- continue the preview and disclose that `Nasdaq` supplied the schedule confirmation
+- continue the preview and disclose that `TradingEconomics` supplied the schedule confirmation
 
 ## Case 3: Critical data is missing and no provider was indicated
 

@@ -42,7 +42,7 @@ If the user already supplied enough evidence to classify the environment, do not
 If trend, volatility, breadth, or event context is still too thin:
 
 - check whether the user already named a supported provider or already shared usable access details
-- if they already indicated `FMP` or `Yahoo Finance`, use [references/providers/fmp.md](references/providers/fmp.md) or [references/providers/yahoo-finance.md](references/providers/yahoo-finance.md) directly
+- if they already indicated `FMP` or `TradingEconomics`, use [references/providers/fmp.md](references/providers/fmp.md) or [references/providers/tradingeconomics.md](references/providers/tradingeconomics.md) directly
 - otherwise consult [references/data-providers.md](references/data-providers.md) and ask which supported provider they want to use
 - once the missing context is gathered, continue the regime analysis and disclose the source used
 
