@@ -1,0 +1,11 @@
+{
+  "instrument": "NVDA",
+  "direction": "long",
+  "planned_entry": 841.0,
+  "planned_stop": 820.0,
+  "planned_target": 890.0,
+  "actual_entry": 842.5,
+  "actual_exit": 826.0,
+  "rule_adherence": "Moved stop wider after entry.",
+  "expected_focus": "Separate initial thesis quality from stop-discipline failure."
+}
