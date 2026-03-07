@@ -66,11 +66,6 @@ def collect_catalog(repo_root: Path = REPO_ROOT) -> dict:
             "name": frontmatter["name"],
             "path": f"skills/{skill_dir.name}",
             "description": frontmatter["description"],
-            "example_path": (
-                f"skills/{skill_dir.name}/sample-output.md"
-                if (skill_dir / "sample-output.md").exists()
-                else None
-            ),
             "docs_path": SKILL_DOC_MAP.get(skill_dir.name),
         }
         records.append(record)
@@ -88,19 +83,14 @@ def collect_catalog(repo_root: Path = REPO_ROOT) -> dict:
 
 def render_skill_index(catalog: dict) -> str:
     parts = [README_START]
-    parts.append("| Skill | Summary | Examples |")
+    parts.append("| Skill | Summary | Guide |")
     parts.append("| --- | --- | --- |")
     for record in catalog["skills"]:
-        example = (
-            f"[sample]({record['example_path']}) / [guide]({record['docs_path']})"
-            if record["example_path"]
-            else (f"[guide]({record['docs_path']})" if record["docs_path"] else "-")
-        )
         parts.append(
             "| "
             f"`{record['name']}` | "
             f"{record['description']} | "
-            f"{example} |"
+            f"{f'[guide]({record['docs_path']})' if record['docs_path'] else '-'} |"
         )
     parts.append("")
     parts.append(README_END)

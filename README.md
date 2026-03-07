@@ -113,14 +113,14 @@ The repo avoids hype, fake precision, and guaranteed-outcome language.
 The current library stays intentionally small and capability-first:
 
 <!-- SKILL_INDEX_START -->
-| Skill | Summary | Examples |
+| Skill | Summary | Guide |
 | --- | --- | --- |
-| `position-sizing` | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. | [sample](skills/position-sizing/sample-output.md) / [guide](docs/examples/position-sizing-walkthrough.md) |
-| `risk-reward-sanity-check` | Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed. | [sample](skills/risk-reward-sanity-check/sample-output.md) / [guide](docs/examples/risk-reward-sanity-check-walkthrough.md) |
-| `post-trade-review` | Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater. | [sample](skills/post-trade-review/sample-output.md) / [guide](docs/examples/post-trade-review-walkthrough.md) |
-| `macro-event-analysis` | Prepare for upcoming macro catalysts by identifying the events that matter, mapping the likely transmission channels, and surfacing timing risk for the user's markets or positions. | [sample](skills/macro-event-analysis/sample-output.md) / [guide](docs/examples/macro-event-analysis-example-mode.md) |
-| `earnings-preview` | Prepare for an upcoming earnings report or earnings week by identifying the reports that matter, framing the key debates, and surfacing the read-through risk that could affect the user's watchlist or positions. | [sample](skills/earnings-preview/sample-output.md) / [guide](docs/examples/earnings-preview-live-mode.md) |
-| `market-regime-analysis` | Analyze current market context through trend, volatility, breadth, and event backdrop so the user can choose tactics that fit the environment without relying on black-box regime claims. | [sample](skills/market-regime-analysis/sample-output.md) / [guide](docs/examples/market-regime-analysis-walkthrough.md) |
+| `position-sizing` | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. | [guide](docs/examples/position-sizing-walkthrough.md) |
+| `risk-reward-sanity-check` | Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed. | [guide](docs/examples/risk-reward-sanity-check-walkthrough.md) |
+| `post-trade-review` | Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater. | [guide](docs/examples/post-trade-review-walkthrough.md) |
+| `macro-event-analysis` | Prepare for upcoming macro catalysts by identifying the events that matter, mapping the likely transmission channels, and surfacing timing risk for the user's markets or positions. | [guide](docs/examples/macro-event-analysis-example-mode.md) |
+| `earnings-preview` | Prepare for an upcoming earnings report or earnings week by identifying the reports that matter, framing the key debates, and surfacing the read-through risk that could affect the user's watchlist or positions. | [guide](docs/examples/earnings-preview-live-mode.md) |
+| `market-regime-analysis` | Analyze current market context through trend, volatility, breadth, and event backdrop so the user can choose tactics that fit the environment without relying on black-box regime claims. | [guide](docs/examples/market-regime-analysis-walkthrough.md) |
 
 <!-- SKILL_INDEX_END -->
 
@@ -144,10 +144,9 @@ trading-skills/
   docs/
   scripts/
   skills/
-  tests/
 ```
 
-Each public skill lives in `skills/<capability>/` and centers around a `SKILL.md` file. Long notes, methodology, fixtures, and provider references stay in adjacent folders so the skill body stays readable.
+Each public skill lives in `skills/<capability>/` and centers around a `SKILL.md` file. Long notes, methodology, assets, and provider references stay in adjacent folders so the skill body stays readable.
 
 ## Architecture in one page
 
@@ -191,19 +190,9 @@ See the docs for details:
 - [Release checklist](docs/release-checklist.md)
 - [Provider support](docs/provider-support.md)
 
-## Testing and validation
+## Validation
 
-This repo keeps most tests in the root [tests/](tests/) directory so contributors can find cross-cutting checks in one place. Skill-specific sample data lives next to the skill in `skills/<skill>/fixtures/`, which keeps demo data and normalization fixtures close to the capability they describe.
-
-Per-skill `tests/` directories are intentionally not the default. Add them only when a skill grows substantial local behavior that is easier to maintain beside the code.
-
-Run the full repository checks with one command:
-
-```bash
-make test
-```
-
-This runs the lightweight validator, bootstraps a local `.venv` if needed, and executes the pytest suite. The validator remains available separately if you want a fast structural pass:
+Run the repository checks with one command:
 
 ```bash
 make validate
@@ -215,12 +204,6 @@ Regenerate the machine-readable catalog and README skill index after metadata ch
 make catalog
 ```
 
-Mirror the GitHub Actions checks locally:
-
-```bash
-make ci
-```
-
 The current checks cover:
 
 - every skill directory contains `SKILL.md`
@@ -229,12 +212,12 @@ The current checks cover:
 - catalog metadata matches the skill folders
 - README skill index stays in sync with the catalog
 - local references in `SKILL.md` files exist
-- README, docs, and sample-output markdown links stay valid
-- fixture JSON files parse successfully
+- README and docs markdown links stay valid
 - forbidden artifacts do not leak into tracked files
 - public skill names do not leak provider branding
 - provider references linked from skills exist
 - skill-local markdown stays aligned with the user-data-first workflow
+- skill directories stay lean by excluding `fixtures/` and `sample-output.md`
 
 ## Next steps after v1
 
@@ -242,4 +225,4 @@ The current checks cover:
 - Expand provider coverage for `macro-event-analysis` and `earnings-preview`
 - Add more `data-optional` skills such as watchlist review and catalyst maps
 - Add packaging and release metadata for one-step installation across more skill marketplaces
-- Add test fixtures and golden outputs for skill examples
+- Keep the skill folders lean while expanding the capability set

@@ -86,8 +86,11 @@ def validate_skill_structure(errors: list[str]) -> None:
             errors.append(f"{skill_dir}: missing SKILL.md")
             continue
         sample_output = skill_dir / "sample-output.md"
-        if not sample_output.exists():
-            errors.append(f"{skill_dir}: missing sample-output.md")
+        if sample_output.exists():
+            errors.append(f"{skill_dir}: sample-output.md should not be checked in")
+        fixtures_dir = skill_dir / "fixtures"
+        if fixtures_dir.exists():
+            errors.append(f"{skill_dir}: fixtures/ should not be checked in")
         validate_frontmatter(skill_md, errors)
         validate_provider_references(skill_dir, errors)
         validate_skill_python_absence(skill_dir, errors)
@@ -198,14 +201,6 @@ def validate_catalog_and_readme(errors: list[str]) -> None:
         errors.append("README skill index is out of date; run `make catalog`")
 
 
-def validate_fixture_json(errors: list[str]) -> None:
-    for fixture in sorted(REPO_ROOT.glob("skills/*/fixtures/*.json")):
-        try:
-            json.loads(fixture.read_text(encoding="utf-8"))
-        except json.JSONDecodeError as exc:
-            errors.append(f"{fixture}: invalid JSON fixture: {exc}")
-
-
 def validate_release_artifacts(errors: list[str]) -> None:
     if not VERSION_PATH.exists():
         errors.append(f"{VERSION_PATH}: missing release version anchor")
@@ -241,7 +236,6 @@ def main() -> int:
     validate_skill_structure(errors)
     validate_repo_markdown_links(errors)
     validate_catalog_and_readme(errors)
-    validate_fixture_json(errors)
     validate_release_artifacts(errors)
     validate_forbidden_tracked_artifacts(errors)
     validate_shared_library(errors)

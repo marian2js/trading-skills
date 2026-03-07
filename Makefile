@@ -1,7 +1,4 @@
 PYTHON ?= python3
-VENV_DIR ?= .venv
-VENV_PYTHON := $(VENV_DIR)/bin/python
-VENV_READY := $(VENV_DIR)/.deps-installed
 
 .PHONY: catalog validate test ci
 
@@ -11,14 +8,7 @@ catalog:
 validate:
 	$(PYTHON) scripts/validate_repo.py
 
-$(VENV_READY): requirements-dev.txt
-	$(PYTHON) -m venv $(VENV_DIR)
-	$(VENV_PYTHON) -m pip install -r requirements-dev.txt
-	touch $(VENV_READY)
+test: validate
 
-test: validate $(VENV_READY)
-	$(VENV_PYTHON) -m pytest
-
-ci: validate $(VENV_READY)
+ci: validate
 	$(PYTHON) scripts/build_catalog.py --check
-	$(VENV_PYTHON) -m pytest

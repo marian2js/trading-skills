@@ -1,9 +1,0 @@
-{
-  "account_size": 150000,
-  "risk_percent": 0.4,
-  "entry": 84.2,
-  "stop": 81.9,
-  "slippage": 0.1,
-  "fee_per_unit": 0.0,
-  "contract_multiplier": 1.0
-}

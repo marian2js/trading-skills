@@ -8,7 +8,7 @@ A portable skill in this repo means:
 
 - a public `SKILL.md` entrypoint
 - minimal frontmatter, usually just `name` and `description`
-- supporting references, fixtures, and assets kept inside the skill directory
+- supporting references and assets kept inside the skill directory
 - no requirement that users understand provider internals to use the capability
 
 ## Expected skill folder shape
@@ -18,7 +18,6 @@ Typical skill shape:
 ```text
 skills/<skill-name>/
   SKILL.md
-  fixtures/
   references/
   assets/
 ```

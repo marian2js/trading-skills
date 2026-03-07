@@ -24,12 +24,6 @@ Use this checklist before opening a pull request for a new skill or a major skil
 - Data-backed output discloses provider, freshness, and coverage limitations.
 - Analysis support is kept separate from execution claims.
 
-## Fixtures and tests
-
-- `fixtures/` contains realistic sample data or examples when they add current value.
-- Static skills include example input/output pairs when practical.
-- Root `tests/` were added or updated to cover the new behavior.
-
 ## Data-backed skills only
 
 - `references/data-providers.md` exists if optional provider support is needed.
@@ -40,4 +34,4 @@ Use this checklist before opening a pull request for a new skill or a major skil
 
 - Do not add metadata fields unless the repo uses them right now.
 - Do not create new public skills for provider variants of the same capability.
-- Prefer a small skill plus a clear `sample-output.md` over extra taxonomy or framework work.
+- Keep the skill directory lean. Do not add `fixtures/` or `sample-output.md`.

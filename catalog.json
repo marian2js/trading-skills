@@ -4,42 +4,36 @@
       "name": "position-sizing",
       "path": "skills/position-sizing",
       "description": "Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade.",
-      "example_path": "skills/position-sizing/sample-output.md",
       "docs_path": "docs/examples/position-sizing-walkthrough.md"
     },
     {
       "name": "risk-reward-sanity-check",
       "path": "skills/risk-reward-sanity-check",
       "description": "Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed.",
-      "example_path": "skills/risk-reward-sanity-check/sample-output.md",
       "docs_path": "docs/examples/risk-reward-sanity-check-walkthrough.md"
     },
     {
       "name": "post-trade-review",
       "path": "skills/post-trade-review",
       "description": "Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater.",
-      "example_path": "skills/post-trade-review/sample-output.md",
       "docs_path": "docs/examples/post-trade-review-walkthrough.md"
     },
     {
       "name": "macro-event-analysis",
       "path": "skills/macro-event-analysis",
       "description": "Prepare for upcoming macro catalysts by identifying the events that matter, mapping the likely transmission channels, and surfacing timing risk for the user's markets or positions.",
-      "example_path": "skills/macro-event-analysis/sample-output.md",
       "docs_path": "docs/examples/macro-event-analysis-example-mode.md"
     },
     {
       "name": "earnings-preview",
       "path": "skills/earnings-preview",
       "description": "Prepare for an upcoming earnings report or earnings week by identifying the reports that matter, framing the key debates, and surfacing the read-through risk that could affect the user's watchlist or positions.",
-      "example_path": "skills/earnings-preview/sample-output.md",
       "docs_path": "docs/examples/earnings-preview-live-mode.md"
     },
     {
       "name": "market-regime-analysis",
       "path": "skills/market-regime-analysis",
       "description": "Analyze current market context through trend, volatility, breadth, and event backdrop so the user can choose tactics that fit the environment without relying on black-box regime claims.",
-      "example_path": "skills/market-regime-analysis/sample-output.md",
       "docs_path": "docs/examples/market-regime-analysis-walkthrough.md"
     }
   ]

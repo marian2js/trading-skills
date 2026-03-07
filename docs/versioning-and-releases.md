@@ -15,7 +15,6 @@ The current release anchor lives in the top-level [VERSION](../VERSION) file.
 Use for:
 
 - docs-only corrections
-- fixture improvements that do not change behavior contracts
 - validation or CI improvements
 - error-message improvements that do not change outputs materially
 
@@ -24,7 +23,7 @@ Use for:
 Use for:
 
 - additive skill improvements
-- new example fixtures
+- new example docs
 - non-breaking provider support additions
 - richer output fields that do not remove or rename existing fields
 
