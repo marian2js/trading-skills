@@ -9,14 +9,15 @@ Use the shortest chain that answers the user's actual problem.
 Recommended default order:
 
 1. `watchlist-review` if the user starts with several names and needs triage first
-2. `macro-event-analysis` or `earnings-preview` if event risk is part of the setup
-3. `market-regime-analysis` to classify the broader environment
-4. `thesis-validation` to test whether the claim is clear enough to act on
-5. `risk-reward-sanity-check` to pressure-test the specific trade structure
-6. `execution-plan-check` to confirm the order logic and stop behavior are operationally realistic
-7. `portfolio-concentration` to confirm the portfolio can absorb the idea without hidden overlap
-8. `position-sizing` once the structure, execution, concentration, and stop are clear
-9. `post-trade-review` after the trade closes
+2. `catalyst-map` if the user needs one ranked event map across several names or exposures
+3. `macro-event-analysis` or `earnings-preview` if event risk is part of the setup
+4. `market-regime-analysis` to classify the broader environment
+5. `thesis-validation` to test whether the claim is clear enough to act on
+6. `risk-reward-sanity-check` to pressure-test the specific trade structure
+7. `execution-plan-check` to confirm the order logic and stop behavior are operationally realistic
+8. `portfolio-concentration` to confirm the portfolio can absorb the idea without hidden overlap
+9. `position-sizing` once the structure, execution, concentration, and stop are clear
+10. `post-trade-review` after the trade closes
 
 Practical rule:
 
@@ -58,17 +59,19 @@ Keep it small. Only carry forward fields that the next skill actually needs.
 ## Workflow 1: Event-heavy swing trade
 
 1. Run `watchlist-review` on the peer set to decide which names deserve active prep.
-2. Run `earnings-preview` on the company and peer group.
-3. Carry forward the event date, key debate, and read-through risk into `market-regime-analysis`.
-4. Use `thesis-validation` to pressure-test the claim, timeframe, and invalidation logic.
-5. Use `risk-reward-sanity-check` once the user commits to an entry, stop, and target.
-6. Run `execution-plan-check` before sizing if the entry depends on breakouts, thin liquidity, or catalyst timing.
-7. Run `portfolio-concentration` before sizing if the user already has related exposure.
-8. Finish with `position-sizing` after the stop is stable.
+2. Run `catalyst-map` to rank the company, macro, and policy events that matter across the peer set.
+3. Run `earnings-preview` on the company and peer group.
+4. Carry forward the event date, key debate, and read-through risk into `market-regime-analysis`.
+5. Use `thesis-validation` to pressure-test the claim, timeframe, and invalidation logic.
+6. Use `risk-reward-sanity-check` once the user commits to an entry, stop, and target.
+7. Run `execution-plan-check` before sizing if the entry depends on breakouts, thin liquidity, or catalyst timing.
+8. Run `portfolio-concentration` before sizing if the user already has related exposure.
+9. Finish with `position-sizing` after the stop is stable.
 
 Good handoff fields:
 
 - event timing
+- catalyst ranking
 - key debate
 - main invalidation trigger
 - thesis statement
@@ -101,13 +104,15 @@ Good handoff fields:
 ## Workflow 0: Too many names, not enough attention
 
 1. Run `watchlist-review` on the current list.
-2. Keep only the active-focus names.
-3. Route those names into `earnings-preview`, `macro-event-analysis`, `market-regime-analysis`, or `thesis-validation` depending on what matters most.
+2. Run `catalyst-map` on the reduced set if the user still needs one cross-name event map.
+3. Keep only the active-focus names.
+4. Route those names into `earnings-preview`, `macro-event-analysis`, `market-regime-analysis`, or `thesis-validation` depending on what matters most.
 
 Good handoff fields:
 
 - active names
 - why they matter now
+- catalyst map
 - names to defer
 - next recommended skill per active name
 

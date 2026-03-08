@@ -7,6 +7,12 @@
       "docs_path": "docs/examples/watchlist-review-walkthrough.md"
     },
     {
+      "name": "catalyst-map",
+      "path": "skills/catalyst-map",
+      "description": "Build a ranked map of the catalysts that could move a watchlist, theme, or portfolio by showing what matters, when it matters, and how those events could transmit across related names or exposures.",
+      "docs_path": "docs/examples/catalyst-map-walkthrough.md"
+    },
+    {
       "name": "thesis-validation",
       "path": "skills/thesis-validation",
       "description": "Pressure-test a trade or investment thesis by clarifying the core claim, evidence, invalidation, timeframe, and dependency chain before the user turns it into an entry, stop, or size.",
