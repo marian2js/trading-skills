@@ -10,14 +10,15 @@ Recommended default order:
 
 1. `watchlist-review` if the user starts with several names and needs triage first
 2. `catalyst-map` if the user needs one ranked event map across several names or exposures
-3. `macro-event-analysis` or `earnings-preview` if event risk is part of the setup
-4. `market-regime-analysis` to classify the broader environment
-5. `thesis-validation` to test whether the claim is clear enough to act on
-6. `risk-reward-sanity-check` to pressure-test the specific trade structure
-7. `execution-plan-check` to confirm the order logic and stop behavior are operationally realistic
-8. `portfolio-concentration` to confirm the portfolio can absorb the idea without hidden overlap
-9. `position-sizing` once the structure, execution, concentration, and stop are clear
-10. `post-trade-review` after the trade closes
+3. `evidence-gap-check` if the idea is promising but the missing information is not yet prioritized
+4. `macro-event-analysis` or `earnings-preview` if event risk is part of the setup
+5. `market-regime-analysis` to classify the broader environment
+6. `thesis-validation` to test whether the claim is clear enough to act on
+7. `risk-reward-sanity-check` to pressure-test the specific trade structure
+8. `execution-plan-check` to confirm the order logic and stop behavior are operationally realistic
+9. `portfolio-concentration` to confirm the portfolio can absorb the idea without hidden overlap
+10. `position-sizing` once the structure, execution, concentration, and stop are clear
+11. `post-trade-review` after the trade closes
 
 Practical rule:
 
@@ -60,18 +61,20 @@ Keep it small. Only carry forward fields that the next skill actually needs.
 
 1. Run `watchlist-review` on the peer set to decide which names deserve active prep.
 2. Run `catalyst-map` to rank the company, macro, and policy events that matter across the peer set.
-3. Run `earnings-preview` on the company and peer group.
-4. Carry forward the event date, key debate, and read-through risk into `market-regime-analysis`.
-5. Use `thesis-validation` to pressure-test the claim, timeframe, and invalidation logic.
-6. Use `risk-reward-sanity-check` once the user commits to an entry, stop, and target.
-7. Run `execution-plan-check` before sizing if the entry depends on breakouts, thin liquidity, or catalyst timing.
-8. Run `portfolio-concentration` before sizing if the user already has related exposure.
-9. Finish with `position-sizing` after the stop is stable.
+3. Run `evidence-gap-check` if the user still has an interesting idea but incomplete preparation.
+4. Run `earnings-preview` on the company and peer group.
+5. Carry forward the event date, key debate, and read-through risk into `market-regime-analysis`.
+6. Use `thesis-validation` to pressure-test the claim, timeframe, and invalidation logic.
+7. Use `risk-reward-sanity-check` once the user commits to an entry, stop, and target.
+8. Run `execution-plan-check` before sizing if the entry depends on breakouts, thin liquidity, or catalyst timing.
+9. Run `portfolio-concentration` before sizing if the user already has related exposure.
+10. Finish with `position-sizing` after the stop is stable.
 
 Good handoff fields:
 
 - event timing
 - catalyst ranking
+- blocking research gaps
 - key debate
 - main invalidation trigger
 - thesis statement
@@ -105,14 +108,16 @@ Good handoff fields:
 
 1. Run `watchlist-review` on the current list.
 2. Run `catalyst-map` on the reduced set if the user still needs one cross-name event map.
-3. Keep only the active-focus names.
-4. Route those names into `earnings-preview`, `macro-event-analysis`, `market-regime-analysis`, or `thesis-validation` depending on what matters most.
+3. Use `evidence-gap-check` when a name is interesting but still under-researched.
+4. Keep only the active-focus names.
+5. Route those names into `earnings-preview`, `macro-event-analysis`, `market-regime-analysis`, or `thesis-validation` depending on what matters most.
 
 Good handoff fields:
 
 - active names
 - why they matter now
 - catalyst map
+- missing evidence
 - names to defer
 - next recommended skill per active name
 

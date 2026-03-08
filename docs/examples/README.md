@@ -5,6 +5,7 @@ These walkthroughs are intentionally short. They show how a user would evaluate 
 - [Position sizing walkthrough](position-sizing-walkthrough.md)
 - [Watchlist review walkthrough](watchlist-review-walkthrough.md)
 - [Catalyst map walkthrough](catalyst-map-walkthrough.md)
+- [Evidence gap check walkthrough](evidence-gap-check-walkthrough.md)
 - [Thesis validation walkthrough](thesis-validation-walkthrough.md)
 - [Execution plan check walkthrough](execution-plan-check-walkthrough.md)
 - [Portfolio concentration walkthrough](portfolio-concentration-walkthrough.md)

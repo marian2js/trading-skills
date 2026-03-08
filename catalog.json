@@ -13,6 +13,12 @@
       "docs_path": "docs/examples/catalyst-map-walkthrough.md"
     },
     {
+      "name": "evidence-gap-check",
+      "path": "skills/evidence-gap-check",
+      "description": "Identify the most important missing facts, assumptions, and unresolved questions that should be answered before a trade or investment idea is trusted, sized, or acted on.",
+      "docs_path": "docs/examples/evidence-gap-check-walkthrough.md"
+    },
+    {
       "name": "thesis-validation",
       "path": "skills/thesis-validation",
       "description": "Pressure-test a trade or investment thesis by clarifying the core claim, evidence, invalidation, timeframe, and dependency chain before the user turns it into an entry, stop, or size.",
