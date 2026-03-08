@@ -10,14 +10,15 @@ Recommended default order:
 
 1. `macro-event-analysis` or `earnings-preview` if event risk is part of the setup
 2. `market-regime-analysis` to classify the broader environment
-3. `risk-reward-sanity-check` to pressure-test the specific trade structure
-4. `position-sizing` once the structure and stop are clear
-5. `post-trade-review` after the trade closes
+3. `thesis-validation` to test whether the claim is clear enough to act on
+4. `risk-reward-sanity-check` to pressure-test the specific trade structure
+5. `position-sizing` once the structure and stop are clear
+6. `post-trade-review` after the trade closes
 
 Practical rule:
 
 - move from broad context to narrow decision
-- do not size first if event risk or structure is still unclear
+- do not size first if event risk, thesis quality, or structure is still unclear
 - do not review outcome before reconstructing the original plan
 
 ## Trade Context schema
@@ -31,6 +32,7 @@ When multiple skills need to share state, prefer a small markdown block like thi
 - direction: long
 - timeframe: swing
 - thesis: AI demand stays strong and gross margins remain resilient
+- invalidation: capex commentary softens and semis leadership breaks
 - entry_idea: buy pullback near 118.50
 - stop_idea: 112.90
 - targets: 124.00, 129.50
@@ -48,14 +50,16 @@ Keep it small. Only carry forward fields that the next skill actually needs.
 
 1. Run `earnings-preview` on the company and peer group.
 2. Carry forward the event date, key debate, and read-through risk into `market-regime-analysis`.
-3. Use `risk-reward-sanity-check` once the user commits to an entry, stop, and target.
-4. Finish with `position-sizing` after the stop is stable.
+3. Use `thesis-validation` to pressure-test the claim, timeframe, and invalidation logic.
+4. Use `risk-reward-sanity-check` once the user commits to an entry, stop, and target.
+5. Finish with `position-sizing` after the stop is stable.
 
 Good handoff fields:
 
 - event timing
 - key debate
 - main invalidation trigger
+- thesis statement
 - entry, stop, targets
 - account risk budget
 
@@ -63,14 +67,16 @@ Good handoff fields:
 
 1. Run `macro-event-analysis` for the next 48 hours to two weeks.
 2. Feed the event clustering and transmission channels into `market-regime-analysis`.
-3. If the user still wants to put on a tactical trade, run `risk-reward-sanity-check`.
-4. Use `position-sizing` only after the event window and stop placement are explicit.
+3. Use `thesis-validation` to test whether the tactical claim still holds under that backdrop.
+4. If the user still wants to put on a tactical trade, run `risk-reward-sanity-check`.
+5. Use `position-sizing` only after the event window and stop placement are explicit.
 
 Good handoff fields:
 
 - prioritized event slate
 - transmission channels
 - heavy or quiet backdrop
+- thesis statement
 - timeframe for the intended trade
 
 ## Workflow 3: Closed trade learning loop

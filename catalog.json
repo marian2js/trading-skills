@@ -1,6 +1,12 @@
 {
   "skills": [
     {
+      "name": "thesis-validation",
+      "path": "skills/thesis-validation",
+      "description": "Pressure-test a trade or investment thesis by clarifying the core claim, evidence, invalidation, timeframe, and dependency chain before the user turns it into an entry, stop, or size.",
+      "docs_path": "docs/examples/thesis-validation-walkthrough.md"
+    },
+    {
       "name": "position-sizing",
       "path": "skills/position-sizing",
       "description": "Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade.",

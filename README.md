@@ -57,6 +57,7 @@ npx skills add marian2js/trading-skills@earnings-preview
 
 Use the static skills immediately:
 
+- `thesis-validation`
 - `position-sizing`
 - `risk-reward-sanity-check`
 - `post-trade-review`
@@ -76,6 +77,7 @@ Example walkthroughs for evaluating the current skills live in [docs/examples/](
 Example prompts after installation:
 
 - "Use `position-sizing` for a $125,000 account risking 0.5% with entry 412.30 and stop 406.80."
+- "Use `thesis-validation` on my semis swing thesis and tell me what evidence is real, what is assumption, and what would invalidate it."
 - "Use `risk-reward-sanity-check` on a swing long with entry 58.20, stop 55.90, and target 65.50."
 - "Use `macro-event-analysis` to summarize macro event risk for the next 48 hours."
 - "Use `earnings-preview` for NVDA, AMD, and the semiconductor group heading into the next earnings-heavy week."
@@ -115,6 +117,7 @@ The current library stays intentionally small and capability-first:
 <!-- SKILL_INDEX_START -->
 | Skill | Summary | Guide |
 | --- | --- | --- |
+| `thesis-validation` | Pressure-test a trade or investment thesis by clarifying the core claim, evidence, invalidation, timeframe, and dependency chain before the user turns it into an entry, stop, or size. | [guide](docs/examples/thesis-validation-walkthrough.md) |
 | `position-sizing` | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. | [guide](docs/examples/position-sizing-walkthrough.md) |
 | `risk-reward-sanity-check` | Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed. | [guide](docs/examples/risk-reward-sanity-check-walkthrough.md) |
 | `post-trade-review` | Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater. | [guide](docs/examples/post-trade-review-walkthrough.md) |
@@ -169,6 +172,7 @@ Recommended composition:
 
 - use `macro-event-analysis` or `earnings-preview` to frame event risk
 - use `market-regime-analysis` to classify the broader environment
+- use `thesis-validation` to pressure-test the claim before turning it into structure
 - use `risk-reward-sanity-check` to pressure-test structure
 - use `position-sizing` only after the stop is stable
 - use `post-trade-review` after the trade closes
@@ -223,6 +227,6 @@ The current checks cover:
 
 - Add better cross-asset examples for equities, futures, and FX risk workflows
 - Expand provider coverage for `macro-event-analysis` and `earnings-preview`
-- Add more `data-optional` skills such as watchlist review and catalyst maps
+- Add more `data-optional` skills such as watchlist review and catalyst-map
 - Add packaging and release metadata for one-step installation across more skill marketplaces
 - Keep the skill folders lean while expanding the capability set
