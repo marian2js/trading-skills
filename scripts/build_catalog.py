@@ -15,7 +15,7 @@ README_PATH = REPO_ROOT / "README.md"
 README_START = "<!-- SKILL_INDEX_START -->"
 README_END = "<!-- SKILL_INDEX_END -->"
 
-SKILL_ORDER = [
+SKILL_PATH_ORDER = [
     "pre-trade-check",
     "earnings-trade-prep",
     "portfolio-risk-review",
@@ -34,6 +34,7 @@ SKILL_ORDER = [
     "macro-event-analysis",
     "earnings-preview",
     "market-regime-analysis",
+    "live-trade/etoro",
 ]
 
 SKILL_DOC_MAP = {
@@ -78,30 +79,34 @@ def parse_frontmatter(path: Path) -> dict[str, str]:
     return data
 
 
-def collect_catalog(repo_root: Path = REPO_ROOT) -> dict:
+def list_skill_dirs(repo_root: Path = REPO_ROOT) -> list[Path]:
     skills_dir = repo_root / "skills"
+    skill_dirs: list[Path] = []
+
+    for relative_path in SKILL_PATH_ORDER:
+        skill_dir = skills_dir / relative_path
+        if not skill_dir.exists():
+            raise ValueError(f"{skill_dir}: listed skill directory is missing")
+        if not skill_dir.is_dir():
+            raise ValueError(f"{skill_dir}: listed skill path is not a directory")
+        skill_dirs.append(skill_dir)
+
+    return skill_dirs
+
+
+def collect_catalog(repo_root: Path = REPO_ROOT) -> dict:
     records = []
 
-    for skill_dir in sorted(
-        path for path in skills_dir.iterdir() if path.is_dir() and not path.name.startswith("_")
-    ):
+    for skill_dir in list_skill_dirs(repo_root):
         frontmatter = parse_frontmatter(skill_dir / "SKILL.md")
         record = {
             "name": frontmatter["name"],
-            "path": f"skills/{skill_dir.name}",
+            "path": skill_dir.relative_to(repo_root).as_posix(),
             "description": frontmatter["description"],
-            "docs_path": SKILL_DOC_MAP.get(skill_dir.name),
+            "docs_path": SKILL_DOC_MAP.get(frontmatter["name"]),
         }
         records.append(record)
 
-    records.sort(
-        key=lambda record: (
-            SKILL_ORDER.index(record["name"])
-            if record["name"] in SKILL_ORDER
-            else len(SKILL_ORDER),
-            record["name"],
-        )
-    )
     return {"skills": records}
 
 

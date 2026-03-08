@@ -7,7 +7,7 @@
 
 The goal is not to generate magic signals. The goal is to improve decision quality, risk management, execution planning, and review discipline with transparent, auditable workflows.
 
-Broker integrations are explicitly out of scope for v1. This repo does not ship order execution, portfolio syncing, account management, or brokerage adapters.
+The core library is analysis-first. Optional live-trade integrations can sit alongside it as separate, provider-specific skills without changing the default analytical workflows.
 
 ## Why this repo exists
 
@@ -83,6 +83,10 @@ Only if critical information is missing should these skills consult optional pro
 
 See [docs/optional-provider-support.md](docs/optional-provider-support.md) for the provider fallback pattern.
 
+Optional live-trade integrations:
+
+- `etoro`
+
 Example walkthroughs for evaluating the current skills live in [docs/examples/](docs/examples/).
 
 Example prompts after installation:
@@ -157,17 +161,15 @@ The current library stays intentionally small and capability-first:
 | `macro-event-analysis` | Prepare for upcoming macro catalysts by identifying the events that matter, mapping the likely transmission channels, and surfacing timing risk for the user's markets or positions. | [guide](docs/examples/macro-event-analysis-example-mode.md) |
 | `earnings-preview` | Prepare for an upcoming earnings report or earnings week by identifying the reports that matter, framing the key debates, and surfacing the read-through risk that could affect the user's watchlist or positions. | [guide](docs/examples/earnings-preview-live-mode.md) |
 | `market-regime-analysis` | Analyze current market context through trend, volatility, breadth, and event backdrop so the user can choose tactics that fit the environment without relying on black-box regime claims. | [guide](docs/examples/market-regime-analysis-walkthrough.md) |
+| `etoro` | Enables agents to interact with the eToro API to access market data, portfolio and social features, and execute trades programmatically. | - |
 
 <!-- SKILL_INDEX_END -->
 
 ## What v1 does not include
 
-- broker-required skills
-- order execution
-- portfolio syncing
-- trade placement
-- account management
-- provider-specific public skill packages
+- automatic portfolio syncing
+- account management or custody operations
+- mandatory broker coupling for the core analytical skills
 
 ## Repository layout
 
@@ -182,7 +184,7 @@ trading-skills/
   skills/
 ```
 
-Each public skill lives in `skills/<capability>/` and centers around a `SKILL.md` file. Long notes, methodology, assets, and provider references stay in adjacent folders so the skill body stays readable.
+Each public skill lives somewhere under `skills/` and centers around a `SKILL.md` file. Capability folders can be top-level or grouped under a category such as `skills/live-trade/etoro/`. Long notes, methodology, assets, and provider references stay in adjacent folders so the skill body stays readable.
 
 ## Architecture in one page
 

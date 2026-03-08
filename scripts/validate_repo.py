@@ -9,7 +9,13 @@ import subprocess
 import sys
 from pathlib import Path
 
-from build_catalog import collect_catalog, parse_frontmatter, update_readme, render_skill_index
+from build_catalog import (
+    collect_catalog,
+    list_skill_dirs,
+    parse_frontmatter,
+    render_skill_index,
+    update_readme,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SKILLS_DIR = REPO_ROOT / "skills"
@@ -20,7 +26,7 @@ CHANGELOG_PATH = REPO_ROOT / "CHANGELOG.md"
 
 GENERIC_DESCRIPTION_FRAGMENTS = {"skill description", "todo", "placeholder", "tbd", "generic"}
 FRONTMATTER_REQUIRED = {"name", "description"}
-FRONTMATTER_ALLOWED = {"name", "description"}
+FRONTMATTER_ALLOWED = {"name", "description", "version", "homepage", "metadata"}
 DATA_AWARE_SKILLS = {"macro-event-analysis", "earnings-preview", "market-regime-analysis"}
 
 FORBIDDEN_TRACKED_PATTERNS = (
@@ -78,9 +84,13 @@ def validate_skill_structure(errors: list[str]) -> None:
         errors.append(f"{SKILLS_DIR}: skills directory is missing")
         return
 
-    for skill_dir in sorted(
-        path for path in SKILLS_DIR.iterdir() if path.is_dir() and not path.name.startswith("_")
-    ):
+    try:
+        skill_dirs = list_skill_dirs(REPO_ROOT)
+    except ValueError as exc:
+        errors.append(str(exc))
+        return
+
+    for skill_dir in skill_dirs:
         skill_md = skill_dir / "SKILL.md"
         if not skill_md.exists():
             errors.append(f"{skill_dir}: missing SKILL.md")

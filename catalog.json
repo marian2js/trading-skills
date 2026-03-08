@@ -107,6 +107,12 @@
       "path": "skills/market-regime-analysis",
       "description": "Analyze current market context through trend, volatility, breadth, and event backdrop so the user can choose tactics that fit the environment without relying on black-box regime claims.",
       "docs_path": "docs/examples/market-regime-analysis-walkthrough.md"
+    },
+    {
+      "name": "etoro",
+      "path": "skills/live-trade/etoro",
+      "description": "Enables agents to interact with the eToro API to access market data, portfolio and social features, and execute trades programmatically.",
+      "docs_path": null
     }
   ]
 }

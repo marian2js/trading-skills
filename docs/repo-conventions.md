@@ -7,7 +7,7 @@ Most skills in this repo should keep frontmatter minimal:
 - `name`
 - `description`
 
-Add more metadata only when it has a clear current job in the repo. Do not add fields for speculative taxonomy work.
+Add more metadata only when it has a clear current job in the repo. Do not add fields for speculative taxonomy work. Imported third-party skills may keep a small amount of extra metadata when preserving compatibility is more valuable than reformatting them.
 
 ## Naming conventions
 

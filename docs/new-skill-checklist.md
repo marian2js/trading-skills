@@ -10,7 +10,7 @@ Use this checklist before opening a pull request for a new skill or a major skil
 
 ## Skill quality
 
-- `SKILL.md` frontmatter stays minimal and matches the directory name.
+- `SKILL.md` frontmatter matches the directory name. Keep it minimal unless an imported skill needs extra metadata that is worth preserving.
 - The description explains what the skill does and when to use it.
 - The skill clearly states helpful inputs.
 - The skill clearly states what it returns.

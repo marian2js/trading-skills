@@ -7,7 +7,7 @@
 A portable skill in this repo means:
 
 - a public `SKILL.md` entrypoint
-- minimal frontmatter, usually just `name` and `description`
+- minimal frontmatter, usually just `name` and `description`, unless an imported skill needs a small amount of compatibility metadata
 - supporting references and assets kept inside the skill directory
 - no requirement that users understand provider internals to use the capability
 
@@ -22,7 +22,7 @@ skills/<skill-name>/
   assets/
 ```
 
-Not every skill needs every subdirectory, but `SKILL.md` is required.
+Grouped skills may also live under a namespace such as `skills/live-trade/<skill-name>/`. Not every skill needs every subdirectory, but `SKILL.md` is required.
 
 ## Installing a single skill
 
