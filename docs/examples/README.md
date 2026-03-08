@@ -6,6 +6,7 @@ These walkthroughs are intentionally short. They show how a user would evaluate 
 - [Pre trade check walkthrough](pre-trade-check-walkthrough.md)
 - [Earnings trade prep walkthrough](earnings-trade-prep-walkthrough.md)
 - [Portfolio risk review walkthrough](portfolio-risk-review-walkthrough.md)
+- [Post trade debrief walkthrough](post-trade-debrief-walkthrough.md)
 - [Position management walkthrough](position-management-walkthrough.md)
 - [Journal pattern analyzer walkthrough](journal-pattern-analyzer-walkthrough.md)
 - [Watchlist review walkthrough](watchlist-review-walkthrough.md)
