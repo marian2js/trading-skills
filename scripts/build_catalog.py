@@ -18,6 +18,7 @@ README_END = "<!-- SKILL_INDEX_END -->"
 SKILL_ORDER = [
     "pre-trade-check",
     "earnings-trade-prep",
+    "portfolio-risk-review",
     "watchlist-review",
     "catalyst-map",
     "evidence-gap-check",
@@ -37,6 +38,7 @@ SKILL_ORDER = [
 SKILL_DOC_MAP = {
     "pre-trade-check": "docs/examples/pre-trade-check-walkthrough.md",
     "earnings-trade-prep": "docs/examples/earnings-trade-prep-walkthrough.md",
+    "portfolio-risk-review": "docs/examples/portfolio-risk-review-walkthrough.md",
     "watchlist-review": "docs/examples/watchlist-review-walkthrough.md",
     "catalyst-map": "docs/examples/catalyst-map-walkthrough.md",
     "evidence-gap-check": "docs/examples/evidence-gap-check-walkthrough.md",

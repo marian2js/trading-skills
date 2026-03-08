@@ -13,6 +13,12 @@
       "docs_path": "docs/examples/earnings-trade-prep-walkthrough.md"
     },
     {
+      "name": "portfolio-risk-review",
+      "path": "skills/portfolio-risk-review",
+      "description": "Orchestrate a whole-book risk review by checking concentration, correlated exposure, catalyst clustering, market-context sensitivity, and live-position fragility before the user adds, holds, or reduces portfolio risk.",
+      "docs_path": "docs/examples/portfolio-risk-review-walkthrough.md"
+    },
+    {
       "name": "watchlist-review",
       "path": "skills/watchlist-review",
       "description": "Review a watchlist and rank which names deserve active attention, background monitoring, or removal based on catalysts, tradability, redundancy, and evidence quality for the user's style and timeframe.",
