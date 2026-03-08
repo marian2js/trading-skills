@@ -3,6 +3,7 @@
 These walkthroughs are intentionally short. They show how a user would evaluate the current library without inspecting provider internals or reading source code first.
 
 - [Position sizing walkthrough](position-sizing-walkthrough.md)
+- [Pre trade check walkthrough](pre-trade-check-walkthrough.md)
 - [Position management walkthrough](position-management-walkthrough.md)
 - [Journal pattern analyzer walkthrough](journal-pattern-analyzer-walkthrough.md)
 - [Watchlist review walkthrough](watchlist-review-walkthrough.md)

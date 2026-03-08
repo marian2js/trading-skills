@@ -1,6 +1,12 @@
 {
   "skills": [
     {
+      "name": "pre-trade-check",
+      "path": "skills/pre-trade-check",
+      "description": "Orchestrate a disciplined pre-trade workflow by routing a watchlist or trade idea through the minimum set of underlying skills needed to decide whether the trade is ready, not ready, or should be resized or reworked first.",
+      "docs_path": "docs/examples/pre-trade-check-walkthrough.md"
+    },
+    {
       "name": "watchlist-review",
       "path": "skills/watchlist-review",
       "description": "Review a watchlist and rank which names deserve active attention, background monitoring, or removal based on catalysts, tradability, redundancy, and evidence quality for the user's style and timeframe.",
