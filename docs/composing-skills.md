@@ -20,6 +20,7 @@ Recommended default order:
 10. `position-sizing` once the structure, execution, concentration, and stop are clear
 11. `position-management` while the trade is open
 12. `post-trade-review` after the trade closes
+13. `journal-pattern-analyzer` when enough completed trades exist to review a real sample
 
 Practical rule:
 
@@ -128,6 +129,7 @@ Good handoff fields:
 1. Carry the original plan into `post-trade-review`.
 2. If the review identifies poor structure, run `risk-reward-sanity-check` on the original setup.
 3. If the review identifies oversizing, use `position-sizing` to show what the size should have been.
+4. If a batch of reviews now exists, run `journal-pattern-analyzer` across them.
 
 Good handoff fields:
 
@@ -135,6 +137,19 @@ Good handoff fields:
 - planned and actual entry, stop, target, size
 - rule violation summary
 - one process change to test next time
+
+## Workflow 5: Batch learning loop
+
+1. Gather a journal sample or batch of closed trades.
+2. Run `journal-pattern-analyzer` to find repeatable strengths and mistakes.
+3. Feed the strongest mistake pattern back into future pre-trade and live-trade rules.
+
+Good handoff fields:
+
+- repeated mistake type
+- repeated strength
+- environment or setup cluster
+- one or two process changes to test next
 
 ## Workflow 4: Open position under pressure
 

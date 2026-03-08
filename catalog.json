@@ -31,6 +31,12 @@
       "docs_path": "docs/examples/position-management-walkthrough.md"
     },
     {
+      "name": "journal-pattern-analyzer",
+      "path": "skills/journal-pattern-analyzer",
+      "description": "Analyze a trade journal or trade log to find repeated strengths, mistakes, environment-dependent patterns, and process changes that could improve future decisions without turning the review into hindsight theater.",
+      "docs_path": "docs/examples/journal-pattern-analyzer-walkthrough.md"
+    },
+    {
       "name": "execution-plan-check",
       "path": "skills/execution-plan-check",
       "description": "Review whether a trade plan is operationally executable by checking order type logic, liquidity and spread risk, event timing, stop realism, and whether the user can actually implement the plan cleanly.",

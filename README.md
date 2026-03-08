@@ -62,6 +62,7 @@ Use the static skills immediately:
 - `evidence-gap-check`
 - `thesis-validation`
 - `position-management`
+- `journal-pattern-analyzer`
 - `execution-plan-check`
 - `portfolio-concentration`
 - `position-sizing`
@@ -88,6 +89,7 @@ Example prompts after installation:
 - "Use `evidence-gap-check` on this swing idea and tell me what I still need to know before it deserves deeper work."
 - "Use `thesis-validation` on my semis swing thesis and tell me what evidence is real, what is assumption, and what would invalidate it."
 - "Use `position-management` on this open long and tell me whether to hold, trim, tighten risk, or exit."
+- "Use `journal-pattern-analyzer` on my last 25 trades and tell me what mistake keeps repeating."
 - "Use `execution-plan-check` on my plan to buy a niche ETF at the open and tell me whether the order logic is actually executable."
 - "Use `portfolio-concentration` on my book before I add to NVDA and tell me if I already have too much semis overlap."
 - "Use `risk-reward-sanity-check` on a swing long with entry 58.20, stop 55.90, and target 65.50."
@@ -134,6 +136,7 @@ The current library stays intentionally small and capability-first:
 | `evidence-gap-check` | Identify the most important missing facts, assumptions, and unresolved questions that should be answered before a trade or investment idea is trusted, sized, or acted on. | [guide](docs/examples/evidence-gap-check-walkthrough.md) |
 | `thesis-validation` | Pressure-test a trade or investment thesis by clarifying the core claim, evidence, invalidation, timeframe, and dependency chain before the user turns it into an entry, stop, or size. | [guide](docs/examples/thesis-validation-walkthrough.md) |
 | `position-management` | Review an open position and decide whether to hold, trim, tighten risk, close, or wait by comparing current behavior against the original thesis, invalidation logic, catalyst calendar, and execution constraints. | [guide](docs/examples/position-management-walkthrough.md) |
+| `journal-pattern-analyzer` | Analyze a trade journal or trade log to find repeated strengths, mistakes, environment-dependent patterns, and process changes that could improve future decisions without turning the review into hindsight theater. | [guide](docs/examples/journal-pattern-analyzer-walkthrough.md) |
 | `execution-plan-check` | Review whether a trade plan is operationally executable by checking order type logic, liquidity and spread risk, event timing, stop realism, and whether the user can actually implement the plan cleanly. | [guide](docs/examples/execution-plan-check-walkthrough.md) |
 | `portfolio-concentration` | Evaluate whether a portfolio, account, or planned position is too dependent on a small number of issuers, sectors, themes, or correlated exposures before the user adds or holds more risk. | [guide](docs/examples/portfolio-concentration-walkthrough.md) |
 | `position-sizing` | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. | [guide](docs/examples/position-sizing-walkthrough.md) |
@@ -199,6 +202,7 @@ Recommended composition:
 - use `portfolio-concentration` before final sizing if portfolio fit could block the trade
 - use `position-sizing` only after the stop is stable
 - use `position-management` while the trade is open
+- use `journal-pattern-analyzer` to review a batch of trades for repeatable patterns
 - use `post-trade-review` after the trade closes
 
 See [docs/composing-skills.md](docs/composing-skills.md) for the shared Trade Context schema and realistic chaining examples.
@@ -251,6 +255,6 @@ The current checks cover:
 
 - Add better cross-asset examples for equities, futures, and FX risk workflows
 - Expand provider coverage for `macro-event-analysis` and `earnings-preview`
-- Add more `data-optional` skills such as workflow wrappers and journal-pattern-analyzer
+- Add more `data-optional` skills such as workflow wrappers
 - Add packaging and release metadata for one-step installation across more skill marketplaces
 - Keep the skill folders lean while expanding the capability set
