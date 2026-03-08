@@ -5,7 +5,7 @@ These skills are designed to work well alone, but they become more useful when a
 Use two layers deliberately:
 
 - atomic skills: reusable capabilities such as `thesis-validation`, `execution-plan-check`, or `position-sizing`
-- workflow skills: wrappers such as `pre-trade-check` that route the user through the smallest useful chain
+- workflow skills: wrappers such as `pre-trade-check` or `earnings-trade-prep` that route the user through the smallest useful chain
 
 ## Recommended chaining order
 
@@ -14,19 +14,20 @@ Use the shortest chain that answers the user's actual problem.
 Recommended default order:
 
 1. `pre-trade-check` if the user wants one readiness verdict instead of manual routing
-2. `watchlist-review` if the user starts with several names and needs triage first
-3. `catalyst-map` if the user needs one ranked event map across several names or exposures
-4. `evidence-gap-check` if the idea is promising but the missing information is not yet prioritized
-5. `macro-event-analysis` or `earnings-preview` if event risk is part of the setup
-6. `market-regime-analysis` to classify the broader environment
-7. `thesis-validation` to test whether the claim is clear enough to act on
-8. `risk-reward-sanity-check` to pressure-test the specific trade structure
-9. `execution-plan-check` to confirm the order logic and stop behavior are operationally realistic
-10. `portfolio-concentration` to confirm the portfolio can absorb the idea without hidden overlap
-11. `position-sizing` once the structure, execution, concentration, and stop are clear
-12. `position-management` while the trade is open
-13. `post-trade-review` after the trade closes
-14. `journal-pattern-analyzer` when enough completed trades exist to review a real sample
+2. `earnings-trade-prep` if the main decision is whether to prep, trade, or hold through an upcoming report
+3. `watchlist-review` if the user starts with several names and needs triage first
+4. `catalyst-map` if the user needs one ranked event map across several names or exposures
+5. `evidence-gap-check` if the idea is promising but the missing information is not yet prioritized
+6. `macro-event-analysis` or `earnings-preview` if event risk is part of the setup
+7. `market-regime-analysis` to classify the broader environment
+8. `thesis-validation` to test whether the claim is clear enough to act on
+9. `risk-reward-sanity-check` to pressure-test the specific trade structure
+10. `execution-plan-check` to confirm the order logic and stop behavior are operationally realistic
+11. `portfolio-concentration` to confirm the portfolio can absorb the idea without hidden overlap
+12. `position-sizing` once the structure, execution, concentration, and stop are clear
+13. `position-management` while the trade is open
+14. `post-trade-review` after the trade closes
+15. `journal-pattern-analyzer` when enough completed trades exist to review a real sample
 
 Practical rule:
 
@@ -140,6 +141,20 @@ Good handoff fields:
 
 - checks run
 - blocking issue
+- updated trade context
+- next recommended skill or action
+
+## Workflow -2: Earnings-event gate
+
+1. Run `earnings-trade-prep`.
+2. Let it choose the minimum useful earnings-related chain.
+3. Stop when the hold-through or event-trade logic fails, or continue until the event decision is defensible.
+
+Good handoff fields:
+
+- key debate
+- hold-through decision
+- checks run
 - updated trade context
 - next recommended skill or action
 

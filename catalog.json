@@ -7,6 +7,12 @@
       "docs_path": "docs/examples/pre-trade-check-walkthrough.md"
     },
     {
+      "name": "earnings-trade-prep",
+      "path": "skills/earnings-trade-prep",
+      "description": "Orchestrate a disciplined earnings-event workflow by deciding which names deserve prep, mapping the key debates and read-through paths, pressure-testing the thesis and structure, and ending with a clear pre-earnings hold, avoid, or trade decision.",
+      "docs_path": "docs/examples/earnings-trade-prep-walkthrough.md"
+    },
+    {
       "name": "watchlist-review",
       "path": "skills/watchlist-review",
       "description": "Review a watchlist and rank which names deserve active attention, background monitoring, or removal based on catalysts, tradability, redundancy, and evidence quality for the user's style and timeframe.",

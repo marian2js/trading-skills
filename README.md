@@ -58,6 +58,7 @@ npx skills add marian2js/trading-skills@earnings-preview
 Use the static skills immediately:
 
 - `pre-trade-check`
+- `earnings-trade-prep`
 - `watchlist-review`
 - `catalyst-map`
 - `evidence-gap-check`
@@ -86,6 +87,7 @@ Example prompts after installation:
 
 - "Use `position-sizing` for a $125,000 account risking 0.5% with entry 412.30 and stop 406.80."
 - "Use `pre-trade-check` on this swing idea and tell me if it is actually ready."
+- "Use `earnings-trade-prep` on NVDA for next week and tell me whether this is prep-only, pre-event tradeable, or a hold-through candidate."
 - "Use `watchlist-review` on these semis for next week and tell me which names actually deserve active attention."
 - "Use `catalyst-map` on my semis watchlist for the next three weeks and show me which events actually matter."
 - "Use `evidence-gap-check` on this swing idea and tell me what I still need to know before it deserves deeper work."
@@ -134,6 +136,7 @@ The current library stays intentionally small and capability-first:
 | Skill | Summary | Guide |
 | --- | --- | --- |
 | `pre-trade-check` | Orchestrate a disciplined pre-trade workflow by routing a watchlist or trade idea through the minimum set of underlying skills needed to decide whether the trade is ready, not ready, or should be resized or reworked first. | [guide](docs/examples/pre-trade-check-walkthrough.md) |
+| `earnings-trade-prep` | Orchestrate a disciplined earnings-event workflow by deciding which names deserve prep, mapping the key debates and read-through paths, pressure-testing the thesis and structure, and ending with a clear pre-earnings hold, avoid, or trade decision. | [guide](docs/examples/earnings-trade-prep-walkthrough.md) |
 | `watchlist-review` | Review a watchlist and rank which names deserve active attention, background monitoring, or removal based on catalysts, tradability, redundancy, and evidence quality for the user's style and timeframe. | [guide](docs/examples/watchlist-review-walkthrough.md) |
 | `catalyst-map` | Build a ranked map of the catalysts that could move a watchlist, theme, or portfolio by showing what matters, when it matters, and how those events could transmit across related names or exposures. | [guide](docs/examples/catalyst-map-walkthrough.md) |
 | `evidence-gap-check` | Identify the most important missing facts, assumptions, and unresolved questions that should be answered before a trade or investment idea is trusted, sized, or acted on. | [guide](docs/examples/evidence-gap-check-walkthrough.md) |
@@ -200,6 +203,7 @@ For agent systems, the cleanest pattern is:
 Recommended composition:
 
 - use `pre-trade-check` when the user wants one readiness verdict instead of manually running each check
+- use `earnings-trade-prep` when the main question is how to prepare for or trade around an upcoming report
 - use `watchlist-review` when the user starts with too many names and needs triage first
 - use `catalyst-map` when the user needs one event map across names, sectors, or themes
 - use `evidence-gap-check` when the idea is interesting but the missing information is not yet prioritized
