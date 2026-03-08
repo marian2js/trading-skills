@@ -17,6 +17,7 @@ README_END = "<!-- SKILL_INDEX_END -->"
 
 SKILL_ORDER = [
     "thesis-validation",
+    "execution-plan-check",
     "portfolio-concentration",
     "position-sizing",
     "risk-reward-sanity-check",
@@ -28,6 +29,7 @@ SKILL_ORDER = [
 
 SKILL_DOC_MAP = {
     "thesis-validation": "docs/examples/thesis-validation-walkthrough.md",
+    "execution-plan-check": "docs/examples/execution-plan-check-walkthrough.md",
     "portfolio-concentration": "docs/examples/portfolio-concentration-walkthrough.md",
     "position-sizing": "docs/examples/position-sizing-walkthrough.md",
     "risk-reward-sanity-check": "docs/examples/risk-reward-sanity-check-walkthrough.md",

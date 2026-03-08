@@ -12,14 +12,16 @@ Recommended default order:
 2. `market-regime-analysis` to classify the broader environment
 3. `thesis-validation` to test whether the claim is clear enough to act on
 4. `risk-reward-sanity-check` to pressure-test the specific trade structure
-5. `portfolio-concentration` to confirm the portfolio can absorb the idea without hidden overlap
-6. `position-sizing` once the structure, concentration, and stop are clear
-7. `post-trade-review` after the trade closes
+5. `execution-plan-check` to confirm the order logic and stop behavior are operationally realistic
+6. `portfolio-concentration` to confirm the portfolio can absorb the idea without hidden overlap
+7. `position-sizing` once the structure, execution, concentration, and stop are clear
+8. `post-trade-review` after the trade closes
 
 Practical rule:
 
 - move from broad context to narrow decision
 - do not size first if event risk, thesis quality, or structure is still unclear
+- do not size first if the order plan is not operationally realistic
 - do not size first if the portfolio fit is still unclear
 - do not review outcome before reconstructing the original plan
 
@@ -36,6 +38,7 @@ When multiple skills need to share state, prefer a small markdown block like thi
 - thesis: AI demand stays strong and gross margins remain resilient
 - invalidation: capex commentary softens and semis leadership breaks
 - entry_idea: buy pullback near 118.50
+- execution_notes: regular-hours only, limit order near support
 - stop_idea: 112.90
 - targets: 124.00, 129.50
 - event_risk: NVDA earnings next Wednesday after the close
@@ -55,8 +58,9 @@ Keep it small. Only carry forward fields that the next skill actually needs.
 2. Carry forward the event date, key debate, and read-through risk into `market-regime-analysis`.
 3. Use `thesis-validation` to pressure-test the claim, timeframe, and invalidation logic.
 4. Use `risk-reward-sanity-check` once the user commits to an entry, stop, and target.
-5. Run `portfolio-concentration` before sizing if the user already has related exposure.
-6. Finish with `position-sizing` after the stop is stable.
+5. Run `execution-plan-check` before sizing if the entry depends on breakouts, thin liquidity, or catalyst timing.
+6. Run `portfolio-concentration` before sizing if the user already has related exposure.
+7. Finish with `position-sizing` after the stop is stable.
 
 Good handoff fields:
 
@@ -65,6 +69,7 @@ Good handoff fields:
 - main invalidation trigger
 - thesis statement
 - entry, stop, targets
+- order logic
 - existing related exposure
 - account risk budget
 
@@ -74,8 +79,9 @@ Good handoff fields:
 2. Feed the event clustering and transmission channels into `market-regime-analysis`.
 3. Use `thesis-validation` to test whether the tactical claim still holds under that backdrop.
 4. If the user still wants to put on a tactical trade, run `risk-reward-sanity-check`.
-5. Use `portfolio-concentration` if the trade overlaps existing sector, factor, or macro exposure.
-6. Use `position-sizing` only after the event window and stop placement are explicit.
+5. Use `execution-plan-check` if the trade depends on open, close, or release-window execution.
+6. Use `portfolio-concentration` if the trade overlaps existing sector, factor, or macro exposure.
+7. Use `position-sizing` only after the event window and stop placement are explicit.
 
 Good handoff fields:
 
@@ -83,6 +89,7 @@ Good handoff fields:
 - transmission channels
 - heavy or quiet backdrop
 - thesis statement
+- order timing
 - related existing exposure
 - timeframe for the intended trade
 
