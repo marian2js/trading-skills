@@ -16,6 +16,7 @@ README_START = "<!-- SKILL_INDEX_START -->"
 README_END = "<!-- SKILL_INDEX_END -->"
 
 SKILL_ORDER = [
+    "watchlist-review",
     "thesis-validation",
     "execution-plan-check",
     "portfolio-concentration",
@@ -28,6 +29,7 @@ SKILL_ORDER = [
 ]
 
 SKILL_DOC_MAP = {
+    "watchlist-review": "docs/examples/watchlist-review-walkthrough.md",
     "thesis-validation": "docs/examples/thesis-validation-walkthrough.md",
     "execution-plan-check": "docs/examples/execution-plan-check-walkthrough.md",
     "portfolio-concentration": "docs/examples/portfolio-concentration-walkthrough.md",

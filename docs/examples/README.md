@@ -3,6 +3,7 @@
 These walkthroughs are intentionally short. They show how a user would evaluate the current library without inspecting provider internals or reading source code first.
 
 - [Position sizing walkthrough](position-sizing-walkthrough.md)
+- [Watchlist review walkthrough](watchlist-review-walkthrough.md)
 - [Thesis validation walkthrough](thesis-validation-walkthrough.md)
 - [Execution plan check walkthrough](execution-plan-check-walkthrough.md)
 - [Portfolio concentration walkthrough](portfolio-concentration-walkthrough.md)

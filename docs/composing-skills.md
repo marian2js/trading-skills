@@ -8,18 +8,20 @@ Use the shortest chain that answers the user's actual problem.
 
 Recommended default order:
 
-1. `macro-event-analysis` or `earnings-preview` if event risk is part of the setup
-2. `market-regime-analysis` to classify the broader environment
-3. `thesis-validation` to test whether the claim is clear enough to act on
-4. `risk-reward-sanity-check` to pressure-test the specific trade structure
-5. `execution-plan-check` to confirm the order logic and stop behavior are operationally realistic
-6. `portfolio-concentration` to confirm the portfolio can absorb the idea without hidden overlap
-7. `position-sizing` once the structure, execution, concentration, and stop are clear
-8. `post-trade-review` after the trade closes
+1. `watchlist-review` if the user starts with several names and needs triage first
+2. `macro-event-analysis` or `earnings-preview` if event risk is part of the setup
+3. `market-regime-analysis` to classify the broader environment
+4. `thesis-validation` to test whether the claim is clear enough to act on
+5. `risk-reward-sanity-check` to pressure-test the specific trade structure
+6. `execution-plan-check` to confirm the order logic and stop behavior are operationally realistic
+7. `portfolio-concentration` to confirm the portfolio can absorb the idea without hidden overlap
+8. `position-sizing` once the structure, execution, concentration, and stop are clear
+9. `post-trade-review` after the trade closes
 
 Practical rule:
 
 - move from broad context to narrow decision
+- cut the list before doing deep work on every name
 - do not size first if event risk, thesis quality, or structure is still unclear
 - do not size first if the order plan is not operationally realistic
 - do not size first if the portfolio fit is still unclear
@@ -33,6 +35,7 @@ When multiple skills need to share state, prefer a small markdown block like thi
 ## Trade Context
 
 - instrument: NVDA
+- watchlist_focus: semis leadership names
 - direction: long
 - timeframe: swing
 - thesis: AI demand stays strong and gross margins remain resilient
@@ -54,13 +57,14 @@ Keep it small. Only carry forward fields that the next skill actually needs.
 
 ## Workflow 1: Event-heavy swing trade
 
-1. Run `earnings-preview` on the company and peer group.
-2. Carry forward the event date, key debate, and read-through risk into `market-regime-analysis`.
-3. Use `thesis-validation` to pressure-test the claim, timeframe, and invalidation logic.
-4. Use `risk-reward-sanity-check` once the user commits to an entry, stop, and target.
-5. Run `execution-plan-check` before sizing if the entry depends on breakouts, thin liquidity, or catalyst timing.
-6. Run `portfolio-concentration` before sizing if the user already has related exposure.
-7. Finish with `position-sizing` after the stop is stable.
+1. Run `watchlist-review` on the peer set to decide which names deserve active prep.
+2. Run `earnings-preview` on the company and peer group.
+3. Carry forward the event date, key debate, and read-through risk into `market-regime-analysis`.
+4. Use `thesis-validation` to pressure-test the claim, timeframe, and invalidation logic.
+5. Use `risk-reward-sanity-check` once the user commits to an entry, stop, and target.
+6. Run `execution-plan-check` before sizing if the entry depends on breakouts, thin liquidity, or catalyst timing.
+7. Run `portfolio-concentration` before sizing if the user already has related exposure.
+8. Finish with `position-sizing` after the stop is stable.
 
 Good handoff fields:
 
@@ -68,6 +72,7 @@ Good handoff fields:
 - key debate
 - main invalidation trigger
 - thesis statement
+- watchlist priority
 - entry, stop, targets
 - order logic
 - existing related exposure
@@ -92,6 +97,19 @@ Good handoff fields:
 - order timing
 - related existing exposure
 - timeframe for the intended trade
+
+## Workflow 0: Too many names, not enough attention
+
+1. Run `watchlist-review` on the current list.
+2. Keep only the active-focus names.
+3. Route those names into `earnings-preview`, `macro-event-analysis`, `market-regime-analysis`, or `thesis-validation` depending on what matters most.
+
+Good handoff fields:
+
+- active names
+- why they matter now
+- names to defer
+- next recommended skill per active name
 
 ## Workflow 3: Closed trade learning loop
 

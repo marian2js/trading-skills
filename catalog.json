@@ -1,6 +1,12 @@
 {
   "skills": [
     {
+      "name": "watchlist-review",
+      "path": "skills/watchlist-review",
+      "description": "Review a watchlist and rank which names deserve active attention, background monitoring, or removal based on catalysts, tradability, redundancy, and evidence quality for the user's style and timeframe.",
+      "docs_path": "docs/examples/watchlist-review-walkthrough.md"
+    },
+    {
       "name": "thesis-validation",
       "path": "skills/thesis-validation",
       "description": "Pressure-test a trade or investment thesis by clarifying the core claim, evidence, invalidation, timeframe, and dependency chain before the user turns it into an entry, stop, or size.",

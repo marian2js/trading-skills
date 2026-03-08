@@ -57,6 +57,7 @@ npx skills add marian2js/trading-skills@earnings-preview
 
 Use the static skills immediately:
 
+- `watchlist-review`
 - `thesis-validation`
 - `execution-plan-check`
 - `portfolio-concentration`
@@ -79,6 +80,7 @@ Example walkthroughs for evaluating the current skills live in [docs/examples/](
 Example prompts after installation:
 
 - "Use `position-sizing` for a $125,000 account risking 0.5% with entry 412.30 and stop 406.80."
+- "Use `watchlist-review` on these semis for next week and tell me which names actually deserve active attention."
 - "Use `thesis-validation` on my semis swing thesis and tell me what evidence is real, what is assumption, and what would invalidate it."
 - "Use `execution-plan-check` on my plan to buy a niche ETF at the open and tell me whether the order logic is actually executable."
 - "Use `portfolio-concentration` on my book before I add to NVDA and tell me if I already have too much semis overlap."
@@ -121,6 +123,7 @@ The current library stays intentionally small and capability-first:
 <!-- SKILL_INDEX_START -->
 | Skill | Summary | Guide |
 | --- | --- | --- |
+| `watchlist-review` | Review a watchlist and rank which names deserve active attention, background monitoring, or removal based on catalysts, tradability, redundancy, and evidence quality for the user's style and timeframe. | [guide](docs/examples/watchlist-review-walkthrough.md) |
 | `thesis-validation` | Pressure-test a trade or investment thesis by clarifying the core claim, evidence, invalidation, timeframe, and dependency chain before the user turns it into an entry, stop, or size. | [guide](docs/examples/thesis-validation-walkthrough.md) |
 | `execution-plan-check` | Review whether a trade plan is operationally executable by checking order type logic, liquidity and spread risk, event timing, stop realism, and whether the user can actually implement the plan cleanly. | [guide](docs/examples/execution-plan-check-walkthrough.md) |
 | `portfolio-concentration` | Evaluate whether a portfolio, account, or planned position is too dependent on a small number of issuers, sectors, themes, or correlated exposures before the user adds or holds more risk. | [guide](docs/examples/portfolio-concentration-walkthrough.md) |
@@ -176,6 +179,7 @@ For agent systems, the cleanest pattern is:
 
 Recommended composition:
 
+- use `watchlist-review` when the user starts with too many names and needs triage first
 - use `macro-event-analysis` or `earnings-preview` to frame event risk
 - use `market-regime-analysis` to classify the broader environment
 - use `thesis-validation` to pressure-test the claim before turning it into structure
@@ -235,6 +239,6 @@ The current checks cover:
 
 - Add better cross-asset examples for equities, futures, and FX risk workflows
 - Expand provider coverage for `macro-event-analysis` and `earnings-preview`
-- Add more `data-optional` skills such as watchlist review and catalyst-map
+- Add more `data-optional` skills such as catalyst-map and evidence-gap-check
 - Add packaging and release metadata for one-step installation across more skill marketplaces
 - Keep the skill folders lean while expanding the capability set
