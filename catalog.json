@@ -25,6 +25,12 @@
       "docs_path": "docs/examples/thesis-validation-walkthrough.md"
     },
     {
+      "name": "position-management",
+      "path": "skills/position-management",
+      "description": "Review an open position and decide whether to hold, trim, tighten risk, close, or wait by comparing current behavior against the original thesis, invalidation logic, catalyst calendar, and execution constraints.",
+      "docs_path": "docs/examples/position-management-walkthrough.md"
+    },
+    {
       "name": "execution-plan-check",
       "path": "skills/execution-plan-check",
       "description": "Review whether a trade plan is operationally executable by checking order type logic, liquidity and spread risk, event timing, stop realism, and whether the user can actually implement the plan cleanly.",

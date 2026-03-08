@@ -61,6 +61,7 @@ Use the static skills immediately:
 - `catalyst-map`
 - `evidence-gap-check`
 - `thesis-validation`
+- `position-management`
 - `execution-plan-check`
 - `portfolio-concentration`
 - `position-sizing`
@@ -86,6 +87,7 @@ Example prompts after installation:
 - "Use `catalyst-map` on my semis watchlist for the next three weeks and show me which events actually matter."
 - "Use `evidence-gap-check` on this swing idea and tell me what I still need to know before it deserves deeper work."
 - "Use `thesis-validation` on my semis swing thesis and tell me what evidence is real, what is assumption, and what would invalidate it."
+- "Use `position-management` on this open long and tell me whether to hold, trim, tighten risk, or exit."
 - "Use `execution-plan-check` on my plan to buy a niche ETF at the open and tell me whether the order logic is actually executable."
 - "Use `portfolio-concentration` on my book before I add to NVDA and tell me if I already have too much semis overlap."
 - "Use `risk-reward-sanity-check` on a swing long with entry 58.20, stop 55.90, and target 65.50."
@@ -131,6 +133,7 @@ The current library stays intentionally small and capability-first:
 | `catalyst-map` | Build a ranked map of the catalysts that could move a watchlist, theme, or portfolio by showing what matters, when it matters, and how those events could transmit across related names or exposures. | [guide](docs/examples/catalyst-map-walkthrough.md) |
 | `evidence-gap-check` | Identify the most important missing facts, assumptions, and unresolved questions that should be answered before a trade or investment idea is trusted, sized, or acted on. | [guide](docs/examples/evidence-gap-check-walkthrough.md) |
 | `thesis-validation` | Pressure-test a trade or investment thesis by clarifying the core claim, evidence, invalidation, timeframe, and dependency chain before the user turns it into an entry, stop, or size. | [guide](docs/examples/thesis-validation-walkthrough.md) |
+| `position-management` | Review an open position and decide whether to hold, trim, tighten risk, close, or wait by comparing current behavior against the original thesis, invalidation logic, catalyst calendar, and execution constraints. | [guide](docs/examples/position-management-walkthrough.md) |
 | `execution-plan-check` | Review whether a trade plan is operationally executable by checking order type logic, liquidity and spread risk, event timing, stop realism, and whether the user can actually implement the plan cleanly. | [guide](docs/examples/execution-plan-check-walkthrough.md) |
 | `portfolio-concentration` | Evaluate whether a portfolio, account, or planned position is too dependent on a small number of issuers, sectors, themes, or correlated exposures before the user adds or holds more risk. | [guide](docs/examples/portfolio-concentration-walkthrough.md) |
 | `position-sizing` | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. | [guide](docs/examples/position-sizing-walkthrough.md) |
@@ -195,6 +198,7 @@ Recommended composition:
 - use `execution-plan-check` to verify the order logic works in the real market
 - use `portfolio-concentration` before final sizing if portfolio fit could block the trade
 - use `position-sizing` only after the stop is stable
+- use `position-management` while the trade is open
 - use `post-trade-review` after the trade closes
 
 See [docs/composing-skills.md](docs/composing-skills.md) for the shared Trade Context schema and realistic chaining examples.

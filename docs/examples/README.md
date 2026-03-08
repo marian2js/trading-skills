@@ -3,6 +3,7 @@
 These walkthroughs are intentionally short. They show how a user would evaluate the current library without inspecting provider internals or reading source code first.
 
 - [Position sizing walkthrough](position-sizing-walkthrough.md)
+- [Position management walkthrough](position-management-walkthrough.md)
 - [Watchlist review walkthrough](watchlist-review-walkthrough.md)
 - [Catalyst map walkthrough](catalyst-map-walkthrough.md)
 - [Evidence gap check walkthrough](evidence-gap-check-walkthrough.md)

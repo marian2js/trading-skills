@@ -18,7 +18,8 @@ Recommended default order:
 8. `execution-plan-check` to confirm the order logic and stop behavior are operationally realistic
 9. `portfolio-concentration` to confirm the portfolio can absorb the idea without hidden overlap
 10. `position-sizing` once the structure, execution, concentration, and stop are clear
-11. `post-trade-review` after the trade closes
+11. `position-management` while the trade is open
+12. `post-trade-review` after the trade closes
 
 Practical rule:
 
@@ -27,6 +28,7 @@ Practical rule:
 - do not size first if event risk, thesis quality, or structure is still unclear
 - do not size first if the order plan is not operationally realistic
 - do not size first if the portfolio fit is still unclear
+- once the trade is live, switch from construction questions to management questions
 - do not review outcome before reconstructing the original plan
 
 ## Trade Context schema
@@ -133,3 +135,17 @@ Good handoff fields:
 - planned and actual entry, stop, target, size
 - rule violation summary
 - one process change to test next time
+
+## Workflow 4: Open position under pressure
+
+1. Carry the original plan and current status into `position-management`.
+2. If a catalyst is near, supplement with `earnings-preview` or `macro-event-analysis`.
+3. If the trade later closes, route the result into `post-trade-review`.
+
+Good handoff fields:
+
+- original thesis
+- current price or PnL status
+- current stop or trailing logic
+- upcoming catalyst
+- hold, trim, tighten risk, or exit decision
