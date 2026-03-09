@@ -28,7 +28,7 @@ Do not contribute:
 
 Every new public skill should include:
 
-- `skills/<skill-name>/SKILL.md`
+- `skills/<group>/<skill-name>/SKILL.md`
 - minimal frontmatter with a name that matches the directory
 - a specific description that explains what the skill does and when to use it
 - realistic usage examples
@@ -94,7 +94,7 @@ The repo keeps metadata intentionally light. In most cases the only frontmatter 
 
 Typical contributor flow:
 
-1. Add or update a skill under `skills/<skill>/`.
+1. Add or update a skill under `skills/<group>/<skill>/`.
 2. Keep the skill folder lean and put longer examples in `docs/examples/` when they help users evaluate the capability.
 3. Regenerate the small machine-readable catalog and README skill index with `make catalog`.
 4. Run `make validate` before opening a PR.

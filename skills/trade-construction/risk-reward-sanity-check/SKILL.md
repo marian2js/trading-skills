@@ -49,7 +49,7 @@ Ask for:
 
 See [references/failure-modes.md](references/failure-modes.md) for the default checklist.
 
-For agents that support code execution, use [../_lib/calculations.py](../_lib/calculations.py) for reward-to-risk math, expectancy, and trade-statistic cross-checks.
+For agents that support code execution, use [../../_lib/calculations.py](../../_lib/calculations.py) for reward-to-risk math, expectancy, and trade-statistic cross-checks.
 
 ## Output structure
 

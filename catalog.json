@@ -1,112 +1,112 @@
 {
   "skills": [
     {
-      "name": "pre-trade-check",
-      "path": "skills/pre-trade-check",
-      "description": "Orchestrate a disciplined pre-trade workflow by routing a watchlist or trade idea through the minimum set of underlying skills needed to decide whether the trade is ready, not ready, or should be resized or reworked first.",
-      "docs_path": "docs/examples/pre-trade-check-walkthrough.md"
-    },
-    {
-      "name": "earnings-trade-prep",
-      "path": "skills/earnings-trade-prep",
-      "description": "Orchestrate a disciplined earnings-event workflow by deciding which names deserve prep, mapping the key debates and read-through paths, pressure-testing the thesis and structure, and ending with a clear pre-earnings hold, avoid, or trade decision.",
-      "docs_path": "docs/examples/earnings-trade-prep-walkthrough.md"
-    },
-    {
-      "name": "portfolio-risk-review",
-      "path": "skills/portfolio-risk-review",
-      "description": "Orchestrate a whole-book risk review by checking concentration, correlated exposure, catalyst clustering, market-context sensitivity, and live-position fragility before the user adds, holds, or reduces portfolio risk.",
-      "docs_path": "docs/examples/portfolio-risk-review-walkthrough.md"
-    },
-    {
-      "name": "post-trade-debrief",
-      "path": "skills/post-trade-debrief",
-      "description": "Orchestrate a disciplined post-trade workflow by reconstructing the original plan, reviewing execution and rule adherence, and deciding whether the lesson is trade-specific or part of a larger repeatable pattern.",
-      "docs_path": "docs/examples/post-trade-debrief-walkthrough.md"
-    },
-    {
-      "name": "watchlist-review",
-      "path": "skills/watchlist-review",
-      "description": "Review a watchlist and rank which names deserve active attention, background monitoring, or removal based on catalysts, tradability, redundancy, and evidence quality for the user's style and timeframe.",
-      "docs_path": "docs/examples/watchlist-review-walkthrough.md"
-    },
-    {
-      "name": "catalyst-map",
-      "path": "skills/catalyst-map",
-      "description": "Build a ranked map of the catalysts that could move a watchlist, theme, or portfolio by showing what matters, when it matters, and how those events could transmit across related names or exposures.",
-      "docs_path": "docs/examples/catalyst-map-walkthrough.md"
-    },
-    {
-      "name": "evidence-gap-check",
-      "path": "skills/evidence-gap-check",
-      "description": "Identify the most important missing facts, assumptions, and unresolved questions that should be answered before a trade or investment idea is trusted, sized, or acted on.",
-      "docs_path": "docs/examples/evidence-gap-check-walkthrough.md"
-    },
-    {
-      "name": "thesis-validation",
-      "path": "skills/thesis-validation",
-      "description": "Pressure-test a trade or investment thesis by clarifying the core claim, evidence, invalidation, timeframe, and dependency chain before the user turns it into an entry, stop, or size.",
-      "docs_path": "docs/examples/thesis-validation-walkthrough.md"
-    },
-    {
-      "name": "position-management",
-      "path": "skills/position-management",
-      "description": "Review an open position and decide whether to hold, trim, tighten risk, close, or wait by comparing current behavior against the original thesis, invalidation logic, catalyst calendar, and execution constraints.",
-      "docs_path": "docs/examples/position-management-walkthrough.md"
-    },
-    {
-      "name": "journal-pattern-analyzer",
-      "path": "skills/journal-pattern-analyzer",
-      "description": "Analyze a trade journal or trade log to find repeated strengths, mistakes, environment-dependent patterns, and process changes that could improve future decisions without turning the review into hindsight theater.",
-      "docs_path": "docs/examples/journal-pattern-analyzer-walkthrough.md"
-    },
-    {
-      "name": "execution-plan-check",
-      "path": "skills/execution-plan-check",
-      "description": "Review whether a trade plan is operationally executable by checking order type logic, liquidity and spread risk, event timing, stop realism, and whether the user can actually implement the plan cleanly.",
-      "docs_path": "docs/examples/execution-plan-check-walkthrough.md"
-    },
-    {
-      "name": "portfolio-concentration",
-      "path": "skills/portfolio-concentration",
-      "description": "Evaluate whether a portfolio, account, or planned position is too dependent on a small number of issuers, sectors, themes, or correlated exposures before the user adds or holds more risk.",
-      "docs_path": "docs/examples/portfolio-concentration-walkthrough.md"
-    },
-    {
-      "name": "position-sizing",
-      "path": "skills/position-sizing",
-      "description": "Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade.",
-      "docs_path": "docs/examples/position-sizing-walkthrough.md"
-    },
-    {
-      "name": "risk-reward-sanity-check",
-      "path": "skills/risk-reward-sanity-check",
-      "description": "Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed.",
-      "docs_path": "docs/examples/risk-reward-sanity-check-walkthrough.md"
-    },
-    {
-      "name": "post-trade-review",
-      "path": "skills/post-trade-review",
-      "description": "Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater.",
-      "docs_path": "docs/examples/post-trade-review-walkthrough.md"
-    },
-    {
       "name": "macro-event-analysis",
-      "path": "skills/macro-event-analysis",
+      "path": "skills/market-context/macro-event-analysis",
       "description": "Prepare for upcoming macro catalysts by identifying the events that matter, mapping the likely transmission channels, and surfacing timing risk for the user's markets or positions.",
       "docs_path": "docs/examples/macro-event-analysis-example-mode.md"
     },
     {
       "name": "earnings-preview",
-      "path": "skills/earnings-preview",
+      "path": "skills/market-context/earnings-preview",
       "description": "Prepare for an upcoming earnings report or earnings week by identifying the reports that matter, framing the key debates, and surfacing the read-through risk that could affect the user's watchlist or positions.",
       "docs_path": "docs/examples/earnings-preview-live-mode.md"
     },
     {
       "name": "market-regime-analysis",
-      "path": "skills/market-regime-analysis",
+      "path": "skills/market-context/market-regime-analysis",
       "description": "Analyze current market context through trend, volatility, breadth, and event backdrop so the user can choose tactics that fit the environment without relying on black-box regime claims.",
       "docs_path": "docs/examples/market-regime-analysis-walkthrough.md"
+    },
+    {
+      "name": "watchlist-review",
+      "path": "skills/idea-discovery/watchlist-review",
+      "description": "Review a watchlist and rank which names deserve active attention, background monitoring, or removal based on catalysts, tradability, redundancy, and evidence quality for the user's style and timeframe.",
+      "docs_path": "docs/examples/watchlist-review-walkthrough.md"
+    },
+    {
+      "name": "catalyst-map",
+      "path": "skills/idea-discovery/catalyst-map",
+      "description": "Build a ranked map of the catalysts that could move a watchlist, theme, or portfolio by showing what matters, when it matters, and how those events could transmit across related names or exposures.",
+      "docs_path": "docs/examples/catalyst-map-walkthrough.md"
+    },
+    {
+      "name": "thesis-validation",
+      "path": "skills/thesis-validation/thesis-validation",
+      "description": "Pressure-test a trade or investment thesis by clarifying the core claim, evidence, invalidation, timeframe, and dependency chain before the user turns it into an entry, stop, or size.",
+      "docs_path": "docs/examples/thesis-validation-walkthrough.md"
+    },
+    {
+      "name": "evidence-gap-check",
+      "path": "skills/thesis-validation/evidence-gap-check",
+      "description": "Identify the most important missing facts, assumptions, and unresolved questions that should be answered before a trade or investment idea is trusted, sized, or acted on.",
+      "docs_path": "docs/examples/evidence-gap-check-walkthrough.md"
+    },
+    {
+      "name": "risk-reward-sanity-check",
+      "path": "skills/trade-construction/risk-reward-sanity-check",
+      "description": "Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed.",
+      "docs_path": "docs/examples/risk-reward-sanity-check-walkthrough.md"
+    },
+    {
+      "name": "portfolio-concentration",
+      "path": "skills/trade-construction/portfolio-concentration",
+      "description": "Evaluate whether a portfolio, account, or planned position is too dependent on a small number of issuers, sectors, themes, or correlated exposures before the user adds or holds more risk.",
+      "docs_path": "docs/examples/portfolio-concentration-walkthrough.md"
+    },
+    {
+      "name": "position-sizing",
+      "path": "skills/trade-construction/position-sizing",
+      "description": "Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade.",
+      "docs_path": "docs/examples/position-sizing-walkthrough.md"
+    },
+    {
+      "name": "execution-plan-check",
+      "path": "skills/trade-construction/execution-plan-check",
+      "description": "Review whether a trade plan is operationally executable by checking order type logic, liquidity and spread risk, event timing, stop realism, and whether the user can actually implement the plan cleanly.",
+      "docs_path": "docs/examples/execution-plan-check-walkthrough.md"
+    },
+    {
+      "name": "position-management",
+      "path": "skills/position-oversight/position-management",
+      "description": "Review an open position and decide whether to hold, trim, tighten risk, close, or wait by comparing current behavior against the original thesis, invalidation logic, catalyst calendar, and execution constraints.",
+      "docs_path": "docs/examples/position-management-walkthrough.md"
+    },
+    {
+      "name": "post-trade-review",
+      "path": "skills/review-learning/post-trade-review",
+      "description": "Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater.",
+      "docs_path": "docs/examples/post-trade-review-walkthrough.md"
+    },
+    {
+      "name": "journal-pattern-analyzer",
+      "path": "skills/review-learning/journal-pattern-analyzer",
+      "description": "Analyze a trade journal or trade log to find repeated strengths, mistakes, environment-dependent patterns, and process changes that could improve future decisions without turning the review into hindsight theater.",
+      "docs_path": "docs/examples/journal-pattern-analyzer-walkthrough.md"
+    },
+    {
+      "name": "pre-trade-check",
+      "path": "skills/workflows/pre-trade-check",
+      "description": "Orchestrate a disciplined pre-trade workflow by routing a watchlist or trade idea through the minimum set of underlying skills needed to decide whether the trade is ready, not ready, or should be resized or reworked first.",
+      "docs_path": "docs/examples/pre-trade-check-walkthrough.md"
+    },
+    {
+      "name": "earnings-trade-prep",
+      "path": "skills/workflows/earnings-trade-prep",
+      "description": "Orchestrate a disciplined earnings-event workflow by deciding which names deserve prep, mapping the key debates and read-through paths, pressure-testing the thesis and structure, and ending with a clear pre-earnings hold, avoid, or trade decision.",
+      "docs_path": "docs/examples/earnings-trade-prep-walkthrough.md"
+    },
+    {
+      "name": "portfolio-risk-review",
+      "path": "skills/workflows/portfolio-risk-review",
+      "description": "Orchestrate a whole-book risk review by checking concentration, correlated exposure, catalyst clustering, market-context sensitivity, and live-position fragility before the user adds, holds, or reduces portfolio risk.",
+      "docs_path": "docs/examples/portfolio-risk-review-walkthrough.md"
+    },
+    {
+      "name": "post-trade-debrief",
+      "path": "skills/workflows/post-trade-debrief",
+      "description": "Orchestrate a disciplined post-trade workflow by reconstructing the original plan, reviewing execution and rule adherence, and deciding whether the lesson is trade-specific or part of a larger repeatable pattern.",
+      "docs_path": "docs/examples/post-trade-debrief-walkthrough.md"
     },
     {
       "name": "etoro",

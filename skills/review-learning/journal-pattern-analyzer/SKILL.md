@@ -46,7 +46,7 @@ Use the user's materials first.
 
 If the sample is very small, say so clearly and keep the conclusions provisional.
 
-For agents that support code execution, use [../_lib/calculations.py](../_lib/calculations.py) for trade-statistic summaries, expectancy, and win/loss distribution checks when the user provides structured results.
+For agents that support code execution, use [../../_lib/calculations.py](../../_lib/calculations.py) for trade-statistic summaries, expectancy, and win/loss distribution checks when the user provides structured results.
 
 ## Analysis process
 

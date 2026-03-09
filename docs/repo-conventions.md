@@ -23,8 +23,8 @@ Public skills should describe an analytical job, not a data utility. If the main
 
 Good:
 
-- `skills/macro-event-analysis/`
-- `skills/earnings-preview/`
+- `skills/market-context/macro-event-analysis/`
+- `skills/market-context/earnings-preview/`
 
 Bad by default:
 

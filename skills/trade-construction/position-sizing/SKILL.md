@@ -49,7 +49,7 @@ If any key input is missing, state what is missing and stop rather than invent i
 
 Use [references/methodology.md](references/methodology.md) for sizing conventions and caveats. Use [assets/trade-plan-template.md](assets/trade-plan-template.md) when the user wants a reusable planning format.
 
-For agents that support code execution, use [../_lib/calculations.py](../_lib/calculations.py) for fixed-fractional sizing, volatility-adjusted sizing, Kelly fraction context, and futures contract math.
+For agents that support code execution, use [../../_lib/calculations.py](../../_lib/calculations.py) for fixed-fractional sizing, volatility-adjusted sizing, Kelly fraction context, and futures contract math.
 
 ## Output structure
 
