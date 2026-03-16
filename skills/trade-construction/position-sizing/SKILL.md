@@ -1,6 +1,6 @@
 ---
 name: position-sizing
-description: Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade.
+description: Use when the user needs a conservative position size from account equity, risk budget, entry, stop, and trading friction before entering a trade.
 ---
 
 # Position Sizing
@@ -49,7 +49,7 @@ If any key input is missing, state what is missing and stop rather than invent i
 
 Use [references/methodology.md](references/methodology.md) for sizing conventions and caveats. Use [assets/trade-plan-template.md](assets/trade-plan-template.md) when the user wants a reusable planning format.
 
-For agents that support code execution, use [../../_lib/calculations.py](../../_lib/calculations.py) for fixed-fractional sizing, volatility-adjusted sizing, Kelly fraction context, and futures contract math.
+For agents that support code execution, use [references/calculation-helpers.md](references/calculation-helpers.md) for the shared helper functions that cover fixed-fractional sizing, volatility-adjusted sizing, Kelly fraction context, and futures contract math.
 
 ## Output structure
 

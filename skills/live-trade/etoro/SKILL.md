@@ -1,7 +1,6 @@
 ---
 name: etoro
-version: 1.0.0
-description: Enables agents to interact with the eToro API to access market data, portfolio and social features, and execute trades programmatically.
+description: Use when the user wants an agent to interact with the eToro API for market data, portfolio and social features, or trade execution.
 homepage: https://api-portal.etoro.com/
 metadata: {"openclaw":{"emoji":"📈","category":"finance","api_base":"https://public-api.etoro.com/api/v1"}}
 ---

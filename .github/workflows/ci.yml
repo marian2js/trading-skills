@@ -23,3 +23,17 @@ jobs:
 
       - name: Check catalog and README drift
         run: python scripts/build_catalog.py --check
+
+  skill-doctor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Skill Doctor
+        uses: marian2js/skill-doctor@v0.1.0
+        with:
+          directory: .
+          strictness: default
+          fail-on: error
+          verbose: true

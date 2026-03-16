@@ -121,18 +121,18 @@ The current library stays intentionally small and capability-first:
 | `catalyst-map` | Build a ranked map of the catalysts that could move a watchlist, theme, or portfolio by showing what matters, when it matters, and how those events could transmit across related names or exposures. | [guide](docs/examples/catalyst-map-walkthrough.md) |
 | `thesis-validation` | Pressure-test a trade or investment thesis by clarifying the core claim, evidence, invalidation, timeframe, and dependency chain before the user turns it into an entry, stop, or size. | [guide](docs/examples/thesis-validation-walkthrough.md) |
 | `evidence-gap-check` | Identify the most important missing facts, assumptions, and unresolved questions that should be answered before a trade or investment idea is trusted, sized, or acted on. | [guide](docs/examples/evidence-gap-check-walkthrough.md) |
-| `risk-reward-sanity-check` | Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed. | [guide](docs/examples/risk-reward-sanity-check-walkthrough.md) |
+| `risk-reward-sanity-check` | Use when the user wants to test whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed. | [guide](docs/examples/risk-reward-sanity-check-walkthrough.md) |
 | `portfolio-concentration` | Evaluate whether a portfolio, account, or planned position is too dependent on a small number of issuers, sectors, themes, or correlated exposures before the user adds or holds more risk. | [guide](docs/examples/portfolio-concentration-walkthrough.md) |
-| `position-sizing` | Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade. | [guide](docs/examples/position-sizing-walkthrough.md) |
+| `position-sizing` | Use when the user needs a conservative position size from account equity, risk budget, entry, stop, and trading friction before entering a trade. | [guide](docs/examples/position-sizing-walkthrough.md) |
 | `execution-plan-check` | Review whether a trade plan is operationally executable by checking order type logic, liquidity and spread risk, event timing, stop realism, and whether the user can actually implement the plan cleanly. | [guide](docs/examples/execution-plan-check-walkthrough.md) |
 | `position-management` | Review an open position and decide whether to hold, trim, tighten risk, close, or wait by comparing current behavior against the original thesis, invalidation logic, catalyst calendar, and execution constraints. | [guide](docs/examples/position-management-walkthrough.md) |
 | `post-trade-review` | Guide a disciplined post-trade review across thesis quality, setup quality, execution, adherence, mistakes, and lessons without turning the result into hindsight theater. | [guide](docs/examples/post-trade-review-walkthrough.md) |
-| `journal-pattern-analyzer` | Analyze a trade journal or trade log to find repeated strengths, mistakes, environment-dependent patterns, and process changes that could improve future decisions without turning the review into hindsight theater. | [guide](docs/examples/journal-pattern-analyzer-walkthrough.md) |
+| `journal-pattern-analyzer` | Use when the user has a trade journal or trade log and wants repeated strengths, mistakes, environment-dependent patterns, and process changes without turning the review into hindsight theater. | [guide](docs/examples/journal-pattern-analyzer-walkthrough.md) |
 | `pre-trade-check` | Orchestrate a disciplined pre-trade workflow by routing a watchlist or trade idea through the minimum set of underlying skills needed to decide whether the trade is ready, not ready, or should be resized or reworked first. | [guide](docs/examples/pre-trade-check-walkthrough.md) |
 | `earnings-trade-prep` | Orchestrate a disciplined earnings-event workflow by deciding which names deserve prep, mapping the key debates and read-through paths, pressure-testing the thesis and structure, and ending with a clear pre-earnings hold, avoid, or trade decision. | [guide](docs/examples/earnings-trade-prep-walkthrough.md) |
 | `portfolio-risk-review` | Orchestrate a whole-book risk review by checking concentration, correlated exposure, catalyst clustering, market-context sensitivity, and live-position fragility before the user adds, holds, or reduces portfolio risk. | [guide](docs/examples/portfolio-risk-review-walkthrough.md) |
 | `post-trade-debrief` | Orchestrate a disciplined post-trade workflow by reconstructing the original plan, reviewing execution and rule adherence, and deciding whether the lesson is trade-specific or part of a larger repeatable pattern. | [guide](docs/examples/post-trade-debrief-walkthrough.md) |
-| `etoro` | Enables agents to interact with the eToro API to access market data, portfolio and social features, and execute trades programmatically. | - |
+| `etoro` | Use when the user wants an agent to interact with the eToro API for market data, portfolio and social features, or trade execution. | - |
 
 <!-- SKILL_INDEX_END -->
 
@@ -211,3 +211,11 @@ The current checks cover:
 - provider references linked from skills exist
 - skill-local markdown stays aligned with the user-data-first workflow
 - skill directories stay lean by excluding `fixtures/` and `sample-output.md`
+
+Run `skill-doctor` locally with:
+
+```bash
+make doctor
+```
+
+The CI workflow also runs the published [`marian2js/skill-doctor`](https://github.com/marian2js/skill-doctor) GitHub Action on the full repository and fails only on analyzer errors.

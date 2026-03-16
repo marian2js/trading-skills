@@ -45,7 +45,7 @@
     {
       "name": "risk-reward-sanity-check",
       "path": "skills/trade-construction/risk-reward-sanity-check",
-      "description": "Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed.",
+      "description": "Use when the user wants to test whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed.",
       "docs_path": "docs/examples/risk-reward-sanity-check-walkthrough.md"
     },
     {
@@ -57,7 +57,7 @@
     {
       "name": "position-sizing",
       "path": "skills/trade-construction/position-sizing",
-      "description": "Compute a conservative position size from account equity, risk budget, entry, stop, and trading friction so the user can inspect exposure before entering a trade.",
+      "description": "Use when the user needs a conservative position size from account equity, risk budget, entry, stop, and trading friction before entering a trade.",
       "docs_path": "docs/examples/position-sizing-walkthrough.md"
     },
     {
@@ -81,7 +81,7 @@
     {
       "name": "journal-pattern-analyzer",
       "path": "skills/review-learning/journal-pattern-analyzer",
-      "description": "Analyze a trade journal or trade log to find repeated strengths, mistakes, environment-dependent patterns, and process changes that could improve future decisions without turning the review into hindsight theater.",
+      "description": "Use when the user has a trade journal or trade log and wants repeated strengths, mistakes, environment-dependent patterns, and process changes without turning the review into hindsight theater.",
       "docs_path": "docs/examples/journal-pattern-analyzer-walkthrough.md"
     },
     {
@@ -111,7 +111,7 @@
     {
       "name": "etoro",
       "path": "skills/live-trade/etoro",
-      "description": "Enables agents to interact with the eToro API to access market data, portfolio and social features, and execute trades programmatically.",
+      "description": "Use when the user wants an agent to interact with the eToro API for market data, portfolio and social features, or trade execution.",
       "docs_path": null
     }
   ]

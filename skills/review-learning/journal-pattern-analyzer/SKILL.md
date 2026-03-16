@@ -1,6 +1,6 @@
 ---
 name: journal-pattern-analyzer
-description: Analyze a trade journal or trade log to find repeated strengths, mistakes, environment-dependent patterns, and process changes that could improve future decisions without turning the review into hindsight theater.
+description: Use when the user has a trade journal or trade log and wants repeated strengths, mistakes, environment-dependent patterns, and process changes without turning the review into hindsight theater.
 ---
 
 # Journal Pattern Analyzer
@@ -46,7 +46,7 @@ Use the user's materials first.
 
 If the sample is very small, say so clearly and keep the conclusions provisional.
 
-For agents that support code execution, use [../../_lib/calculations.py](../../_lib/calculations.py) for trade-statistic summaries, expectancy, and win/loss distribution checks when the user provides structured results.
+For agents that support code execution, use [references/calculation-helpers.md](references/calculation-helpers.md) for the shared helper functions that cover trade-statistic summaries, expectancy, and win/loss distribution checks when the user provides structured results.
 
 ## Analysis process
 

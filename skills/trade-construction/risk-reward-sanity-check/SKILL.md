@@ -1,6 +1,6 @@
 ---
 name: risk-reward-sanity-check
-description: Analyze whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed.
+description: Use when the user wants to test whether a proposed entry, stop, and target structure is coherent, asymmetric enough, and vulnerable to obvious failure modes before the trade is placed.
 ---
 
 # Risk Reward Sanity Check
@@ -49,7 +49,7 @@ Ask for:
 
 See [references/failure-modes.md](references/failure-modes.md) for the default checklist.
 
-For agents that support code execution, use [../../_lib/calculations.py](../../_lib/calculations.py) for reward-to-risk math, expectancy, and trade-statistic cross-checks.
+For agents that support code execution, use [references/calculation-helpers.md](references/calculation-helpers.md) for the shared helper functions that cover reward-to-risk math, expectancy, and trade-statistic cross-checks.
 
 ## Output structure
 
